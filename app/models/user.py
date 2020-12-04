@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    profile_image = db.Column(db.String(255), nullable=True)
+    profile_image = db.Column(db.String(255), nullable=True, default=None)
 
     leagues = db.relationship('League', secondary='league_users')
     league_users = db.relationship('League_User', back_populates='user')

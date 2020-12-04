@@ -50,6 +50,9 @@ This point system places a lot of value on upsets and cinderella teams, which we
 
 # DEV STUFF
 
+## Helpful Links
+- [Team Logos](https://www.sportslogos.net/leagues/list_by_category/14/American_Colleges_-_NCAA/logos/)
+
 ## Getting started
 
 1. Clone this repository (only this branch)

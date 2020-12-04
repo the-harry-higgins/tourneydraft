@@ -18,6 +18,6 @@ class League(db.Model):
             "id": self.id,
             "name": self.name,
             "admin_id": self.admin_id,
-            "draft_ids": [draft.id for draft in self.drafts]
+            "draft_ids": [draft.id for draft in self.drafts],
             "league_user_ids": [league_user.id for league_user in self.league_users]
         }

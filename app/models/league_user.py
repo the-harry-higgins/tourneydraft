@@ -3,7 +3,7 @@ from sqlalchemy.sql import func
 
 
 class League_User(db.Model):
-    __tablename__ = 'leagues'
+    __tablename__ = 'league_users'
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

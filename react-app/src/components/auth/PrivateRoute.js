@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const ProtectedRoute = props => {
+const PrivateRoute = props => {
 
   if (!props.authenticated) {
-    return <Redirect to="/login"/>
+    return <Redirect to="/splash" />
   }
 
   return (
-    <Route {...props}/>
+    <Route {...props} />
   );
 };
 
-export default ProtectedRoute;
+export default PrivateRoute;

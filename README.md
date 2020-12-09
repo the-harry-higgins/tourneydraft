@@ -52,6 +52,8 @@ This point system places a lot of value on upsets and cinderella teams, which we
 
 ## Helpful Links
 - [Team Logos](https://www.sportslogos.net/leagues/list_by_category/14/American_Colleges_-_NCAA/logos/)
+- [Icon](https://www.flaticon.com/free-icon/basketball-game_77307?term=basketball&page=1&position=46&related_item_id=77307)
+- [Favicon](https://favicon.io/emoji-favicons/basketball/)
 
 ## Getting started
 

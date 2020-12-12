@@ -1,5 +1,7 @@
 import React from "react";
-import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
+import { responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
+
 
 let theme = createMuiTheme({
   fontFamily: [
@@ -17,7 +19,18 @@ let theme = createMuiTheme({
         paddingTop: 0,
         paddingBottom: 0,
       }
-    }
+    },
+    MuiBottomNavigation: {
+      root: {
+        color: '#FFF',
+        backgroundColor: '#546e7a',
+      }
+    },
+    MuiBottomNavigationAction: {
+      root: {
+        color: '#FFF',
+      }
+    },
   },
   // spacing: [0, 4, 8, 16, 32, 64],
   typography: {

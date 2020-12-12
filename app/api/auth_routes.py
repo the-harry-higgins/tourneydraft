@@ -50,10 +50,16 @@ def get_user_data(user):
             session_data['currentLeagueUserId'] = league_user_id
 
             league_users_data = {
+              'dict': {
                 league_user.id: league_user.to_dict()
                 for league in user.leagues
                 for league_user in league.league_users
                 if league.id == league_id
+              },
+              'ids': [league_user.id
+                      for league in user.leagues
+                      for league_user in league.league_users
+                      if league.id == league_id]
             }
 
             drafted_teams = Drafted_Team.query.filter(Drafted_Team.id.in_(

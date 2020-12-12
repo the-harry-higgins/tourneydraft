@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, ClickAwayListener, List, ListItem, ListItemText, Paper, Popper } from '@material-ui/core';
@@ -8,12 +8,12 @@ import { setRound } from '../store/actions/ui';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: 'absolute',
+    position: 'fixed',
     top: 0,
     left: 0,
     height: 50,
-    marginTop: theme.spacing(2),
-    marginLeft: theme.spacing(4),
+    marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(1),
   },
   button: {
     padding: theme.spacing(1),
@@ -48,7 +48,7 @@ export default function UserMenu() {
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <div className={classes.root}>
-        <Button variant="contained" color="primary" onClick={handleClick} className={classes.button}>
+        <Button variant="contained" color="primary" size='large' onClick={handleClick} className={classes.button}>
           Rounds
           {open ? <ExpandLess /> : <ExpandMore />}
         </Button>

@@ -9,21 +9,21 @@ import { logoutThunk } from '../store/actions/authenticate';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: 'absolute',
+    position: 'fixed',
     top: 0,
     right: 0,
     height: 50,
-    marginTop: theme.spacing(2),
-    marginRight: theme.spacing(4),
+    marginTop: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
   button: {
     padding: theme.spacing(1),
     color: '#FFF',
   },
   logo: {
-    width: 30,
+    width: 26,
     fill: '#FFF',
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
   },
 }));
 

@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import UserMenu from './UserMenu';
 import RoundsMenu from './RoundsMenu';
 import BracketPage from './BracketPage';
+import LeaderboardPage from './LeaderboardPage';
 import SimpleBottomNavigation from './SimpleBottomNavigation';
 
 
@@ -19,7 +20,7 @@ export default function MainPage(props) {
         <RoundsMenu />
         <Switch>
           <Route path='/leaderboard' exact={true} >
-            <h1>LeaderboardPage</h1>
+            <LeaderboardPage />
           </Route>
           <Route path='/bracket' exact={true}>
             <BracketPage />

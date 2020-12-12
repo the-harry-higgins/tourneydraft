@@ -6,14 +6,20 @@ const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridTemplateAreas: `'top' 'bottom'`,
     justifyContent: 'stretch',
+    fontSize: '0.8rem'
   },
   top: {
     gridArea: 'top',
     borderBottom: '2px solid black',
+    alignSelf: 'end',
+    overflowX: 'hidden',
+    whiteSpace: 'nowrap'
   },
   bottom: {
     gridArea: 'bottom',
     borderTop: '2px solid black',
+    overflowX: 'hidden',
+    whiteSpace: 'nowrap'
   },
   winner: {
     color: theme.palette.success.main,

@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     (async() => {
-      const auth = await dispatch(authenticateThunk(authenticate));
+      await dispatch(authenticateThunk(authenticate));
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -39,7 +39,7 @@ function App() {
         });
       })
     }
-  }, [messages])
+  }, [messages, closeSnackbar, enqueueSnackbar])
 
   if (!loaded) {
     return <SimpleBackdrop/>;

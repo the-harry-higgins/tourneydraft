@@ -1,6 +1,6 @@
 .bracket-region__left {
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr 1fr 2fr 1fr 2fr;
+  grid-template-columns: 8fr 1fr 8fr 1fr 8fr 1fr 8fr;
   grid-template-rows: repeat(18, 1fr);
   grid-template-areas: 'region region region region region region region'
     'round1 . round2 . round3 . round4'
@@ -23,11 +23,12 @@
   justify-items: stretch;
   align-items: stretch;
   justify-content: stretch;
+  text-align: left;
 }
 
 .bracket-region__right {
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr 1fr 2fr 1fr 2fr;
+  grid-template-columns: 8fr 1fr 8fr 1fr 8fr 1fr 8fr;
   grid-template-rows: repeat(18, 1fr);
   grid-template-areas: 'region region region region region region region'
     'round4 . round3 . round2 . round1'
@@ -50,158 +51,236 @@
   justify-items: stretch;
   align-items: stretch;
   justify-content: stretch;
+  text-align: right;
 }
 
 
 .region {
   grid-area: region;
 }
-
 .round1 {
   grid-area: round1;
 }
-
 .round2 {
   grid-area: round2;
 }
-
 .round3 {
   grid-area: round3;
 }
-
-
 .round4 {
   grid-area: round4;
 }
-
-
 .game1 {
   grid-area: game1;
 }
-
-
 .game2 {
   grid-area: game2;
 }
-
-
 .game3 {
   grid-area: game3;
 }
-
-
 .game4 {
   grid-area: game4;
 }
-
-
 .game5 {
   grid-area: game5;
 }
-
-
 .game6 {
   grid-area: game6;
 }
-
-
 .game7 {
   grid-area: game7;
 }
-
-
 .game8 {
   grid-area: game8;
 }
-
-
 .game9 {
   grid-area: game9;
 }
-
 .game10 {
   grid-area: game10;
 }
-
-
 .game11 {
   grid-area: game11;
 }
-
-
 .game12 {
   grid-area: game12;
 }
-
-
 .game13 {
   grid-area: game13;
 }
-
-
 .game14 {
   grid-area: game14;
 }
-
-
 .game15 {
   grid-area: game15;
 }
-
-
 .link1to9 {
   grid-area: link1to9;
 }
-
-
 .link2to9 {
   grid-area: link2to9;
 }
-
 .link3to10 {
   grid-area: link3to10;
 }
-
 .link4to10 {
   grid-area: link4to10;
 }
-
 .link5to11 {
   grid-area: link5to11;
 }
-
 .link6to11 {
   grid-area: link6to11;
 }
-
 .link7to12 {
   grid-area: link7to12;
 }
-
 .link8to12 {
   grid-area: link8to12;
 }
-
 .link9to13 {
   grid-area: link9to13;
 }
-
 .link10to13 {
   grid-area: link10to13;
 }
-
 .link11to14 {
   grid-area: link11to14;
 }
-
 .link12to14 {
   grid-area: link12to14;
 }
-
 .link13to15 {
   grid-area: link13to15;
 }
-
 .link14to15 {
   grid-area: link14to15;
+}
+
+.bracket-region__left .link1to9,
+.bracket-region__left .link3to10,
+.bracket-region__left .link5to11,
+.bracket-region__left .link7to12,
+.bracket-region__left .link9to13,
+.bracket-region__left .link11to14,
+.bracket-region__left .link13to15 {
+  border-left: 4px solid black;
+  border-bottom: 2px solid black;
+}
+
+.bracket-region__left .link2to9,
+.bracket-region__left .link4to10,
+.bracket-region__left .link6to11,
+.bracket-region__left .link8to12,
+.bracket-region__left .link10to13,
+.bracket-region__left .link12to14,
+.bracket-region__left .link14to15 {
+  border-left: 4px solid black;
+  border-top: 2px solid black;
+}
+
+.bracket-region__right .link1to9,
+.bracket-region__right .link3to10,
+.bracket-region__right .link5to11,
+.bracket-region__right .link7to12,
+.bracket-region__right .link9to13,
+.bracket-region__right .link11to14,
+.bracket-region__right .link13to15 {
+  border-right: 4px solid black;
+  border-bottom: 2px solid black;
+}
+
+.bracket-region__right .link2to9,
+.bracket-region__right .link4to10,
+.bracket-region__right .link6to11,
+.bracket-region__right .link8to12,
+.bracket-region__right .link10to13,
+.bracket-region__right .link12to14,
+.bracket-region__right .link14to15 {
+  border-right: 4px solid black;
+  border-top: 2px solid black;
+}
+
+.final-four {
+  display: grid;
+  grid-template-columns: 8fr 1fr 8fr 8fr 8fr 1fr 8fr;
+  grid-template-rows: repeat(8, 1fr);
+  grid-template-areas:
+    'round5 . . championship . . round5-2'
+    'region1 . . . . . region3'
+    '. link1 . . . link2 .'
+    '. link1 semi1 champion semi2 link2 .'
+    '. link4 . champion . link3 .'
+    '. link4 . . . link3 .'
+    'region2 . . . . . region4';
+  justify-items: stretch;
+  align-items: stretch;
+  justify-content: stretch;
+}
+.round5 {
+  grid-area: round5;
+}
+.round5-2 {
+  grid-area: round5-2;
+}
+.championship {
+  grid-area: championship;
+}
+.region1 {
+  grid-area: region1;
+  border-bottom: 4px solid black;
+  align-self: end;
+}
+.region2 {
+  grid-area: region2;
+  border-top: 4px solid black;
+}
+.region3 {
+  grid-area: region3;
+  border-bottom: 4px solid black;
+  align-self: end;
+}
+.region4 {
+  grid-area: region4;
+  border-top: 4px solid black;
+}
+.semi1 {
+  grid-area: semi1;
+  border-bottom: 4px solid black;
+  align-self: end;
+}
+.semi2 {
+  grid-area: semi2;
+  border-bottom: 4px solid black;
+  align-self: end;
+}
+.champion {
+  grid-area: champion;
+  border: 4px solid black;
+  align-self: center;
+}
+.link1 {
+  grid-area: link1;
+  border-bottom: 4px solid black;
+  border-left: 4px solid black;
+}
+.link2 {
+  grid-area: link2;
+  border-bottom: 4px solid black;
+  border-right: 4px solid black;
+}
+.link3 {
+  grid-area: link3;
+  border-right: 4px solid black;
+}
+.link4 {
+  grid-area: link4;
+  border-left: 4px solid black;
+}
+.winner {
+  color: green;
+}
+.loser {
+  color: red;
 }

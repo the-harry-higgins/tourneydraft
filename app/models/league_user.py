@@ -19,5 +19,7 @@ class League_User(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "league_id": self.league_id,
-            "drafted_teams": [drafted_team.id for drafted_team in self.drafted_teams]
+            "drafted_teams": [drafted_team.id for drafted_team in self.drafted_teams],
+            "name": self.user.name,
+            "profile_image": self.user.profile_image,
         }

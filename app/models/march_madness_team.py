@@ -31,5 +31,6 @@ class March_Madness_Team(db.Model):
             "college_id": self.college_id,
             "name": self.college.name,
             "logo": self.college.logo,
-            "games_by_round": {game.round_num: game.id for game in self.games}
+            "games_by_round": {game.round_num: game.id for game in self.games},
+            "won_game_ids": [game.id for game in self.won_games]
         }

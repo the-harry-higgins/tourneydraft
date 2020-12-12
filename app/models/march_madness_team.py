@@ -24,10 +24,12 @@ class March_Madness_Team(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "league_id": self.league_id,
             "year": self.year,
             "seed_number": self.seed_number,
             "region": self.region,
             "eliminated": self.eliminated,
             "college_id": self.college_id,
+            "name": self.college.name,
+            "logo": self.college.logo,
+            "games_by_round": {game.round_num: game.id for game in self.games}
         }

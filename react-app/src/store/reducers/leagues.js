@@ -1,9 +1,11 @@
-import { LOGIN } from '../actions/authenticate';
+import { LOGIN, LOGOUT } from '../actions/authenticate';
 
 export default function reducer(state = null, action) {
   switch (action.type) {
     case LOGIN:
       return action.data.leagues;
+    case LOGOUT:
+      return null;
     default:
       return state;
   }

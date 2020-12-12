@@ -28,4 +28,9 @@ class Drafted_Team(db.Model):
             "league_user_id": self.league_user_id,
             "draft_id": self.draft_id,
             "selection_num": self.selection_num,
+            # "seed_number": self.march_madness_team.seed_number,
+            # "region": self.march_madness_team.region,
+            # "eliminated": self.march_madness_team.eliminated,
+            # "name": self.march_madness_team.college.name,
+            # "logo": self.march_madness_team.college.logo,
         }

@@ -4,26 +4,30 @@ import user from './reducers/user';
 import leagues from './reducers/leagues';
 import league_users from './reducers/league_users';
 import drafts from './reducers/drafts';
-import teams from './reducers/teams';
+import draftedTeams from './reducers/draftedTeams';
+import marchMadnessTeams from './reducers/marchMadnessTeams';
 import games from './reducers/games';
 import session from './reducers/session';
-import errors from './reducers/errors';
+import messages from './reducers/messages';
+import ui from './reducers/ui';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const entities = combineReducers({
   user,
   leagues,
-  // league_users,
-  // drafts,
-  // teams,
-  // games
+  league_users,
+  drafts,
+  draftedTeams,
+  marchMadnessTeams,
+  games
 });
 
 const reducer = combineReducers({
   entities,
   session,
-  errors
+  messages,
+  ui
 });
 
 const configureStore = (initialState) => {

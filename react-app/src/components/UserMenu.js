@@ -1,0 +1,89 @@
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { ExpandLess, ExpandMore } from "@material-ui/icons";
+import { makeStyles } from '@material-ui/core/styles';
+import { Button, ClickAwayListener, Divider, List, ListItem, ListItemText, Paper, Popper } from '@material-ui/core';
+import { ReactComponent as Logo } from '../images/basketball-game.svg';
+import { logoutThunk } from '../store/actions/authenticate';
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    height: 50,
+    marginTop: theme.spacing(2),
+    marginRight: theme.spacing(4),
+  },
+  button: {
+    padding: theme.spacing(1),
+    color: '#FFF',
+  },
+  logo: {
+    width: 30,
+    fill: '#FFF',
+    marginRight: theme.spacing(2),
+  },
+}));
+
+export default function UserMenu() {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const user = useSelector(state => state.entities.user);
+  const leagues = useSelector(state => state.entities.leagues);
+  const drafts = useSelector(state => state.entities.drafts);
+  const dispatch = useDispatch();
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popper' : undefined;
+
+  const handleClick = (event) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+
+  const handleClickAway = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutThunk());
+  };
+
+  return (
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <div className={classes.root}>
+        <Button variant="contained" color="primary" onClick={handleClick} className={classes.button}>
+          <Logo className={classes.logo} />
+          {user.name}
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </Button>
+        <Popper id={id} open={open} placement='top-end' anchorEl={anchorEl}>
+          <Paper className={classes.menu}>
+            <List>
+              <ListItem disabled>
+                <ListItemText primary={user.email} />
+              </ListItem>
+              <Divider />
+              { Object.keys(leagues).map(leagueId => (
+                <div key={`league-${id}`}>
+                  <ListItem disabled>
+                    <ListItemText primary={leagues[leagueId].name} />
+                  </ListItem>
+                  {leagues[leagueId].draft_ids.map(id => (
+                    <ListItem button key={`draft-${id}`}>
+                      <ListItemText primary={`${drafts[id].year}`} />
+                    </ListItem>
+                  ))}
+                </div>
+              ))}
+              <Divider />
+              <ListItem button onClick={handleLogout}>
+                <ListItemText primary="Sign Out" />
+              </ListItem>
+            </List>
+          </Paper>
+        </Popper>
+      </div>
+    </ClickAwayListener>
+  );
+}

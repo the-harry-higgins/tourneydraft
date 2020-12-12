@@ -33,5 +33,6 @@ class User(db.Model, UserMixin):
             "name": self.name,
             "email": self.email,
             "profile_image": self.profile_image,
-            "league_user_ids": [league_user.id for league_user in self.league_users]
+            "league_user_ids": [league_user.id for league_user in self.league_users],
+            "league_ids": [league.id for league in self.leagues]
         }

@@ -11,12 +11,22 @@ let theme = createMuiTheme({
       root: {
         flexGrow: 1
       }
+    },
+    MuiListItem: {
+      root: {
+        paddingTop: 0,
+        paddingBottom: 0,
+      }
     }
   },
-  spacing: [0, 4, 8, 16, 32, 64],
+  // spacing: [0, 4, 8, 16, 32, 64],
   typography: {
+    fontFamily: [
+      'Ubuntu',
+      'sans-serif',
+    ].join(','),
     button: {
-      fontWeight: 'bold'
+      fontWeight: 'bold',
     },
     h1: {
       color: '#FFF',
@@ -33,9 +43,6 @@ let theme = createMuiTheme({
     secondary: {
       main: '#546e7a',
     },
-    // background: {
-    //   default: '',
-    // }
   },
 });
 

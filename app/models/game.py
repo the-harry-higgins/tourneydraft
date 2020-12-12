@@ -20,11 +20,11 @@ class Game(db.Model):
     winning_team = db.relationship('March_Madness_Team', back_populates='won_games')
     child_game = db.relationship('Game')
 
-    # def to_dict(self):
-    #     return {
-    #         "id": self.id,
-    #         "march_madness_team_id": self.march_madness_team_id,
-    #         "league_user_id": self.league_user_id,
-    #         "draft_id": self.draft_id,
-    #         "selection_num": self.selection_num,
-    #     }
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "round_num": self.round_num,
+            "game_num": self.game_num,
+            "winning_team_id": self.winning_team_id,
+            "team_ids": [team.id for team in self.teams],
+        }

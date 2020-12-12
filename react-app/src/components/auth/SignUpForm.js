@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { signupThunk } from "../../store/actions/user";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-// import AuthStyles from '../styles/AuthStyles';
+import { authenticateThunk } from "../../store/actions/authenticate";
+import { signUp } from '../../services/auth';
+
 
 const SignUpForm = (props) => {
-  // const classes = AuthStyles();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +14,7 @@ const SignUpForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await dispatch(signupThunk(name, email, password));
+    const success = await dispatch(authenticateThunk(signUp, name, email, password));
     if (success) {
       props.setRedirect(true);
     }
@@ -34,7 +34,6 @@ const SignUpForm = (props) => {
 
   return (
     <form
-      // className={classes.form}
       noValidate
       onSubmit={handleSubmit}>
       <TextField
@@ -81,7 +80,6 @@ const SignUpForm = (props) => {
         fullWidth
         variant="contained"
         color="primary"
-      // className={classes.submit}
       >
         Continue
       </Button>

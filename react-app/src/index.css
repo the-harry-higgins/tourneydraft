@@ -1,0 +1,207 @@
+.bracket-region__left {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 1fr 2fr 1fr 2fr;
+  grid-template-rows: repeat(18, 1fr);
+  grid-template-areas: 'region region region region region region region'
+    'round1 . round2 . round3 . round4'
+    'game1 . . . . . .'
+    'game1 link1to9 game9 . . . .'
+    'game2 link2to9 game9 link9to13 . . .'
+    'game2 . . link9to13 game13 . .'
+    'game3 . . link10to13 game13 link13to15 .'
+    'game3 link3to10 game10 link10to13 . link13to15 .'
+    'game4 link4to10 game10 . . link13to15 .'
+    'game4 . . . . link13to15 game15'
+    'game5 . . . . link14to15 game15'
+    'game5 link5to11 game11 . . link14to15 .'
+    'game6 link6to11 game11 link11to14 . link14to15 .'
+    'game6 . . link11to14 game14 link14to15 .'
+    'game7 . . link12to14 game14 . .'
+    'game7 link7to12 game12 link12to14 . . .'
+    'game8 link8to12 game12 . . . .'
+    'game8 . . . . . .';
+  justify-items: stretch;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.bracket-region__right {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 1fr 2fr 1fr 2fr;
+  grid-template-rows: repeat(18, 1fr);
+  grid-template-areas: 'region region region region region region region'
+    'round4 . round3 . round2 . round1'
+    '. . . . . . game1'
+    '. . . . game9 link1to9 game1'
+    '. . . link9to13 game9 link2to9 game2'
+    '. . game13 link9to13 . . game2'
+    '. link13to15 game13 link10to13 . . game3'
+    '. link13to15 . link10to13 game10 link3to10 game3'
+    '. link13to15 . . game10 link4to10 game4'
+    'game15 link13to15 . . . . game4'
+    'game15 link14to15 . . . . game5'
+    '. link14to15 . . game11 link5to11 game5'
+    '. link14to15 . link11to14 game11 link6to11 game6'
+    '. link14to15 game14 link11to14 . . game6'
+    '. . game14 link12to14 . . game7'
+    '. . . link12to14 game12 link7to12 game7'
+    '. . . . game12 link8to12 game8'
+    '. . . . . . game8';
+  justify-items: stretch;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+
+.region {
+  grid-area: region;
+}
+
+.round1 {
+  grid-area: round1;
+}
+
+.round2 {
+  grid-area: round2;
+}
+
+.round3 {
+  grid-area: round3;
+}
+
+
+.round4 {
+  grid-area: round4;
+}
+
+
+.game1 {
+  grid-area: game1;
+}
+
+
+.game2 {
+  grid-area: game2;
+}
+
+
+.game3 {
+  grid-area: game3;
+}
+
+
+.game4 {
+  grid-area: game4;
+}
+
+
+.game5 {
+  grid-area: game5;
+}
+
+
+.game6 {
+  grid-area: game6;
+}
+
+
+.game7 {
+  grid-area: game7;
+}
+
+
+.game8 {
+  grid-area: game8;
+}
+
+
+.game9 {
+  grid-area: game9;
+}
+
+.game10 {
+  grid-area: game10;
+}
+
+
+.game11 {
+  grid-area: game11;
+}
+
+
+.game12 {
+  grid-area: game12;
+}
+
+
+.game13 {
+  grid-area: game13;
+}
+
+
+.game14 {
+  grid-area: game14;
+}
+
+
+.game15 {
+  grid-area: game15;
+}
+
+
+.link1to9 {
+  grid-area: link1to9;
+}
+
+
+.link2to9 {
+  grid-area: link2to9;
+}
+
+.link3to10 {
+  grid-area: link3to10;
+}
+
+.link4to10 {
+  grid-area: link4to10;
+}
+
+.link5to11 {
+  grid-area: link5to11;
+}
+
+.link6to11 {
+  grid-area: link6to11;
+}
+
+.link7to12 {
+  grid-area: link7to12;
+}
+
+.link8to12 {
+  grid-area: link8to12;
+}
+
+.link9to13 {
+  grid-area: link9to13;
+}
+
+.link10to13 {
+  grid-area: link10to13;
+}
+
+.link11to14 {
+  grid-area: link11to14;
+}
+
+.link12to14 {
+  grid-area: link12to14;
+}
+
+.link13to15 {
+  grid-area: link13to15;
+}
+
+.link14to15 {
+  grid-area: link14to15;
+}

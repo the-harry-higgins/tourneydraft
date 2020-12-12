@@ -17,9 +17,6 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
-  button: {
-    margin: theme.spacing(1),
-  }
 }));
 
 export default function TransitionsModal(props) {
@@ -36,7 +33,7 @@ export default function TransitionsModal(props) {
 
   return (
     <>
-      <Button type="button" className={classes.button} onClick={handleOpen} variant='contained' color='secondary'>
+      <Button type="button" onClick={handleOpen} variant='contained' color='secondary'>
         {props.name}
       </Button>
       <Modal

@@ -279,8 +279,8 @@
   border-left: 4px solid black;
 }
 .winner {
-  color: green;
+  color: green !important;
 }
 .loser {
-  color: red;
+  color: red !important;
 }

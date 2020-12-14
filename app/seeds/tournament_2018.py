@@ -290,7 +290,7 @@ def seed_2018_tournament():
 
     db.session.commit()
 
-    game_1 = Game(game_num=1, round_num=1, winning_team_id=villanova.id)
+    game_1 = Game(game_num=1, round_num=1, winning_team_id=uMBC.id)
     db.session.add(game_1)
     game_2 = Game(game_num=1, round_num=1, winning_team_id=kansas_State.id)
     db.session.add(game_2)

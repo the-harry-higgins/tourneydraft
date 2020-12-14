@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { BracketTeam } from './Team';
 
 
 export default function FinalFour(props) {
@@ -13,31 +14,25 @@ export default function FinalFour(props) {
   let region4winner = '';
   let semi1winner = '';
   let semi2winner = '';
-  let championshipWinner = 'Champion';
+  let championshipWinner = '';
   const colors = ['','','','','','','']
 
   if (roundNum >= 5) {
-    const winner1 = marchMadnessTeams[games[57].winning_team_id];
-    const winner2 = marchMadnessTeams[games[58].winning_team_id];
-    const winner3 = marchMadnessTeams[games[59].winning_team_id];
-    const winner4 = marchMadnessTeams[games[60].winning_team_id];
-    region1winner = winner1.name;
-    region2winner = winner2.name;
-    region3winner = winner3.name;
-    region4winner =winner4.name;
+    region1winner = marchMadnessTeams[games[57].winning_team_id];
+    region2winner = marchMadnessTeams[games[58].winning_team_id];
+    region3winner = marchMadnessTeams[games[59].winning_team_id];
+    region4winner = marchMadnessTeams[games[60].winning_team_id];
     if (roundNum >= 6) {
-      const semi1 = marchMadnessTeams[games[61].winning_team_id];
-      const semi2 = marchMadnessTeams[games[62].winning_team_id];
-      semi1winner = semi1.name;
-      semi2winner = semi2.name;
-      if (semi1.id === winner1.id) {
+      semi1winner = marchMadnessTeams[games[61].winning_team_id];
+      semi2winner = marchMadnessTeams[games[62].winning_team_id];
+      if (semi1winner.id === region1winner.id) {
         colors[0] = 'winner';
         colors[1] = 'loser';
       } else {
         colors[1] = 'winner';
         colors[0] = 'loser';
       }
-      if (semi2.id === winner3.id) {
+      if (semi2winner.id === region3winner.id) {
         colors[2] = 'winner';
         colors[3] = 'loser';
       } else {
@@ -45,9 +40,8 @@ export default function FinalFour(props) {
         colors[2] = 'loser';
       }
       if (roundNum === 7) {
-        const champion = marchMadnessTeams[games[62].winning_team_id];
-        championshipWinner = champion.name;
-        if (champion.id === semi1.id) {
+        championshipWinner = marchMadnessTeams[games[62].winning_team_id];
+        if (championshipWinner.id === semi1winner.id) {
           colors[4] = 'winner';
           colors[5] = 'loser';
         } else {
@@ -71,25 +65,25 @@ export default function FinalFour(props) {
         National Championship
       </div>
       <div className={`region1 ${colors[0]}`}>
-        {region1winner}
+        <BracketTeam team={region1winner} default=''/>
       </div>
       <div className={`region2 ${colors[1]}`}>
-        {region2winner}
+        <BracketTeam team={region2winner} default='' />
       </div>
       <div className={`region3 ${colors[2]}`}>
-        {region3winner}
+        <BracketTeam team={region3winner} default=''/>
       </div>
       <div className={`region4 ${colors[3]}`}>
-        {region4winner}
+        <BracketTeam team={region4winner} default=''/>
       </div>
       <div className={`semi1 ${colors[4]}`}>
-        {semi1winner}
+        <BracketTeam team={semi1winner} default=''/>
       </div>
       <div className={`semi2 ${colors[5]}`}>
-        {semi2winner}
+        <BracketTeam team={semi2winner} default=''/>
       </div>
       <div className={`champion ${colors[6]}`}>
-        {championshipWinner}
+        <BracketTeam team={championshipWinner} default='Champion'/>
       </div>
       <div className='link1' />
       <div className='link2' />

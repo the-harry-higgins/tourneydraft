@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
+import { BracketTeam } from './Team';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
   loser: {
     color: theme.palette.error.main,
-  }
+  },
 }));
 
 const order = (thisRound, teams) => {
@@ -63,10 +64,10 @@ export default function Game(props) {
     return (
       <div className={`${classes.root} game${props.bracketGameNum}`}>
         <div className={classes.top}>
-          {`#${orderedTeams[0].seed_number} ${orderedTeams[0].name}`}
+          <BracketTeam team={orderedTeams[0]}/>
         </div>
         <div className={classes.bottom}>
-          {`#${orderedTeams[1].seed_number} ${orderedTeams[1].name}`}
+          <BracketTeam team={orderedTeams[1]} />
         </div>
       </div>
     );
@@ -78,10 +79,10 @@ export default function Game(props) {
   return (
     <div className={`${classes.root} game${props.bracketGameNum}`}>
       <div className={`${classes.top} ${colors[0]}`}>
-        {`#${orderedTeams[0].seed_number} ${orderedTeams[0].name}`}
+        <BracketTeam team={orderedTeams[0]} />
       </div>
       <div className={`${classes.bottom} ${colors[1]}`}>
-        {`#${orderedTeams[1].seed_number} ${orderedTeams[1].name}`}
+        <BracketTeam team={orderedTeams[1]} />
       </div>
     </div>
   );

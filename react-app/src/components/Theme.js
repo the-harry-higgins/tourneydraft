@@ -48,6 +48,14 @@ let theme = createMuiTheme({
         'cursive',
       ].join(','),
     },
+    h2: {
+      color: '#FFF',
+      fontSize: '2rem',
+      fontFamily: [
+        'Lobster',
+        'cursive',
+      ].join(','),
+    },
   },
   palette: {
     primary: {

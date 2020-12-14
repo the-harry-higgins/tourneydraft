@@ -5,14 +5,21 @@ import MainPage from './MainPage';
 import SplashPage from './SplashPage';
 import PrivateRoute from "./auth/PrivateRoute";
 import { CssBaseline, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import Theme from './Theme';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import { authenticateThunk } from "../store/actions/authenticate";
 import { authenticate } from '../services/auth';
 import SimpleBackdrop from './SimpleBackdrop';
 
+const useStyles = makeStyles((theme) => ({
+  button: {
+    color: '#FFF',
+  },
+}));
 
 function App() {
+  const classes = useStyles();
   const isNotLoggedIn = useSelector((state) => !state.session.currentUserId);
   const messages = useSelector((state) => state.messages);
   const [loaded, setLoaded] = useState(false);
@@ -32,14 +39,14 @@ function App() {
         messages[key].forEach(message => {
           enqueueSnackbar(message, {variant: key,
             action: (
-              <Button color="secondary" size="small" onClick={() => closeSnackbar()}>
+              <Button className={classes.button} size="small" onClick={() => closeSnackbar()}>
                 Close
               </Button>
             ),});
         });
       })
     }
-  }, [messages, closeSnackbar, enqueueSnackbar])
+  }, [messages, closeSnackbar, enqueueSnackbar, classes.button])
 
   if (!loaded) {
     return <SimpleBackdrop/>;
@@ -66,7 +73,7 @@ export default function AppContainer() {
     <>
       <CssBaseline />
       <Theme>
-        <SnackbarProvider maxSnack={3}>
+        <SnackbarProvider maxSnack={2}>
           <App />
         </SnackbarProvider>
       </Theme>

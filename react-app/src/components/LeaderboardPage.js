@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import PlayerCard from './PlayerCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    backgroundColor: theme.palette.secondary.main,
   },
   header: {
     padding: theme.spacing(2),
@@ -52,11 +54,9 @@ export default function LeaderboardPage() {
           </Paper>
         </Grid>
         {sorted.map((obj, index) => (
-          <Grid key={`leader-${obj.id}`} item xs={12} md={6} lg={3}>
+          <Grid key={`leader-${obj.id}`} item xs={12} md={6} lg={4}>
             <Paper className={classes.paper}>
-              Number {index + 1}
-              {players.dict[obj.id].name}
-              Points {obj.points}
+              <PlayerCard rank={index + 1} points={obj.points} player={players.dict[obj.id]}/>
             </Paper>
           </Grid>
         ))}

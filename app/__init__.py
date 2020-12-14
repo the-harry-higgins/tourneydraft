@@ -4,6 +4,10 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
+from flask_socketio import SocketIO, emit, send
+from flask_socketio import join_room, leave_room
+
+
 
 from .models import db, User
 from .api.user_routes import user_routes
@@ -38,7 +42,7 @@ Migrate(app, db)
 
 # Application Security
 CORS(app)
-
+socketio = SocketIO(app, cors_allowed_origins='*')
 
 @app.after_request
 def inject_csrf_token(response):
@@ -55,6 +59,47 @@ def inject_csrf_token(response):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
-    if path == 'favicon.ico':
-        return app.send_static_file('favicon.png')
+    if path:
+        return app.send_static_file(path)
     return app.send_static_file('index.html')
+
+
+@socketio.on('connect')
+def test_connect():
+    print('Client connected')
+    emit('my response', {'data': 'Connected'})
+
+
+@socketio.on('disconnect')
+def test_disconnect():
+    print('Client disconnected')
+
+
+@socketio.on('message')
+def handle_message(data):
+    print('received message: ' + data)
+
+
+# @socketio.on('my event')
+# def handle_my_custom_event(json):
+#     print('received json: ' + str(json))
+
+
+# @socketio.on('join')
+# def on_join(data):
+#     username = data['username']
+#     room = data['room']
+#     join_room(room)
+#     send(username + ' has entered the room.', room=room)
+
+
+# @socketio.on('leave')
+# def on_leave(data):
+#     username = data['username']
+#     room = data['room']
+#     leave_room(room)
+#     send(username + ' has left the room.', room=room)
+
+
+if __name__ == '__main__':
+  socketio.run(app)

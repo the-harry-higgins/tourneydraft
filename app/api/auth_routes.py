@@ -30,7 +30,7 @@ def get_user_data(user):
                 if drafts_data[draft_id]['drafting']:
                     current_draft_id = draft_id
                     messages_data = {
-                        'info': 'Your league is currently drafting'
+                        'info': ['Your league is currently drafting']
                     }
                     break
                 if drafts_data[draft_id]['year'] > max_year:

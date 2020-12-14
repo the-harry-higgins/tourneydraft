@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from "react-router-dom";
 import UserMenu from './UserMenu';
 import RoundsMenu from './RoundsMenu';
+import DraftPage from './DraftPage';
 import BracketPage from './BracketPage';
 import LeaderboardPage from './LeaderboardPage';
 import SimpleBottomNavigation from './SimpleBottomNavigation';
@@ -14,7 +15,7 @@ export default function MainPage(props) {
     <UserMenu />
     <Switch>
       <Route path='/draft' exact={true} >
-        <h1>DraftPage</h1>
+        <DraftPage />
       </Route>
       <Route path='/'>
         <RoundsMenu />

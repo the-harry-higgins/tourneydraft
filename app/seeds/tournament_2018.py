@@ -1,291 +1,295 @@
-from app.models import db, March_Madness_Team, College, Game, Game_Team_Score, League, League_User, Draft, Drafted_Team, User
+from app.models import db, March_Madness_Team, College, Game, Game_Team_Score, League, League_User, Draft, Drafted_Team, User, Tournament
 import json
 from datetime import datetime
 
 def seed_2018_tournament():
+    tournament = Tournament(year=2018, region1='South', region2='West', region3='East', region4='Midwest')
+    db.session.add(tournament)
+    db.session.commit()
+
     Alabama = College.query.filter(College.name == 'Alabama').one()
-    alabama = March_Madness_Team(year=2018, seed_number=9, region='East', eliminated=True, college_id=Alabama.id)
+    alabama = March_Madness_Team(tournament_id=tournament.id, seed_number=9, region='East', college_id=Alabama.id)
     db.session.add(alabama)
     
     Arizona = College.query.filter(College.name == 'Arizona').one()
-    arizona = March_Madness_Team(year=2018, seed_number=4, region='South', eliminated=True, college_id=Arizona.id)
+    arizona = March_Madness_Team(tournament_id=tournament.id, seed_number=4, region='South', college_id=Arizona.id)
     db.session.add(arizona)
 
     Arkansas = College.query.filter(College.name == 'Arkansas').one()
-    arkansas = March_Madness_Team(year=2018, seed_number=7, region='East', eliminated=True, college_id=Arkansas.id)
+    arkansas = March_Madness_Team(tournament_id=tournament.id, seed_number=7, region='East', college_id=Arkansas.id)
     db.session.add(arkansas)
 
     Syracuse = College.query.filter(College.name == 'Syracuse').one()
-    syracuse = March_Madness_Team(year=2018, seed_number=11, region='Midwest', eliminated=True, college_id=Syracuse.id)
+    syracuse = March_Madness_Team(tournament_id=tournament.id, seed_number=11, region='Midwest', college_id=Syracuse.id)
     db.session.add(syracuse)
 
     Auburn = College.query.filter(College.name == 'Auburn').one()
-    auburn = March_Madness_Team(year=2018, seed_number=4, region='Midwest', eliminated=True, college_id=Auburn.id)
+    auburn = March_Madness_Team(tournament_id=tournament.id, seed_number=4, region='Midwest', college_id=Auburn.id)
     db.session.add(auburn)
 
     Bucknell = College.query.filter(College.name == 'Bucknell').one()
-    bucknell = March_Madness_Team(year=2018, seed_number=14, region='Midwest', eliminated=True, college_id=Bucknell.id)
+    bucknell = March_Madness_Team(tournament_id=tournament.id, seed_number=14, region='Midwest', college_id=Bucknell.id)
     db.session.add(bucknell)
 
     Buffalo = College.query.filter(College.name == 'Buffalo').one()
     buffalo = March_Madness_Team(
-        year=2018, seed_number=13, region='South', eliminated=True, college_id=Buffalo.id)
+        tournament_id=tournament.id, seed_number=13, region='South', college_id=Buffalo.id)
     db.session.add(buffalo)
 
     Butler = College.query.filter(College.name == 'Butler').one()
     butler = March_Madness_Team(
-        year=2018, seed_number=10, region='East', eliminated=True, college_id=Butler.id)
+        tournament_id=tournament.id, seed_number=10, region='East', college_id=Butler.id)
     db.session.add(butler)
 
     Cal_State_Fullerton = College.query.filter(College.name == 'Cal State Fullerton').one()
     cal_State_Fullerton = March_Madness_Team(
-        year=2018, seed_number=15, region='East', eliminated=True, college_id=Cal_State_Fullerton.id)
+        tournament_id=tournament.id, seed_number=15, region='East', college_id=Cal_State_Fullerton.id)
     db.session.add(cal_State_Fullerton)
 
     Charleston = College.query.filter(College.name == 'Charleston').one()
     charleston = March_Madness_Team(
-        year=2018, seed_number=13, region='Midwest', eliminated=True, college_id=Charleston.id)
+        tournament_id=tournament.id, seed_number=13, region='Midwest', college_id=Charleston.id)
     db.session.add(charleston)
 
     Cincinnati = College.query.filter(College.name == 'Cincinnati').one()
     cincinnati = March_Madness_Team(
-        year=2018, seed_number=2, region='South', eliminated=True, college_id=Cincinnati.id)
+        tournament_id=tournament.id, seed_number=2, region='South', college_id=Cincinnati.id)
     db.session.add(cincinnati)
 
     Clemson = College.query.filter(College.name == 'Clemson').one()
     clemson = March_Madness_Team(
-        year=2018, seed_number=5, region='Midwest', eliminated=True, college_id=Clemson.id)
+        tournament_id=tournament.id, seed_number=5, region='Midwest', college_id=Clemson.id)
     db.session.add(clemson)
 
     Creighton = College.query.filter(College.name == 'Creighton').one()
     creighton = March_Madness_Team(
-        year=2018, seed_number=8, region='South', eliminated=True, college_id=Creighton.id)
+        tournament_id=tournament.id, seed_number=8, region='South', college_id=Creighton.id)
     db.session.add(creighton)
 
     Davidson = College.query.filter(College.name == 'Davidson').one()
     davidson = March_Madness_Team(
-        year=2018, seed_number=12, region='South', eliminated=True, college_id=Davidson.id)
+        tournament_id=tournament.id, seed_number=12, region='South', college_id=Davidson.id)
     db.session.add(davidson)
 
     Duke = College.query.filter(College.name == 'Duke').one()
     duke = March_Madness_Team(
-        year=2018, seed_number=2, region='Midwest', eliminated=True, college_id=Duke.id)
+        tournament_id=tournament.id, seed_number=2, region='Midwest', college_id=Duke.id)
     db.session.add(duke)
 
     Florida_State = College.query.filter(College.name == 'Florida State').one()
     florida_State = March_Madness_Team(
-        year=2018, seed_number=9, region='West', eliminated=True, college_id=Florida_State.id)
+        tournament_id=tournament.id, seed_number=9, region='West', college_id=Florida_State.id)
     db.session.add(florida_State)
 
     Florida = College.query.filter(College.name == 'Florida').one()
     florida = March_Madness_Team(
-        year=2018, seed_number=6, region='East', eliminated=True, college_id=Florida.id)
+        tournament_id=tournament.id, seed_number=6, region='East', college_id=Florida.id)
     db.session.add(florida)
 
     Georgia_State = College.query.filter(College.name == 'Georgia State').one()
     georgia_State = March_Madness_Team(
-        year=2018, seed_number=15, region='South', eliminated=True, college_id=Georgia_State.id)
+        tournament_id=tournament.id, seed_number=15, region='South', college_id=Georgia_State.id)
     db.session.add(georgia_State)
 
     Gonzaga = College.query.filter(College.name == 'Gonzaga').one()
     gonzaga = March_Madness_Team(
-        year=2018, seed_number=4, region='West', eliminated=True, college_id=Gonzaga.id)
+        tournament_id=tournament.id, seed_number=4, region='West', college_id=Gonzaga.id)
     db.session.add(gonzaga)
 
     Houston = College.query.filter(College.name == 'Houston').one()
     houston = March_Madness_Team(
-        year=2018, seed_number=6, region='West', eliminated=True, college_id=Houston.id)
+        tournament_id=tournament.id, seed_number=6, region='West', college_id=Houston.id)
     db.session.add(houston)
 
     Iona = College.query.filter(College.name == 'Iona').one()
     iona = March_Madness_Team(
-        year=2018, seed_number=15, region='Midwest', eliminated=True, college_id=Iona.id)
+        tournament_id=tournament.id, seed_number=15, region='Midwest', college_id=Iona.id)
     db.session.add(iona)
 
     Kansas_State = College.query.filter(College.name == 'Kansas State').one()
     kansas_State = March_Madness_Team(
-        year=2018, seed_number=9, region='South', eliminated=True, college_id=Kansas_State.id)
+        tournament_id=tournament.id, seed_number=9, region='South', college_id=Kansas_State.id)
     db.session.add(kansas_State)
 
     Kansas = College.query.filter(College.name == 'Kansas').one()
     kansas = March_Madness_Team(
-        year=2018, seed_number=1, region='Midwest', eliminated=True, college_id=Kansas.id)
+        tournament_id=tournament.id, seed_number=1, region='Midwest', college_id=Kansas.id)
     db.session.add(kansas)
     
     Kentucky = College.query.filter(College.name == 'Kentucky').one()
     kentucky = March_Madness_Team(
-        year=2018, seed_number=5, region='South', eliminated=True, college_id=Kentucky.id)
+        tournament_id=tournament.id, seed_number=5, region='South', college_id=Kentucky.id)
     db.session.add(kentucky)
 
     Lipscomb = College.query.filter(College.name == 'Lipscomb').one()
     lipscomb = March_Madness_Team(
-        year=2018, seed_number=15, region='West', eliminated=True, college_id=Lipscomb.id)
+        tournament_id=tournament.id, seed_number=15, region='West', college_id=Lipscomb.id)
     db.session.add(lipscomb)
 
     Radford = College.query.filter(College.name == 'Radford').one()
     radford = March_Madness_Team(
-        year=2018, seed_number=16, region='East', eliminated=True, college_id=Radford.id)
+        tournament_id=tournament.id, seed_number=16, region='East', college_id=Radford.id)
     db.session.add(radford)
 
     Loyola_Chicago = College.query.filter(College.name == 'Loyola Chicago').one()
     loyola_Chicago = March_Madness_Team(
-        year=2018, seed_number=11, region='South', eliminated=True, college_id=Loyola_Chicago.id)
+        tournament_id=tournament.id, seed_number=11, region='South', college_id=Loyola_Chicago.id)
     db.session.add(loyola_Chicago)
 
     Marshall = College.query.filter(College.name == 'Marshall').one()
     marshall = March_Madness_Team(
-        year=2018, seed_number=13, region='East', eliminated=True, college_id=Marshall.id)
+        tournament_id=tournament.id, seed_number=13, region='East', college_id=Marshall.id)
     db.session.add(marshall)
 
     Miami = College.query.filter(College.name == 'Miami').one()
     miami = March_Madness_Team(
-        year=2018, seed_number=6, region='South', eliminated=True, college_id=Miami.id)
+        tournament_id=tournament.id, seed_number=6, region='South', college_id=Miami.id)
     db.session.add(miami)
 
     Michigan_State = College.query.filter(College.name == 'Michigan State').one()
-    michigan_State = March_Madness_Team(year=2018, seed_number=3, region='Midwest', eliminated=True, college_id=Michigan_State.id)
+    michigan_State = March_Madness_Team(tournament_id=tournament.id, seed_number=3, region='Midwest', college_id=Michigan_State.id)
     db.session.add(michigan_State)
 
     Michigan = College.query.filter(College.name == 'Michigan').one()
-    michigan = March_Madness_Team(year=2018, seed_number=4, region='West', eliminated=True, college_id=Michigan.id)
+    michigan = March_Madness_Team(tournament_id=tournament.id, seed_number=4, region='West', college_id=Michigan.id)
     db.session.add(michigan)
 
     Missouri = College.query.filter(College.name == 'Missouri').one()
     missouri = March_Madness_Team(
-        year=2018, seed_number=8, region='West', eliminated=True, college_id=Missouri.id)
+        tournament_id=tournament.id, seed_number=8, region='West', college_id=Missouri.id)
     db.session.add(missouri)
 
     Montana = College.query.filter(College.name == 'Montana').one()
     montana = March_Madness_Team(
-        year=2018, seed_number=14, region='West', eliminated=True, college_id=Montana.id)
+        tournament_id=tournament.id, seed_number=14, region='West', college_id=Montana.id)
     db.session.add(montana)
 
     Murray_State = College.query.filter(College.name == 'Murray State').one()
     murray_State = March_Madness_Team(
-        year=2018, seed_number=12, region='East', eliminated=True, college_id=Murray_State.id)
+        tournament_id=tournament.id, seed_number=12, region='East', college_id=Murray_State.id)
     db.session.add(murray_State)
 
     Texas_Southern = College.query.filter(College.name == 'Texas Southern').one()
-    texas_Southern = March_Madness_Team(year=2018, seed_number=16, region='West', eliminated=True, college_id=Texas_Southern.id)
+    texas_Southern = March_Madness_Team(tournament_id=tournament.id, seed_number=16, region='West', college_id=Texas_Southern.id)
     db.session.add(texas_Southern)
 
     UNC_Greensboro = College.query.filter(College.name == 'UNC Greensboro').one()
     uNC_Greensboro = March_Madness_Team(
-        year=2018, seed_number=13, region='West', eliminated=True, college_id=UNC_Greensboro.id)
+        tournament_id=tournament.id, seed_number=13, region='West', college_id=UNC_Greensboro.id)
     db.session.add(uNC_Greensboro)
 
     Nevada = College.query.filter(College.name == 'Nevada').one()
     nevada = March_Madness_Team(
-        year=2018, seed_number=7, region='South', eliminated=True, college_id=Nevada.id)
+        tournament_id=tournament.id, seed_number=7, region='South', college_id=Nevada.id)
     db.session.add(nevada)
 
     New_Mexico_State = College.query.filter(College.name == 'New Mexico State').one()
     new_Mexico_State = March_Madness_Team(
-        year=2018, seed_number=12, region='Midwest', eliminated=True, college_id=New_Mexico_State.id)
+        tournament_id=tournament.id, seed_number=12, region='Midwest', college_id=New_Mexico_State.id)
     db.session.add(new_Mexico_State)
 
     North_Carolina_State = College.query.filter(College.name == 'North Carolina State').one()
-    north_Carolina_State = March_Madness_Team(year=2018, seed_number=9, region='Midwest', eliminated=True, college_id=North_Carolina_State.id)
+    north_Carolina_State = March_Madness_Team(tournament_id=tournament.id, seed_number=9, region='Midwest', college_id=North_Carolina_State.id)
     db.session.add(north_Carolina_State)
 
     North_Carolina = College.query.filter(College.name == 'North Carolina').one()
-    north_Carolina = March_Madness_Team(year=2018, seed_number=2, region='West', eliminated=True, college_id=North_Carolina.id)
+    north_Carolina = March_Madness_Team(tournament_id=tournament.id, seed_number=2, region='West', college_id=North_Carolina.id)
     db.session.add(north_Carolina)
 
     Ohio_State = College.query.filter(College.name == 'Ohio State').one()
-    ohio_State = March_Madness_Team(year=2018, seed_number=5, region='West', eliminated=True, college_id=Ohio_State.id)
+    ohio_State = March_Madness_Team(tournament_id=tournament.id, seed_number=5, region='West', college_id=Ohio_State.id)
     db.session.add(ohio_State)
     
     Oklahoma = College.query.filter(College.name == 'Oklahoma').one()
-    oklahoma = March_Madness_Team(year=2018, seed_number=10, region='Midwest', eliminated=True, college_id=Oklahoma.id)
+    oklahoma = March_Madness_Team(tournament_id=tournament.id, seed_number=10, region='Midwest', college_id=Oklahoma.id)
     db.session.add(oklahoma)
 
     Penn = College.query.filter(College.name == 'Penn').one()
-    penn = March_Madness_Team(year=2018, seed_number=16, region='Midwest', eliminated=True, college_id=Penn.id)
+    penn = March_Madness_Team(tournament_id=tournament.id, seed_number=16, region='Midwest', college_id=Penn.id)
     db.session.add(penn)
 
     Providence = College.query.filter(College.name == 'Providence').one()
-    providence = March_Madness_Team(year=2018, seed_number=10, region='West', eliminated=True, college_id=Providence.id)
+    providence = March_Madness_Team(tournament_id=tournament.id, seed_number=10, region='West', college_id=Providence.id)
     db.session.add(providence)
 
     Purdue = College.query.filter(College.name == 'Purdue').one()
-    purdue = March_Madness_Team(year=2018, seed_number=2, region='East', eliminated=True, college_id=Purdue.id)
+    purdue = March_Madness_Team(tournament_id=tournament.id, seed_number=2, region='East', college_id=Purdue.id)
     db.session.add(purdue)
 
     Rhode_Island = College.query.filter(College.name == 'Rhode Island').one()
-    rhode_Island = March_Madness_Team(year=2018, seed_number=7, region='Midwest', eliminated=True, college_id=Rhode_Island.id)
+    rhode_Island = March_Madness_Team(tournament_id=tournament.id, seed_number=7, region='Midwest', college_id=Rhode_Island.id)
     db.session.add(rhode_Island)
 
     San_Diego_State = College.query.filter(College.name == 'San Diego State').one()
-    san_Diego_State = March_Madness_Team(year=2018, seed_number=11, region='West', eliminated=True, college_id=San_Diego_State.id)
+    san_Diego_State = March_Madness_Team(tournament_id=tournament.id, seed_number=11, region='West', college_id=San_Diego_State.id)
     db.session.add(san_Diego_State)
 
     Seton_Hall = College.query.filter(College.name == 'Seton Hall').one()
-    seton_Hall = March_Madness_Team(year=2018, seed_number=8, region='Midwest', eliminated=True, college_id=Seton_Hall.id)
+    seton_Hall = March_Madness_Team(tournament_id=tournament.id, seed_number=8, region='Midwest', college_id=Seton_Hall.id)
     db.session.add(seton_Hall)
 
     South_Dakota_State = College.query.filter(College.name == 'South Dakota State').one()
-    south_Dakota_State = March_Madness_Team(year=2018, seed_number=12, region='West', eliminated=True, college_id=South_Dakota_State.id)
+    south_Dakota_State = March_Madness_Team(tournament_id=tournament.id, seed_number=12, region='West', college_id=South_Dakota_State.id)
     db.session.add(south_Dakota_State)
 
     St_Bonaventure = College.query.filter(College.name == 'St. Bonaventure').one()
-    st_Bonaventure = March_Madness_Team(year=2018, seed_number=11, region='East', eliminated=True, college_id=St_Bonaventure.id)
+    st_Bonaventure = March_Madness_Team(tournament_id=tournament.id, seed_number=11, region='East', college_id=St_Bonaventure.id)
     db.session.add(st_Bonaventure)
 
     Stephen_F_Austin = College.query.filter(College.name == 'Stephen F. Austin').one()
-    stephen_F_Austin = March_Madness_Team(year=2018, seed_number=14, region='East', eliminated=True, college_id=Stephen_F_Austin.id)
+    stephen_F_Austin = March_Madness_Team(tournament_id=tournament.id, seed_number=14, region='East', college_id=Stephen_F_Austin.id)
     db.session.add(stephen_F_Austin)
 
     TCU = College.query.filter(College.name == 'TCU').one()
-    tCU = March_Madness_Team(year=2018, seed_number=6, region='Midwest', eliminated=True, college_id=TCU.id)
+    tCU = March_Madness_Team(tournament_id=tournament.id, seed_number=6, region='Midwest', college_id=TCU.id)
     db.session.add(tCU)
 
     Tennessee = College.query.filter(College.name == 'Tennessee').one()
-    tennessee = March_Madness_Team(year=2018, seed_number=3, region='South', eliminated=True, college_id=Tennessee.id)
+    tennessee = March_Madness_Team(tournament_id=tournament.id, seed_number=3, region='South', college_id=Tennessee.id)
     db.session.add(tennessee)
 
     Texas_AM = College.query.filter(College.name == 'Texas A&M').one()
-    texas_AM = March_Madness_Team(year=2018, seed_number=7, region='West', eliminated=True, college_id=Texas_AM.id)
+    texas_AM = March_Madness_Team(tournament_id=tournament.id, seed_number=7, region='West', college_id=Texas_AM.id)
     db.session.add(texas_AM)
 
     Texas_Tech = College.query.filter(College.name == 'Texas Tech').one()
-    texas_Tech = March_Madness_Team(year=2018, seed_number=3, region='East', eliminated=True, college_id=Texas_Tech.id)
+    texas_Tech = March_Madness_Team(tournament_id=tournament.id, seed_number=3, region='East', college_id=Texas_Tech.id)
     db.session.add(texas_Tech)
 
     Texas = College.query.filter(College.name == 'Texas').one()
-    texas = March_Madness_Team(year=2018, seed_number=10, region='South', eliminated=True, college_id=Texas.id)
+    texas = March_Madness_Team(tournament_id=tournament.id, seed_number=10, region='South', college_id=Texas.id)
     db.session.add(texas)
 
     UMBC = College.query.filter(College.name == 'UMBC').one()
-    uMBC = March_Madness_Team(year=2018, seed_number=16, region='South', eliminated=True, college_id=UMBC.id)
+    uMBC = March_Madness_Team(tournament_id=tournament.id, seed_number=16, region='South', college_id=UMBC.id)
     db.session.add(uMBC)
 
     Villanova = College.query.filter(College.name == 'Villanova').one()
-    villanova = March_Madness_Team(year=2018, seed_number=1, region='East', eliminated=False, college_id=Villanova.id)
+    villanova = March_Madness_Team(tournament_id=tournament.id, seed_number=1, region='East',  college_id=Villanova.id)
     db.session.add(villanova)
 
     Virginia_Tech = College.query.filter(College.name == 'Virginia Tech').one()
-    virginia_Tech = March_Madness_Team(year=2018, seed_number=8, region='East', eliminated=True, college_id=Virginia_Tech.id)
+    virginia_Tech = March_Madness_Team(tournament_id=tournament.id, seed_number=8, region='East', college_id=Virginia_Tech.id)
     db.session.add(virginia_Tech)
 
     Virginia = College.query.filter(College.name == 'Virginia').one()
-    virginia = March_Madness_Team(year=2018, seed_number=1, region='South', eliminated=True, college_id=Virginia.id)
+    virginia = March_Madness_Team(tournament_id=tournament.id, seed_number=1, region='South', college_id=Virginia.id)
     db.session.add(virginia)
 
     West_Virginia = College.query.filter(College.name == 'West Virginia').one()
-    west_Virginia = March_Madness_Team(year=2018, seed_number=5, region='East', eliminated=True, college_id=West_Virginia.id)
+    west_Virginia = March_Madness_Team(tournament_id=tournament.id, seed_number=5, region='East', college_id=West_Virginia.id)
     db.session.add(west_Virginia)
 
     Wichita_State = College.query.filter(College.name == 'Wichita State').one()
-    wichita_State = March_Madness_Team(year=2018, seed_number=4, region='East', eliminated=True, college_id=Wichita_State.id)
+    wichita_State = March_Madness_Team(tournament_id=tournament.id, seed_number=4, region='East', college_id=Wichita_State.id)
     db.session.add(wichita_State)
 
     Wright_State = College.query.filter(College.name == 'Wright State').one()
-    wright_State = March_Madness_Team(year=2018, seed_number=14, region='South', eliminated=True, college_id=Wright_State.id)
+    wright_State = March_Madness_Team(tournament_id=tournament.id, seed_number=14, region='South', college_id=Wright_State.id)
     db.session.add(wright_State)
 
     Xavier = College.query.filter(College.name == 'Xavier').one()
-    xavier = March_Madness_Team(year=2018, seed_number=1, region='West', eliminated=True, college_id=Xavier.id)
+    xavier = March_Madness_Team(tournament_id=tournament.id, seed_number=1, region='West', college_id=Xavier.id)
     db.session.add(xavier)
 
     db.session.commit()
@@ -741,7 +745,7 @@ def seed_2018_tournament():
     draft_order = [
         lu_ids['Will'],
         lu_ids['Ryan'],
-        lu_ids['Chase'],
+        lu_ids['DemoDraft'],
         lu_ids['Demo'],
         lu_ids['Mitch'],
         lu_ids['TJ'],
@@ -752,12 +756,12 @@ def seed_2018_tournament():
         lu_ids['TJ'],
         lu_ids['Mitch'],
         lu_ids['Demo'],
-        lu_ids['Chase'],
+        lu_ids['DemoDraft'],
         lu_ids['Ryan'],
         lu_ids['Will'],
         lu_ids['Patrick'],
         lu_ids['Mitch'],
-        lu_ids['Chase'],
+        lu_ids['DemoDraft'],
         lu_ids['Will'],
         lu_ids['Ryan'],
         lu_ids['Demo'],
@@ -768,11 +772,11 @@ def seed_2018_tournament():
         lu_ids['Demo'],
         lu_ids['Ryan'],
         lu_ids['Will'],
-        lu_ids['Chase'],
+        lu_ids['DemoDraft'],
         lu_ids['Mitch'],
         lu_ids['Patrick'],
         lu_ids['Patrick'],
-        lu_ids['Chase'],
+        lu_ids['DemoDraft'],
         lu_ids['Isaac'],
         lu_ids['Ryan'],
         lu_ids['Demo'],
@@ -785,7 +789,7 @@ def seed_2018_tournament():
         lu_ids['Demo'],
         lu_ids['Ryan'],
         lu_ids['Isaac'],
-        lu_ids['Chase'],
+        lu_ids['DemoDraft'],
         lu_ids['Patrick'],
         lu_ids['Will'],
         lu_ids['Demo'],
@@ -794,8 +798,8 @@ def seed_2018_tournament():
         lu_ids['Ryan'],
         lu_ids['TJ'],
         lu_ids['Isaac'],
-        lu_ids['Chase'],
-        lu_ids['Chase'],
+        lu_ids['DemoDraft'],
+        lu_ids['DemoDraft'],
         lu_ids['Isaac'],
         lu_ids['TJ'],
         lu_ids['Ryan'],
@@ -806,7 +810,7 @@ def seed_2018_tournament():
     ]
 
     draft = Draft(league_id=league.id,
-                  year=2018, draft_order=json.dumps(draft_order), draft_index=64,
+                  tournament_id=tournament.id, draft_order=json.dumps(draft_order), draft_index=64,
                   draft_time=datetime.now(), drafting=False, current_drafter_id=None,
                   time_limit_mins=None)
     db.session.add(draft)
@@ -946,6 +950,7 @@ def seed_2018_tournament():
 
 
 def undo_2018_tournament():
+    db.session.execute('TRUNCATE tournaments RESTART IDENTITY CASCADE;')
     db.session.execute('TRUNCATE march_madness_teams RESTART IDENTITY CASCADE;')
     db.session.execute('TRUNCATE games RESTART IDENTITY CASCADE;')
     db.session.execute('TRUNCATE game_team_scores RESTART IDENTITY CASCADE;')

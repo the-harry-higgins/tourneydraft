@@ -4,9 +4,12 @@ from app.models import db, User, League, League_User
 
 def seed_league_of_extraordinary_gentlemen():
 
-    demodrafter = User(name='DemoDraft', email='demodraft@aa.io',
+    chase = User(name='Chase', email='chase@aa.io',
                 password='password')
-    chase = User.query.filter(User.name == 'Chase').one()
+    db.session.add(chase)
+    db.session.commit()
+    
+    demodrafter = User.query.filter(User.name == 'DemoDraft').one()
     isaac = User.query.filter(User.name == 'Isaac').one()
     mitch = User.query.filter(User.name == 'Mitch').one()
     patrick = User.query.filter(User.name == 'Patrick').one()

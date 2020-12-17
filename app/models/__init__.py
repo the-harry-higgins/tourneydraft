@@ -7,4 +7,5 @@ from .game import Game
 from .league_user import League_User
 from .league import League
 from .march_madness_team import March_Madness_Team
+from .tournament import Tournament
 from .user import User

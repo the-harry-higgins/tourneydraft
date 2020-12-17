@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2aab3d4df9ad
+Revision ID: 87f05bac6e4d
 Revises: 
-Create Date: 2020-12-03 11:12:09.509851
+Create Date: 2020-12-16 21:58:38.069458
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2aab3d4df9ad'
+revision = '87f05bac6e4d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,6 +24,15 @@ def upgrade():
     sa.Column('logo', sa.String(length=256), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
+    )
+    op.create_table('tournaments',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('year', sa.Integer(), nullable=False),
+    sa.Column('region1', sa.String(length=20), nullable=False),
+    sa.Column('region2', sa.String(length=20), nullable=False),
+    sa.Column('region3', sa.String(length=20), nullable=False),
+    sa.Column('region4', sa.String(length=20), nullable=False),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -43,12 +52,12 @@ def upgrade():
     )
     op.create_table('march_madness_teams',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('year', sa.Integer(), nullable=False),
+    sa.Column('tournament_id', sa.Integer(), nullable=False),
     sa.Column('seed_number', sa.Integer(), nullable=False),
     sa.Column('region', sa.String(length=50), nullable=False),
-    sa.Column('eliminated', sa.Boolean(), nullable=False),
     sa.Column('college_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['college_id'], ['colleges.id'], ),
+    sa.ForeignKeyConstraint(['tournament_id'], ['tournaments.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('games',
@@ -120,5 +129,6 @@ def downgrade():
     op.drop_table('march_madness_teams')
     op.drop_table('leagues')
     op.drop_table('users')
+    op.drop_table('tournaments')
     op.drop_table('colleges')
     # ### end Alembic commands ###

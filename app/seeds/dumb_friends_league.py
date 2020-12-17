@@ -6,8 +6,8 @@ def seed_dumb_friends_league():
 
     demo = User(name='Demo', email='demo@aa.io',
                 password='password')
-    chase = User(name='Chase', email='chase@aa.io',
-                 password='password')
+    demodrafter = User(name='DemoDraft', email='demodraft@aa.io',
+                       password='password')
     isaac = User(name='Isaac', email='isaac@aa.io',
                  password='password')
     mitch = User(name='Mitch', email='mitch@aa.io',
@@ -25,7 +25,7 @@ def seed_dumb_friends_league():
     league.admin = demo
 
     db.session.add(demo)
-    db.session.add(chase)
+    db.session.add(demodrafter)
     db.session.add(isaac)
     db.session.add(mitch)
     db.session.add(patrick)
@@ -36,7 +36,7 @@ def seed_dumb_friends_league():
     db.session.commit()
 
     demo_lu = League_User(user_id=demo.id, league_id=league.id)
-    chase_lu = League_User(user_id=chase.id, league_id=league.id)
+    demodrafter_lu = League_User(user_id=demodrafter.id, league_id=league.id)
     isaac_lu = League_User(user_id=isaac.id, league_id=league.id)
     mitch_lu = League_User(user_id=mitch.id, league_id=league.id)
     patrick_lu = League_User(user_id=patrick.id, league_id=league.id)
@@ -46,7 +46,7 @@ def seed_dumb_friends_league():
 
 
     db.session.add(demo_lu)
-    db.session.add(chase_lu)
+    db.session.add(demodrafter_lu)
     db.session.add(isaac_lu)
     db.session.add(mitch_lu)
     db.session.add(patrick_lu)

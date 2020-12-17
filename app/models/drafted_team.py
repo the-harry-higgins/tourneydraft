@@ -1,6 +1,4 @@
 from .db import db
-from sqlalchemy.sql import func
-
 
 class Drafted_Team(db.Model):
     __tablename__ = 'drafted_teams'
@@ -18,7 +16,7 @@ class Drafted_Team(db.Model):
                                "march_madness_team_id", unique=True),)
 
     march_madness_team = db.relationship('March_Madness_Team')
-    league_user = db.relationship('League_User', back_populates='drafted_teams')
+    league_user = db.relationship('League_User')
     draft = db.relationship('Draft', back_populates='drafted_teams')
 
     def to_dict(self):

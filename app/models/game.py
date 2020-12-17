@@ -1,6 +1,4 @@
 from .db import db
-from sqlalchemy.sql import func
-
 
 class Game(db.Model):
     __tablename__ = 'games'

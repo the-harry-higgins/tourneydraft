@@ -10,6 +10,12 @@ function getRoundGameNums(regionNum, roundNum) {
   });
 }
 
+function getGameByNum(games, num) {
+  for (const [id, game] of Object.entries(games)) {
+    if (game.game_num === num) return game;
+  }
+}
+
 const links = ['link1to9', 'link2to9', 'link3to10', 'link4to10', 'link5to11', 'link6to11', 'link7to12', 'link8to12', 'link9to13', 'link10to13', 'link11to14', 'link12to14', 'link13to15', 'link14to15',]
 
 export default function BracketRegion(props) {
@@ -41,8 +47,8 @@ export default function BracketRegion(props) {
           roundNum={roundNum}
           teams={
             [
-              marchMadnessTeams[games[num].team_ids[0]],
-              marchMadnessTeams[games[num].team_ids[1]]
+              marchMadnessTeams[getGameByNum(games, num).team_ids[0]],
+              marchMadnessTeams[getGameByNum(games, num).team_ids[1]]
             ]
           }
           color={false}
@@ -57,11 +63,11 @@ export default function BracketRegion(props) {
           roundNum={roundNum}
           teams={
             [
-              marchMadnessTeams[games[num].team_ids[0]],
-              marchMadnessTeams[games[num].team_ids[1]]
+              marchMadnessTeams[getGameByNum(games, num).team_ids[0]],
+              marchMadnessTeams[getGameByNum(games, num).team_ids[1]]
             ]
           }
-          game={games[num]}
+          game={getGameByNum(games, num)}
           color={true}
         />
       ));

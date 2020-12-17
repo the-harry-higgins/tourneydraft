@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db, Drafted_Team, March_Madness_Team
+from app.models import User, db, Drafted_Team, March_Madness_Team, Tournament
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -8,36 +8,44 @@ auth_routes = Blueprint('auth', __name__)
 
 
 def get_user_data(user):
+    session_data = {'currentUserId': user.id}
+    messages_data = {'success': ['Successfully logged in']}
+
+    # Build the user menu with leagues and drafts
     leagues_data = {league.id: league.to_dict() for league in user.leagues}
     drafts_data = {draft.id: draft.to_dict()
                    for league in user.leagues for draft in league.drafts}
+
+    # Specific to the league
     league_users_data = None
+
+    # Specific to the draft
     drafted_teams_data = None
     march_madness_teams_data = None
     games_data = None
-    session_data = {
-        "currentUserId": user.id
-    }
-    messages_data = {'success': ['Successfully logged in']}
+    tournament_data = None
+
     # You are in at least one league
     if user.league_users:
         # There are drafts
         if drafts_data:
             # Check if any draft is currently drafting
+            # Otherwise return most recent draft
             current_draft_id = None
             max_year = 0
             for draft_id in drafts_data:
                 if drafts_data[draft_id]['drafting']:
                     current_draft_id = draft_id
-                    messages_data = {
-                        'info': ['Your league is currently drafting']
-                    }
+                    messages_data['info'] = [
+                        'Your league is currently drafting']
                     break
                 if drafts_data[draft_id]['year'] > max_year:
                     max_year = drafts_data[draft_id]['year']
                     current_draft_id = draft_id
 
+            session_data['currentDraftId'] = current_draft_id
             league_id = drafts_data[current_draft_id]['league_id']
+            session_data['currentLeagueId'] = league_id
 
             league_user_id = None
             for league_user in user.league_users:
@@ -45,22 +53,18 @@ def get_user_data(user):
                     league_user_id = league_user.id
                     break
 
-            session_data['currentDraftId'] = current_draft_id
-            session_data['currentLeagueId'] = league_id
             session_data['currentLeagueUserId'] = league_user_id
 
             league_users_data = {
-              'dict': {
                 league_user.id: league_user.to_dict()
                 for league in user.leagues
                 for league_user in league.league_users
                 if league.id == league_id
-              },
-              'ids': [league_user.id
-                      for league in user.leagues
-                      for league_user in league.league_users
-                      if league.id == league_id]
             }
+
+            tournament = Tournament.query.filter(
+                Tournament.id == drafts_data[current_draft_id]['tournament_id']).one()
+            tournament_data = tournament.to_dict()
 
             drafted_teams = Drafted_Team.query.filter(Drafted_Team.id.in_(
                 drafts_data[current_draft_id]['drafted_team_ids'])).all()
@@ -68,7 +72,7 @@ def get_user_data(user):
                                   for drafted_team in drafted_teams}
 
             march_madness_teams = March_Madness_Team.query.filter(
-                March_Madness_Team.year == drafts_data[current_draft_id]['year']).all()
+                March_Madness_Team.tournament_id == drafts_data[current_draft_id]['tournament_id']).all()
             march_madness_teams_data = {march_madness_team.id: march_madness_team.to_dict()
                                         for march_madness_team in march_madness_teams}
 
@@ -84,6 +88,7 @@ def get_user_data(user):
         'drafted_teams': drafted_teams_data,
         'march_madness_teams': march_madness_teams_data,
         'games': games_data,
+        'tournament': tournament_data,
         "session": session_data,
         'messages': messages_data,
     }

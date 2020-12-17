@@ -1,24 +1,8 @@
-import React from 'react';
-import io from "socket.io-client";
-import { baseUrl } from "../config";
+import React, { useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-
-const socket = io.connect(baseUrl);
-socket.on('error', (error) => {
-  console.log('Error');
-
-  console.error(error);
-});
-
-socket.on('connect', function () {
-  console.log('I connected');
-  socket.emit('I\'m connected!');
-});
-socket.on('disconnect', function () {
-  console.log('I disconnected');
-});
+import { getDraftSocket } from '../services/socket';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,11 +23,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DraftPage(props) {
-  // socket.emit('connect', { data: 'I\'m connected!' });
   const classes = useStyles();
+  const socket = useRef(null);
+
+  useEffect(() => {
+    const ws = getDraftSocket();
+
+    socket.current = ws;
+
+    return function cleanup() {
+      if (socket.current !== null) {
+        socket.current.disconnect();
+      }
+    }
+  }, []);
 
   const onClick = () => {
-    socket.emit('message', 'Sending a message');
+    if (socket.current !== null) {
+      console.log('Attempting to join draft...');
+      socket.current.emit('join', 'I am joing the draft');
+    }
   }
 
   return (
@@ -59,6 +58,7 @@ export default function DraftPage(props) {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <h1>Drafting</h1>
+            <button onClick={onClick}>Send Message</button>
           </Paper>
         </Grid>
         <Grid item xs={12} md={4}>

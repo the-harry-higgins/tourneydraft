@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'auto 100%',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.background.default,
     minHeight: 400,
     height: '100vh',
     display: 'flex'

@@ -1,4 +1,4 @@
-from app.models import db, March_Madness_Team, College, Game, Game_Team_Score, League, League_User, Draft, User
+from app.models import db, March_Madness_Team, College, Game, Game_Team_Score, League, League_User, Draft, Drafted_Team, User
 import json
 from datetime import datetime
 
@@ -632,6 +632,83 @@ def seed_draft_2019():
     db.session.commit()
 
     league = League.query.filter(
+        League.name == 'The League of Extraordinary Gentlemen').one()
+    lu_ids = {lu.user.name: lu.id for lu in league.league_users}
+    draft_order = [
+        lu_ids['Will'],
+        lu_ids['Ryan'],
+        lu_ids['Chase'],
+        lu_ids['DemoDraft'],
+        lu_ids['Mitch'],
+        lu_ids['TJ'],
+        lu_ids['Patrick'],
+        lu_ids['Isaac'],
+        lu_ids['Isaac'],
+        lu_ids['Patrick'],
+        lu_ids['TJ'],
+        lu_ids['Mitch'],
+        lu_ids['DemoDraft'],
+        lu_ids['Chase'],
+        lu_ids['Ryan'],
+        lu_ids['Will'],
+        lu_ids['Patrick'],
+        lu_ids['Mitch'],
+        lu_ids['Chase'],
+        lu_ids['Will'],
+        lu_ids['Ryan'],
+        lu_ids['DemoDraft'],
+        lu_ids['Isaac'],
+        lu_ids['TJ'],
+        lu_ids['TJ'],
+        lu_ids['Isaac'],
+        lu_ids['DemoDraft'],
+        lu_ids['Ryan'],
+        lu_ids['Will'],
+        lu_ids['Chase'],
+        lu_ids['Mitch'],
+        lu_ids['Patrick'],
+        lu_ids['Patrick'],
+        lu_ids['Chase'],
+        lu_ids['Isaac'],
+        lu_ids['Ryan'],
+        lu_ids['DemoDraft'],
+        lu_ids['Will'],
+        lu_ids['Mitch'],
+        lu_ids['TJ'],
+        lu_ids['TJ'],
+        lu_ids['Mitch'],
+        lu_ids['Will'],
+        lu_ids['DemoDraft'],
+        lu_ids['Ryan'],
+        lu_ids['Isaac'],
+        lu_ids['Chase'],
+        lu_ids['Patrick'],
+        lu_ids['Will'],
+        lu_ids['DemoDraft'],
+        lu_ids['Patrick'],
+        lu_ids['Mitch'],
+        lu_ids['Ryan'],
+        lu_ids['TJ'],
+        lu_ids['Isaac'],
+        lu_ids['Chase'],
+        lu_ids['Chase'],
+        lu_ids['Isaac'],
+        lu_ids['TJ'],
+        lu_ids['Ryan'],
+        lu_ids['Mitch'],
+        lu_ids['Patrick'],
+        lu_ids['DemoDraft'],
+        lu_ids['Will'],
+    ]
+
+    draft = Draft(league_id=league.id,
+                  year=2019, draft_order=json.dumps(draft_order), draft_index=0,
+                  draft_time=datetime.now(), drafting=True, current_drafter_id=None,
+                  time_limit_mins=None)
+    db.session.add(draft)
+    db.session.commit()
+
+    league = League.query.filter(
         League.name == 'The Dumb Friends League').one()
     lu_ids = {lu.user.name: lu.id for lu in league.league_users}
     draft_order = [
@@ -702,10 +779,206 @@ def seed_draft_2019():
     ]
 
     draft = Draft(league_id=league.id,
-                  year=2019, draft_order=json.dumps(draft_order), draft_index=0,
-                  draft_time=datetime.now(), drafting=True, current_drafter_id=None,
+                  year=2019, draft_order=json.dumps(draft_order), draft_index=64,
+                  draft_time=datetime.now(), drafting=False, current_drafter_id=None,
                   time_limit_mins=None)
     db.session.add(draft)
+    db.session.commit()
+
+    pick_1 = Drafted_Team(march_madness_team_id=virginia.id,
+                          league_user_id=draft_order[0], draft_id=draft.id, selection_num=1)
+    pick_2 = Drafted_Team(march_madness_team_id=michigan_State.id,
+                          league_user_id=draft_order[1], draft_id=draft.id, selection_num=2)
+    pick_3 = Drafted_Team(march_madness_team_id=duke.id,
+                          league_user_id=draft_order[2], draft_id=draft.id, selection_num=3)
+    pick_4 = Drafted_Team(march_madness_team_id=villanova.id,
+                          league_user_id=draft_order[3], draft_id=draft.id, selection_num=4)
+    pick_5 = Drafted_Team(march_madness_team_id=purdue.id,
+                          league_user_id=draft_order[4], draft_id=draft.id, selection_num=5)
+    pick_6 = Drafted_Team(march_madness_team_id=xavier.id,
+                          league_user_id=draft_order[5], draft_id=draft.id, selection_num=6)
+    pick_7 = Drafted_Team(march_madness_team_id=north_Carolina.id,
+                          league_user_id=draft_order[6], draft_id=draft.id, selection_num=7)
+    pick_8 = Drafted_Team(march_madness_team_id=cincinnati.id,
+                          league_user_id=draft_order[7], draft_id=draft.id, selection_num=8)
+    pick_9 = Drafted_Team(march_madness_team_id=gonzaga.id,
+                          league_user_id=draft_order[8], draft_id=draft.id, selection_num=9)
+    pick_10 = Drafted_Team(march_madness_team_id=michigan.id,
+                           league_user_id=draft_order[9], draft_id=draft.id, selection_num=10)
+    pick_11 = Drafted_Team(march_madness_team_id=tennessee.id,
+                           league_user_id=draft_order[10], draft_id=draft.id, selection_num=11)
+    pick_12 = Drafted_Team(march_madness_team_id=arizona.id,
+                           league_user_id=draft_order[11], draft_id=draft.id, selection_num=12)
+    pick_13 = Drafted_Team(march_madness_team_id=kansas.id,
+                           league_user_id=draft_order[12], draft_id=draft.id, selection_num=13)
+    pick_14 = Drafted_Team(march_madness_team_id=texas_Tech.id,
+                           league_user_id=draft_order[13], draft_id=draft.id, selection_num=14)
+    pick_15 = Drafted_Team(march_madness_team_id=west_Virginia.id,
+                           league_user_id=draft_order[14], draft_id=draft.id, selection_num=15)
+    pick_16 = Drafted_Team(march_madness_team_id=ohio_State.id,
+                           league_user_id=draft_order[15], draft_id=draft.id, selection_num=16)
+    pick_17 = Drafted_Team(march_madness_team_id=auburn.id,
+                           league_user_id=draft_order[16], draft_id=draft.id, selection_num=17)
+    pick_18 = Drafted_Team(march_madness_team_id=florida.id,
+                           league_user_id=draft_order[17], draft_id=draft.id, selection_num=18)
+    pick_19 = Drafted_Team(march_madness_team_id=wichita_State.id,
+                           league_user_id=draft_order[18], draft_id=draft.id, selection_num=19)
+    pick_20 = Drafted_Team(march_madness_team_id=kentucky.id,
+                           league_user_id=draft_order[19], draft_id=draft.id, selection_num=20)
+    pick_21 = Drafted_Team(march_madness_team_id=houston.id,
+                           league_user_id=draft_order[20], draft_id=draft.id, selection_num=21)
+    pick_22 = Drafted_Team(march_madness_team_id=syracuse.id,
+                           league_user_id=draft_order[21], draft_id=draft.id, selection_num=22)
+    pick_23 = Drafted_Team(march_madness_team_id=butler.id,
+                           league_user_id=draft_order[22], draft_id=draft.id, selection_num=23)
+    pick_24 = Drafted_Team(march_madness_team_id=alabama.id,
+                           league_user_id=draft_order[23], draft_id=draft.id, selection_num=24)
+    pick_25 = Drafted_Team(march_madness_team_id=miami.id,
+                           league_user_id=draft_order[24], draft_id=draft.id, selection_num=25)
+    pick_26 = Drafted_Team(march_madness_team_id=clemson.id,
+                           league_user_id=draft_order[25], draft_id=draft.id, selection_num=26)
+    pick_27 = Drafted_Team(march_madness_team_id=st_Bonaventure.id,
+                           league_user_id=draft_order[26], draft_id=draft.id, selection_num=27)
+    pick_28 = Drafted_Team(march_madness_team_id=loyola_Chicago.id,
+                           league_user_id=draft_order[27], draft_id=draft.id, selection_num=28)
+    pick_29 = Drafted_Team(march_madness_team_id=rhode_Island.id,
+                           league_user_id=draft_order[28], draft_id=draft.id, selection_num=29)
+    pick_30 = Drafted_Team(march_madness_team_id=south_Dakota_State.id,
+                           league_user_id=draft_order[29], draft_id=draft.id, selection_num=30)
+    pick_31 = Drafted_Team(march_madness_team_id=nevada.id,
+                           league_user_id=draft_order[30], draft_id=draft.id, selection_num=31)
+    pick_32 = Drafted_Team(march_madness_team_id=davidson.id,
+                           league_user_id=draft_order[31], draft_id=draft.id, selection_num=32)
+    pick_33 = Drafted_Team(march_madness_team_id=stephen_F_Austin.id,
+                           league_user_id=draft_order[32], draft_id=draft.id, selection_num=33)
+    pick_34 = Drafted_Team(march_madness_team_id=new_Mexico_State.id,
+                           league_user_id=draft_order[33], draft_id=draft.id, selection_num=34)
+    pick_35 = Drafted_Team(march_madness_team_id=tCU.id,
+                           league_user_id=draft_order[34], draft_id=draft.id, selection_num=35)
+    pick_36 = Drafted_Team(march_madness_team_id=texas.id,
+                           league_user_id=draft_order[35], draft_id=draft.id, selection_num=36)
+    pick_37 = Drafted_Team(march_madness_team_id=arkansas.id,
+                           league_user_id=draft_order[36], draft_id=draft.id, selection_num=37)
+    pick_38 = Drafted_Team(march_madness_team_id=north_Carolina_State.id,
+                           league_user_id=draft_order[37], draft_id=draft.id, selection_num=38)
+    pick_39 = Drafted_Team(march_madness_team_id=providence.id,
+                           league_user_id=draft_order[38], draft_id=draft.id, selection_num=39)
+    pick_40 = Drafted_Team(march_madness_team_id=missouri.id,
+                           league_user_id=draft_order[39], draft_id=draft.id, selection_num=40)
+    pick_41 = Drafted_Team(march_madness_team_id=creighton.id,
+                           league_user_id=draft_order[40], draft_id=draft.id, selection_num=41)
+    pick_42 = Drafted_Team(march_madness_team_id=florida_State.id,
+                           league_user_id=draft_order[41], draft_id=draft.id, selection_num=42)
+    pick_43 = Drafted_Team(march_madness_team_id=san_Diego_State.id,
+                           league_user_id=draft_order[42], draft_id=draft.id, selection_num=43)
+    pick_44 = Drafted_Team(march_madness_team_id=texas_AM.id,
+                           league_user_id=draft_order[43], draft_id=draft.id, selection_num=44)
+    pick_45 = Drafted_Team(march_madness_team_id=oklahoma.id,
+                           league_user_id=draft_order[44], draft_id=draft.id, selection_num=45)
+    pick_46 = Drafted_Team(march_madness_team_id=virginia_Tech.id,
+                           league_user_id=draft_order[45], draft_id=draft.id, selection_num=46)
+    pick_47 = Drafted_Team(march_madness_team_id=kansas_State.id,
+                           league_user_id=draft_order[46], draft_id=draft.id, selection_num=47)
+    pick_48 = Drafted_Team(march_madness_team_id=seton_Hall.id,
+                           league_user_id=draft_order[47], draft_id=draft.id, selection_num=48)
+    pick_49 = Drafted_Team(march_madness_team_id=buffalo.id,
+                           league_user_id=draft_order[48], draft_id=draft.id, selection_num=49)
+    pick_50 = Drafted_Team(march_madness_team_id=uNC_Greensboro.id,
+                           league_user_id=draft_order[49], draft_id=draft.id, selection_num=50)
+    pick_51 = Drafted_Team(march_madness_team_id=marshall.id,
+                           league_user_id=draft_order[50], draft_id=draft.id, selection_num=51)
+    pick_52 = Drafted_Team(march_madness_team_id=murray_State.id,
+                           league_user_id=draft_order[51], draft_id=draft.id, selection_num=52)
+    pick_53 = Drafted_Team(march_madness_team_id=montana.id,
+                           league_user_id=draft_order[52], draft_id=draft.id, selection_num=53)
+    pick_54 = Drafted_Team(march_madness_team_id=charleston.id,
+                           league_user_id=draft_order[53], draft_id=draft.id, selection_num=54)
+    pick_55 = Drafted_Team(march_madness_team_id=wright_State.id,
+                           league_user_id=draft_order[54], draft_id=draft.id, selection_num=55)
+    pick_56 = Drafted_Team(march_madness_team_id=georgia_State.id,
+                           league_user_id=draft_order[55], draft_id=draft.id, selection_num=56)
+    pick_57 = Drafted_Team(march_madness_team_id=bucknell.id,
+                           league_user_id=draft_order[56], draft_id=draft.id, selection_num=57)
+    pick_58 = Drafted_Team(march_madness_team_id=penn.id,
+                           league_user_id=draft_order[57], draft_id=draft.id, selection_num=58)
+    pick_59 = Drafted_Team(march_madness_team_id=iona.id,
+                           league_user_id=draft_order[58], draft_id=draft.id, selection_num=59)
+    pick_60 = Drafted_Team(march_madness_team_id=cal_State_Fullerton.id,
+                           league_user_id=draft_order[59], draft_id=draft.id, selection_num=60)
+    pick_61 = Drafted_Team(march_madness_team_id=texas_Southern.id,
+                           league_user_id=draft_order[60], draft_id=draft.id, selection_num=61)
+    pick_62 = Drafted_Team(march_madness_team_id=radford.id,
+                           league_user_id=draft_order[61], draft_id=draft.id, selection_num=62)
+    pick_63 = Drafted_Team(march_madness_team_id=lipscomb.id,
+                           league_user_id=draft_order[62], draft_id=draft.id, selection_num=63)
+    pick_64 = Drafted_Team(march_madness_team_id=uMBC.id,
+                           league_user_id=draft_order[63], draft_id=draft.id, selection_num=64)
+
+    db.session.add(pick_1)
+    db.session.add(pick_2)
+    db.session.add(pick_3)
+    db.session.add(pick_4)
+    db.session.add(pick_5)
+    db.session.add(pick_6)
+    db.session.add(pick_7)
+    db.session.add(pick_8)
+    db.session.add(pick_9)
+    db.session.add(pick_10)
+    db.session.add(pick_11)
+    db.session.add(pick_12)
+    db.session.add(pick_13)
+    db.session.add(pick_14)
+    db.session.add(pick_15)
+    db.session.add(pick_16)
+    db.session.add(pick_17)
+    db.session.add(pick_18)
+    db.session.add(pick_19)
+    db.session.add(pick_20)
+    db.session.add(pick_21)
+    db.session.add(pick_22)
+    db.session.add(pick_23)
+    db.session.add(pick_24)
+    db.session.add(pick_25)
+    db.session.add(pick_26)
+    db.session.add(pick_27)
+    db.session.add(pick_28)
+    db.session.add(pick_29)
+    db.session.add(pick_30)
+    db.session.add(pick_31)
+    db.session.add(pick_32)
+    db.session.add(pick_33)
+    db.session.add(pick_34)
+    db.session.add(pick_35)
+    db.session.add(pick_36)
+    db.session.add(pick_37)
+    db.session.add(pick_38)
+    db.session.add(pick_39)
+    db.session.add(pick_40)
+    db.session.add(pick_41)
+    db.session.add(pick_42)
+    db.session.add(pick_43)
+    db.session.add(pick_44)
+    db.session.add(pick_45)
+    db.session.add(pick_46)
+    db.session.add(pick_47)
+    db.session.add(pick_48)
+    db.session.add(pick_49)
+    db.session.add(pick_50)
+    db.session.add(pick_51)
+    db.session.add(pick_52)
+    db.session.add(pick_53)
+    db.session.add(pick_54)
+    db.session.add(pick_55)
+    db.session.add(pick_56)
+    db.session.add(pick_57)
+    db.session.add(pick_58)
+    db.session.add(pick_59)
+    db.session.add(pick_60)
+    db.session.add(pick_61)
+    db.session.add(pick_62)
+    db.session.add(pick_63)
+    db.session.add(pick_64)
+
     db.session.commit()
 
 

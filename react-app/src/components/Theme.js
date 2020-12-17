@@ -59,11 +59,15 @@ let theme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: '#f57c00',
+      main: '#f57c00', 
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: '#546e7a',
+      main: '#1976d2',
     },
+    background: {
+      default: '#546e7a',
+    }
   },
 });
 

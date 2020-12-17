@@ -6,8 +6,8 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from flask_socketio import SocketIO, emit, send
 from flask_socketio import join_room, leave_room
-
-
+import json
+import eventlet
 
 from .models import db, User
 from .api.user_routes import user_routes
@@ -42,7 +42,24 @@ Migrate(app, db)
 
 # Application Security
 CORS(app)
-socketio = SocketIO(app, cors_allowed_origins='*')
+
+socketio = SocketIO(
+    app,
+    cors_allowed_origins='*',
+    logger=True,
+    engineio_logger=True,
+    async_mode='eventlet'
+)
+
+
+@app.before_request
+def redirect_https():
+    if os.environ.get('FLASK_ENV') == 'production':
+        if request.headers.get('X-Forwarded-Proto') == 'http':
+            url = request.url.replace('http://', 'https://', 1)
+            code = 301
+            return redirect(url, code=code)
+
 
 @app.after_request
 def inject_csrf_token(response):
@@ -67,7 +84,6 @@ def react_root(path):
 @socketio.on('connect')
 def test_connect():
     print('Client connected')
-    emit('my response', {'data': 'Connected'})
 
 
 @socketio.on('disconnect')
@@ -75,9 +91,10 @@ def test_disconnect():
     print('Client disconnected')
 
 
-@socketio.on('message')
-def handle_message(data):
-    print('received message: ' + data)
+@socketio.on('join')
+def on_join(data):
+    print('Join received message: ', json.dumps(data))
+    emit('join_draft', {'Draft': 'New draft'})
 
 
 # @socketio.on('my event')
@@ -98,8 +115,4 @@ def handle_message(data):
 #     username = data['username']
 #     room = data['room']
 #     leave_room(room)
-#     send(username + ' has left the room.', room=room)
-
-
-if __name__ == '__main__':
-  socketio.run(app)
+#     send(username + ' has left the room.', room=room)    

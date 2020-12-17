@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { BracketTeam } from './Team';
+import {Typography} from '@material-ui/core';
 
 
 export default function FinalFour(props) {
@@ -55,14 +56,17 @@ export default function FinalFour(props) {
 
   return (
     <div className='final-four'>
+      <div className='region'>
+        <Typography variant='h3'>Final Four</Typography>
+      </div>
       <div className='round5'>
-        Final Four
+        <Typography variant='subtitle1'>Final Four</Typography>
       </div>
       <div className='round5-2'>
-        Final Four
+        <Typography variant='subtitle1'>Final Four</Typography>
       </div>
       <div className='championship'>
-        National Championship
+        <Typography variant='subtitle1'>National Championship</Typography>
       </div>
       <div className={`region1 ${colors[0]}`}>
         <BracketTeam team={region1winner} default=''/>

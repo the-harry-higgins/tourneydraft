@@ -13,15 +13,20 @@ import { LeaderboardTeam } from './Team';
 
 
 function getTeams(player, draftedTeams, marchMadnessTeams, roundNum) {
-  const teams = player.drafted_teams.map(drafted_team_id => {
-    const wins = (roundNum - 1) < marchMadnessTeams[draftedTeams[drafted_team_id].march_madness_team_id].won_game_ids.length ?
-      (roundNum - 1) : marchMadnessTeams[draftedTeams[drafted_team_id].march_madness_team_id].won_game_ids.length;
-    return {
-      ...marchMadnessTeams[draftedTeams[drafted_team_id].march_madness_team_id],
-      selectionNum: draftedTeams[drafted_team_id].selection_num,
+  const teams = []
+  for (const [drafted_team_id, drafted_team] of Object.entries(draftedTeams)) {
+    if (drafted_team.league_user_id !== player.id) {
+      continue;
+    }
+
+    const wins = (roundNum - 1) < marchMadnessTeams[drafted_team.march_madness_team_id].won_game_ids.length ?
+      (roundNum - 1) : marchMadnessTeams[drafted_team.march_madness_team_id].won_game_ids.length;
+    teams.push({
+      ...marchMadnessTeams[drafted_team.march_madness_team_id],
+      selectionNum: drafted_team.selection_num,
       wins
-    };
-  });
+    });
+  }
   return teams;
 }
 

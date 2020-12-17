@@ -23,14 +23,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function sort(players, draftedTeams, marchMadnessTeams) {
-  const unsorted = players.ids.map(id => {
-    const points = players.dict[id].drafted_teams.map(drafted_team_id => {
-      return Number(marchMadnessTeams[draftedTeams[drafted_team_id].march_madness_team_id].points);
-    });
-    return {
-      id, 'points': points.reduce((a, b) => Number(a) + Number(b), 0)
-    }
+  const obj = {}
+  Object.keys(players).forEach(id => {
+    obj[id] = 0;
   });
+  Object.keys(draftedTeams).forEach(team_id => {
+    obj[draftedTeams[team_id].league_user_id] += marchMadnessTeams[draftedTeams[team_id].march_madness_team_id].points
+  });
+  const unsorted = []
+  for (const [id, points] of Object.entries(obj)) {
+    unsorted.push({id, points});
+  }
   unsorted.sort((a, b) => b.points - a.points);
   return unsorted;
 }
@@ -56,7 +59,7 @@ export default function LeaderboardPage() {
         {sorted.map((obj, index) => (
           <Grid key={`leader-${obj.id}`} item xs={12} md={6} lg={4}>
             <Paper className={classes.paper}>
-              <PlayerCard rank={index + 1} points={obj.points} player={players.dict[obj.id]}/>
+              <PlayerCard rank={index + 1} points={obj.points} player={players[obj.id]}/>
             </Paper>
           </Grid>
         ))}

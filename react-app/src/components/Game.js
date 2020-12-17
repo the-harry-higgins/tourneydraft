@@ -11,14 +11,14 @@ const useStyles = makeStyles(theme => ({
   },
   top: {
     gridArea: 'top',
-    borderBottom: '2px solid black',
+    borderBottom: '2px solid #546e7a',
     alignSelf: 'end',
     overflowX: 'hidden',
     whiteSpace: 'nowrap'
   },
   bottom: {
     gridArea: 'bottom',
-    borderTop: '2px solid black',
+    borderTop: '2px solid #546e7a',
     overflowX: 'hidden',
     whiteSpace: 'nowrap'
   },

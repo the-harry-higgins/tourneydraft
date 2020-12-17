@@ -23,7 +23,7 @@ let theme = createMuiTheme({
     MuiBottomNavigation: {
       root: {
         color: '#FFF',
-        backgroundColor: '#546e7a',
+        backgroundColor: '#1976d2',
       }
     },
     MuiBottomNavigationAction: {

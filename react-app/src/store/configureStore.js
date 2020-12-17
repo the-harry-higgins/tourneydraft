@@ -7,6 +7,7 @@ import drafts from './reducers/drafts';
 import draftedTeams from './reducers/draftedTeams';
 import marchMadnessTeams from './reducers/marchMadnessTeams';
 import games from './reducers/games';
+import tournament from './reducers/tournament';
 import session from './reducers/session';
 import messages from './reducers/messages';
 import ui from './reducers/ui';
@@ -20,7 +21,8 @@ const entities = combineReducers({
   drafts,
   draftedTeams,
   marchMadnessTeams,
-  games
+  games,
+  tournament
 });
 
 const reducer = combineReducers({

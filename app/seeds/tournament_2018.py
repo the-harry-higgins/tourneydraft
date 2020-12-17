@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 
 def seed_2018_tournament():
-    tournament = Tournament(year=2018, region1='South', region2='West', region3='East', region4='Midwest')
+    tournament = Tournament(year=2018, region1='South', region2='West', region3='East', region4='Midwest', last_round_completed=6)
     db.session.add(tournament)
     db.session.commit()
 

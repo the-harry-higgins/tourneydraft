@@ -49,6 +49,10 @@ export default function UserMenu() {
     dispatch(logoutThunk());
   };
 
+  const handleDraftChange = (draftId) => () => {
+    dispatch(draftChangeThunk(draftId));
+  }
+
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <div className={classes.root}>
@@ -64,13 +68,18 @@ export default function UserMenu() {
                 <ListItemText primary={user.email} />
               </ListItem>
               <Divider />
-              { Object.keys(leagues).map(leagueId => (
+              {Object.keys(leagues).map(leagueId => (
                 <div key={`league-${id}`}>
                   <ListItem disabled>
                     <ListItemText primary={leagues[leagueId].name} />
                   </ListItem>
                   {leagues[leagueId].draft_ids.map(id => (
-                    <ListItem button key={`draft-${id}`}>
+                    <ListItem
+                      key={`draft-${id}`}
+                      button
+                      selected={false}
+                      disabled={false}
+                      onClick={handleDraftChange(id)}>
                       <ListItemText primary={`${drafts[id].year}`} />
                     </ListItem>
                   ))}

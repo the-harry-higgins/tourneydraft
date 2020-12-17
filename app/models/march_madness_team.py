@@ -20,7 +20,11 @@ class March_Madness_Team(db.Model):
         'Game', secondary='game_team_scores', back_populates='teams')
 
 
-    def to_dict(self):
+    def calculate_points(self, round):
+        won_rounds = [game.round_num for game in self.won_games]
+        return sum([round + self.seed for round in range(1,round) if round in won_rounds])
+
+    def to_dict(self, round=1):
         return {
             "id": self.id,
             "seed_number": self.seed_number,
@@ -29,5 +33,5 @@ class March_Madness_Team(db.Model):
             "logo": self.college.logo,
             "games_by_round": {game.round_num: game.id for game in self.games},
             "won_game_ids": [game.id for game in self.won_games],
-            "points": 0
+            "points": self.calculate_points(round)
         }

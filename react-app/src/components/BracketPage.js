@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import BracketRegion from './BracketRegion';
 import FinalFour from './FinalFour';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BracketPage() {
   const classes = useStyles();
+  const tournament = useSelector(state => state.entities.tournament)
 
   return (
     <div className={classes.root}>
@@ -36,21 +38,21 @@ export default function BracketPage() {
         </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.paper}>
-            <BracketRegion regionNum={1}/>
+            <BracketRegion regionNum={1} region={tournament.region1}/>
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.paper}>
-            <BracketRegion regionNum={3} />
+            <BracketRegion regionNum={3} region={tournament.region3}/>
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.paper}>
-            <BracketRegion regionNum={2} />
+            <BracketRegion regionNum={2} region={tournament.region2}/>
           </Paper>        </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.paper}>
-            <BracketRegion regionNum={4} />
+            <BracketRegion regionNum={4} region={tournament.region4}/>
           </Paper>       
         </Grid>
         <Grid item sm={12}>

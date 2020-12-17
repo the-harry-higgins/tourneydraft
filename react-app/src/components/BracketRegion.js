@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Game from './Game';
@@ -77,19 +78,19 @@ export default function BracketRegion(props) {
   return (
     <div className={props.regionNum < 3 ? 'bracket-region__left' : 'bracket-region__right'}>
       <div className='region'>
-        {props.regionNum}
+        <Typography variant='h3'>{props.region}</Typography>
       </div>
       <div className='round1'>
-        Round 1
+        <Typography variant='subtitle1'>Round 1</Typography>
       </div>
       <div className='round2'>
-        Round 2
+        <Typography variant='subtitle1'>Round 2</Typography>
       </div>
       <div className='round3'>
-        Sweet Sixteen
+        <Typography variant='subtitle1'>Sweet Sixteen</Typography>
       </div>
       <div className='round4'>
-        Elite 8
+        <Typography variant='subtitle1'>Elite Eight</Typography>
       </div>
       { createGames(1) }
       { createGames(2) }

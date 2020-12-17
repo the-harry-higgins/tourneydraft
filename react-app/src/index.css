@@ -1,7 +1,7 @@
 .bracket-region__left {
   display: grid;
   grid-template-columns: 8fr 1fr 8fr 1fr 8fr 1fr 8fr;
-  grid-template-rows: repeat(18, 1fr);
+  grid-template-rows: 1.75fr repeat(17, 1fr);
   grid-template-areas: 'region region region region region region region'
     'round1 . round2 . round3 . round4'
     'game1 . . . . . .'
@@ -29,7 +29,7 @@
 .bracket-region__right {
   display: grid;
   grid-template-columns: 8fr 1fr 8fr 1fr 8fr 1fr 8fr;
-  grid-template-rows: repeat(18, 1fr);
+  grid-template-rows:  1.75fr repeat(17, 1fr);
   grid-template-areas: 'region region region region region region region'
     'round4 . round3 . round2 . round1'
     '. . . . . . game1'
@@ -57,6 +57,7 @@
 
 .region {
   grid-area: region;
+  padding-bottom: 4px;
 }
 .round1 {
   grid-area: round1;
@@ -165,8 +166,8 @@
 .bracket-region__left .link9to13,
 .bracket-region__left .link11to14,
 .bracket-region__left .link13to15 {
-  border-left: 4px solid black;
-  border-bottom: 2px solid black;
+  border-left: 4px solid #546e7a;
+  border-bottom: 2px solid #546e7a;
 }
 
 .bracket-region__left .link2to9,
@@ -176,8 +177,8 @@
 .bracket-region__left .link10to13,
 .bracket-region__left .link12to14,
 .bracket-region__left .link14to15 {
-  border-left: 4px solid black;
-  border-top: 2px solid black;
+  border-left: 4px solid #546e7a;
+  border-top: 2px solid #546e7a;
 }
 
 .bracket-region__right .link1to9,
@@ -187,8 +188,8 @@
 .bracket-region__right .link9to13,
 .bracket-region__right .link11to14,
 .bracket-region__right .link13to15 {
-  border-right: 4px solid black;
-  border-bottom: 2px solid black;
+  border-right: 4px solid #546e7a;
+  border-bottom: 2px solid #546e7a;
 }
 
 .bracket-region__right .link2to9,
@@ -198,15 +199,16 @@
 .bracket-region__right .link10to13,
 .bracket-region__right .link12to14,
 .bracket-region__right .link14to15 {
-  border-right: 4px solid black;
-  border-top: 2px solid black;
+  border-right: 4px solid #546e7a;
+  border-top: 2px solid #546e7a;
 }
 
 .final-four {
   display: grid;
   grid-template-columns: 8fr 1fr 8fr 8fr 8fr 1fr 8fr;
-  grid-template-rows: repeat(8, 1fr);
+  grid-template-rows: 1.75fr repeat(8, 1fr);
   grid-template-areas:
+    'region region region region region region region'
     'round5 . . championship . . round5-2'
     'region1 . . . . . region3'
     '. link1 . . . link2 .'
@@ -229,58 +231,66 @@
 }
 .region1 {
   grid-area: region1;
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid #546e7a;
   align-self: end;
 }
 .region2 {
   grid-area: region2;
-  border-top: 4px solid black;
+  border-top: 4px solid #546e7a;
 }
 .region3 {
   grid-area: region3;
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid #546e7a;
   align-self: end;
 }
 .region4 {
   grid-area: region4;
-  border-top: 4px solid black;
+  border-top: 4px solid #546e7a;
 }
 .semi1 {
   grid-area: semi1;
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid #546e7a;
   align-self: end;
 }
 .semi2 {
   grid-area: semi2;
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid #546e7a;
   align-self: end;
 }
 .champion {
   grid-area: champion;
-  border: 4px solid black;
+  border: 4px solid #546e7a;
   align-self: center;
 }
 .link1 {
   grid-area: link1;
-  border-bottom: 4px solid black;
-  border-left: 4px solid black;
+  border-bottom: 4px solid #546e7a;
+  border-left: 4px solid #546e7a;
 }
 .link2 {
   grid-area: link2;
-  border-bottom: 4px solid black;
-  border-right: 4px solid black;
+  border-bottom: 4px solid #546e7a;
+  border-right: 4px solid #546e7a;
 }
 .link3 {
   grid-area: link3;
-  border-right: 4px solid black;
+  border-right: 4px solid #546e7a;
 }
 .link4 {
   grid-area: link4;
-  border-left: 4px solid black;
+  border-left: 4px solid #546e7a;
 }
 .winner {
   color: green !important;
 }
 .loser {
   color: red !important;
+}
+
+.region,
+.round1,
+.round2,
+.round3,
+.round4 {
+  text-align: center;
 }

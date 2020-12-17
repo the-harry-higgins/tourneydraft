@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, ClickAwayListener, List, ListItem, ListItemText, Paper, Popper } from '@material-ui/core';
@@ -26,12 +26,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserMenu() {
+const rounds = [
+  {round: 1, name: 'Round 1'},
+  {round: 2, name: 'Round 2'},
+  {round: 3, name: 'Sweet Sixteen'},
+  {round: 4, name: 'Elite Eight'},
+  {round: 5, name: 'Final Four'},
+  {round: 6, name: 'Championship'},
+  {round: 7, name: 'Final'},
+]
+
+export default function RoundsMenu() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popper' : undefined;
+  const tournament = useSelector(state => state.entities.tournament);
+  const roundNum = useSelector(state => state.ui.roundNum)
 
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -55,27 +67,16 @@ export default function UserMenu() {
         <Popper id={id} open={open} placement='top-start' anchorEl={anchorEl}>
           <Paper className={classes.menu}>
             <List>
-              <ListItem button onClick={handleRoundChange(1)}>
-                <ListItemText primary="Round 1" />
-              </ListItem>
-              <ListItem button onClick={handleRoundChange(2)}>
-                <ListItemText primary="Round 2" />
-              </ListItem>
-              <ListItem button onClick={handleRoundChange(3)}>
-                <ListItemText primary="Sweet Sixteen" />
-              </ListItem>
-              <ListItem button onClick={handleRoundChange(4)}>
-                <ListItemText primary="Elite Eight" />
-              </ListItem>
-              <ListItem button onClick={handleRoundChange(5)}>
-                <ListItemText primary="Final Four" />
-              </ListItem>
-              <ListItem button onClick={handleRoundChange(6)}>
-                <ListItemText primary="Championship" />
-              </ListItem>
-              <ListItem button onClick={handleRoundChange(7)}>
-                <ListItemText primary="Final" />
-              </ListItem>
+              {rounds.map(round => (
+                <ListItem
+                  key={`round-${round.round}`}
+                  button
+                  selected={round.round == roundNum}
+                  disabled={tournament.last_round_completed < round.round - 1} 
+                  onClick={handleRoundChange(round.round)}>
+                  <ListItemText primary={round.name} />
+                </ListItem>
+              ))}
             </List>
           </Paper>
         </Popper>

@@ -73,7 +73,7 @@ def get_user_data(user):
 
             march_madness_teams = March_Madness_Team.query.filter(
                 March_Madness_Team.tournament_id == drafts_data[current_draft_id]['tournament_id']).all()
-            march_madness_teams_data = {march_madness_team.id: march_madness_team.to_dict()
+            march_madness_teams_data = {march_madness_team.id: march_madness_team.to_dict(tournament.last_round_completed)
                                         for march_madness_team in march_madness_teams}
 
             games_data = {game.id: game.to_dict()

@@ -12,6 +12,7 @@ class Tournament(db.Model):
     region4 = db.Column(db.String(20), nullable=False)
     last_round_completed = db.Column(db.Integer, nullable=False, default=0)
 
+    games = db.relationship('Game', back_populates='tournament')
     march_madness_teams = db.relationship(
         'March_Madness_Team', back_populates='tournament')
 
@@ -25,4 +26,5 @@ class Tournament(db.Model):
             "region4": self.region4,
             "last_round_completed": self.last_round_completed,
             "march_madness_teams_ids": [team.id for team in self.march_madness_teams],
+            "games_ids": [game.id for game in self.games],
         }

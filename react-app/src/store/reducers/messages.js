@@ -1,6 +1,7 @@
 import { SET_ERRORS } from '../actions/errors';
 import { LOGIN } from '../actions/authenticate';
 import { SET_ROUND, SET_SORT } from '../actions/ui';
+import { DRAFT_CHANGE } from '../actions/drafts';
 
 const roundMessages = ['','Round 1', 'Round 2', 'Sweet Sixteen', 'Elite Eight', 'Final Four', 'Championship', 'Final Results']
 
@@ -9,6 +10,7 @@ export default function reducer(state = null, action) {
     case SET_ERRORS:
       return {'error': action.errors};
     case LOGIN:
+    case DRAFT_CHANGE:
       return action.data.messages;
     case SET_ROUND:
       return {'success': [`Viewing ${roundMessages[action.roundNum]}`]};

@@ -22,7 +22,7 @@ class March_Madness_Team(db.Model):
 
     def calculate_points(self, round):
         won_rounds = [game.round_num for game in self.won_games]
-        return sum([round + self.seed for round in range(1,round) if round in won_rounds])
+        return sum([round + self.seed_number for round in range(1,round) if round in won_rounds])
 
     def to_dict(self, round=1):
         return {

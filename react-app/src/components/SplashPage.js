@@ -89,7 +89,7 @@ const SplashPage = (props) => {
           </>
           }
           <ButtonGroup color="primary" variant='contained' orientation='vertical' aria-label="outlined primary button group">
-            <Button onClick={demoLogin('demo@aa.io', 'password')}>Demo Draft</Button>
+            <Button onClick={demoLogin('demodraft@aa.io', 'password')}>Demo Draft</Button>
             <Button onClick={demoLogin('demo@aa.io', 'password')}>Demo Site</Button>
           </ButtonGroup>
         </Box>

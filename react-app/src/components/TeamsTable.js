@@ -14,7 +14,7 @@ import { LeaderboardTeam } from './Team';
 
 function getTeams(player, draftedTeams, marchMadnessTeams, roundNum) {
   const teams = []
-  for (const [drafted_team_id, drafted_team] of Object.entries(draftedTeams)) {
+  for (const drafted_team of Object.values(draftedTeams)) {
     if (drafted_team.league_user_id !== player.id) {
       continue;
     }

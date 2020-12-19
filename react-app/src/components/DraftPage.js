@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper, Typography } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { getDraftSocket } from '../services/socket';
 
 const useStyles = makeStyles((theme) => ({

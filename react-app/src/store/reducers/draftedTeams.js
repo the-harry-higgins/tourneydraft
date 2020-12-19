@@ -1,9 +1,11 @@
 import { LOGIN, LOGOUT } from '../actions/authenticate';
+import { DRAFT_CHANGE } from '../actions/drafts';
 
 export default function reducer(state = null, action) {
   switch (action.type) {
     case LOGIN:
-      return action.data.drafted_teams;
+    case DRAFT_CHANGE:
+      return action.data.draftedTeams;
     case LOGOUT:
       return null;
     default:

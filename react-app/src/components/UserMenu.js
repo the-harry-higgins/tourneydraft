@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, ClickAwayListener, Divider, List, ListItem, ListItemText, Paper, Popper } from '@material-ui/core';
 import { ReactComponent as Logo } from '../images/basketball-game.svg';
 import { logoutThunk } from '../store/actions/authenticate';
+import { draftChangeThunk } from '../store/actions/drafts';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,8 +50,8 @@ export default function UserMenu() {
     dispatch(logoutThunk());
   };
 
-  const handleDraftChange = (draftId) => () => {
-    dispatch(draftChangeThunk(draftId));
+  const handleDraftChange = (draftId, leagueId) => () => {
+    dispatch(draftChangeThunk(draftId, leagueId));
   }
 
   return (
@@ -69,17 +70,17 @@ export default function UserMenu() {
               </ListItem>
               <Divider />
               {Object.keys(leagues).map(leagueId => (
-                <div key={`league-${id}`}>
+                <div key={`league-${leagueId}`}>
                   <ListItem disabled>
                     <ListItemText primary={leagues[leagueId].name} />
                   </ListItem>
                   {leagues[leagueId].draft_ids.map(id => (
                     <ListItem
-                      key={`draft-${id}`}
+                      key={`league-${leagueId}-draft-${id}`}
                       button
                       selected={false}
                       disabled={false}
-                      onClick={handleDraftChange(id)}>
+                      onClick={handleDraftChange(id, leagueId)}>
                       <ListItemText primary={`${drafts[id].year}`} />
                     </ListItem>
                   ))}

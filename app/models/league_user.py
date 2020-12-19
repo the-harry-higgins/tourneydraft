@@ -10,14 +10,12 @@ class League_User(db.Model):
 
     user = db.relationship('User', back_populates='league_users')
     league = db.relationship('League', back_populates='league_users')
-    # drafted_teams = db.relationship('Drafted_Team', back_populates='league_user')
 
     def to_dict(self):
         return {
             "id": self.id,
             "user_id": self.user_id,
             "league_id": self.league_id,
-            # "drafted_teams": [drafted_team.id for drafted_team in self.drafted_teams],
             "name": self.user.name,
             "profile_image": self.user.profile_image,
         }

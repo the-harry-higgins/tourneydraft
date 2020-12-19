@@ -1,5 +1,6 @@
 import { LOGIN, LOGOUT } from '../actions/authenticate';
 import { SET_ROUND } from '../actions/ui';
+import { DRAFT_CHANGE } from '../actions/drafts';
 
 function calculatePoints(team, round) {
   let points = 0;
@@ -17,7 +18,8 @@ function calculatePoints(team, round) {
 export default function reducer(state = null, action) {
   switch (action.type) {
     case LOGIN:
-      return action.data.march_madness_teams;
+    case DRAFT_CHANGE:
+      return action.data.marchMadnessTeams;
     case LOGOUT:
       return null;
     case SET_ROUND:

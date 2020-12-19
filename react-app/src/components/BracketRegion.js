@@ -12,7 +12,7 @@ function getRoundGameNums(regionNum, roundNum) {
 }
 
 function getGameByNum(games, num) {
-  for (const [id, game] of Object.entries(games)) {
+  for (const game of Object.values(games)) {
     if (game.game_num === num) return game;
   }
 }

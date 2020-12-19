@@ -17,6 +17,7 @@ export const authenticateThunk = (callback, ...params) => async (dispatch) => {
     return false;
   }
   const data = await callback(...params);
+  console.log(data);
   if (!data.errors) {
     return onSuccess(data);
   }

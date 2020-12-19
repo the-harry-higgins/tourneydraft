@@ -3,6 +3,7 @@ from app.models import User, db, Drafted_Team, March_Madness_Team, Tournament
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from .draft_routes import get_data_for_draft
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -11,15 +12,13 @@ def get_user_data(user):
     session_data = {'currentUserId': user.id}
     messages_data = {'success': ['Successfully logged in']}
 
-    # Build the user menu with leagues and drafts
+    # Build the user menu data with all leagues and drafts
     leagues_data = {league.id: league.to_dict() for league in user.leagues}
     drafts_data = {draft.id: draft.to_dict()
                    for league in user.leagues for draft in league.drafts}
 
-    # Specific to the league
+    # Specific to the league / draft
     league_users_data = None
-
-    # Specific to the draft
     drafted_teams_data = None
     march_madness_teams_data = None
     games_data = None
@@ -44,6 +43,7 @@ def get_user_data(user):
                     current_draft_id = draft_id
 
             session_data['currentDraftId'] = current_draft_id
+
             league_id = drafts_data[current_draft_id]['league_id']
             session_data['currentLeagueId'] = league_id
 
@@ -52,41 +52,28 @@ def get_user_data(user):
                 if league_user.league_id == league_id:
                     league_user_id = league_user.id
                     break
-
             session_data['currentLeagueUserId'] = league_user_id
 
-            league_users_data = {
-                league_user.id: league_user.to_dict()
-                for league in user.leagues
-                for league_user in league.league_users
-                if league.id == league_id
-            }
+            (tournament_data, 
+            league_users_data, 
+            drafted_teams_data, 
+            march_madness_teams_data, 
+            games_data) = get_data_for_draft(current_draft_id)
+        # No drafts but you are in a league
+        else:
+          pass
+    # You are not in any leagues
+    else:
+      pass
 
-            tournament = Tournament.query.filter(
-                Tournament.id == drafts_data[current_draft_id]['tournament_id']).one()
-            tournament_data = tournament.to_dict()
-
-            drafted_teams = Drafted_Team.query.filter(Drafted_Team.id.in_(
-                drafts_data[current_draft_id]['drafted_team_ids'])).all()
-            drafted_teams_data = {drafted_team.id: drafted_team.to_dict()
-                                  for drafted_team in drafted_teams}
-
-            march_madness_teams = March_Madness_Team.query.filter(
-                March_Madness_Team.tournament_id == drafts_data[current_draft_id]['tournament_id']).all()
-            march_madness_teams_data = {march_madness_team.id: march_madness_team.to_dict(tournament.last_round_completed)
-                                        for march_madness_team in march_madness_teams}
-
-            games_data = {game.id: game.to_dict()
-                          for march_madness_team in march_madness_teams
-                          for game in march_madness_team.games}
 
     return {
         "user": user.to_dict(),
         "leagues": leagues_data,
         "drafts": drafts_data,
-        'league_users': league_users_data,
-        'drafted_teams': drafted_teams_data,
-        'march_madness_teams': march_madness_teams_data,
+        'leagueUsers': league_users_data,
+        'draftedTeams': drafted_teams_data,
+        'marchMadnessTeams': march_madness_teams_data,
         'games': games_data,
         'tournament': tournament_data,
         "session": session_data,

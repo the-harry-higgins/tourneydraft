@@ -19,9 +19,13 @@
 ![ERD](database.png)
 
 # BACKEND ENDPOINTS
+- GET /api/auth
 - POST /api/auth/login
 - GET /api/auth/logout
 - POST /api/auth/signup
+- GET /api/users/:id/leagues/:id/league_users/:id/drafts
+  - Validates that user is in the league
+  - Returns league_users, drafted_teams, march_madness_teams, games, tournament
 - POST /api/users/:id/leagues
   - Create a league
 - POST /api/users/:id/leagues/:id/league-user

@@ -71,7 +71,7 @@ export default function RoundsMenu() {
                 <ListItem
                   key={`round-${round.round}`}
                   button
-                  selected={round.round == roundNum}
+                  selected={round.round === roundNum}
                   disabled={tournament.last_round_completed < round.round - 1} 
                   onClick={handleRoundChange(round.round)}>
                   <ListItemText primary={round.name} />

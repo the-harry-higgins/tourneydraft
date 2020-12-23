@@ -13,9 +13,14 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: '2px solid #546e7a',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    maxWidth: props => props.width,
+  },
+  button: {
+    marginBottom: theme.spacing(2),
+    width: 300,
   },
 }));
 
@@ -33,7 +38,7 @@ export default function TransitionsModal(props) {
 
   return (
     <>
-      <Button type="button" onClick={handleOpen} variant='contained' color='secondary'>
+      <Button className={classes.button} color={props.color} variant={props.variant} onClick={handleOpen}>
         {props.name}
       </Button>
       <Modal

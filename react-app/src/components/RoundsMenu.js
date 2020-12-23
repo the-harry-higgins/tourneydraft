@@ -57,6 +57,10 @@ export default function RoundsMenu() {
     dispatch(setRound(roundNum));
   };
 
+  if (!tournament) {
+    return null;
+  }
+
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <div className={classes.root}>

@@ -18,8 +18,8 @@ def get_user_data(user):
                    for league in user.leagues for draft in league.drafts}
 
     # Specific to the league / draft
-    league_users_data = None
-    drafted_teams_data = None
+    league_users_data = {}
+    drafted_teams_data = {}
     march_madness_teams_data = None
     games_data = None
     tournament_data = None
@@ -54,18 +54,25 @@ def get_user_data(user):
                     break
             session_data['currentLeagueUserId'] = league_user_id
 
-            (tournament_data, 
-            league_users_data, 
-            drafted_teams_data, 
-            march_madness_teams_data, 
-            games_data) = get_data_for_draft(current_draft_id)
+            (tournament_data,
+             league_users_data,
+             drafted_teams_data,
+             march_madness_teams_data,
+             games_data) = get_data_for_draft(current_draft_id)
         # No drafts but you are in a league
         else:
-          pass
+            league_user = user.league_users[0]
+            session_data['currentLeagueUserId'] = league_user.id
+            session_data['currentLeagueId'] = league_user.league_id
+            messages_data['info'] = ['Your league does not have any drafts.']
+
+            league_users_data = {
+                lu.id: lu.to_dict()
+                for lu in league_user.league.league_users
+            }
     # You are not in any leagues
     else:
-      pass
-
+        pass
 
     return {
         "user": user.to_dict(),

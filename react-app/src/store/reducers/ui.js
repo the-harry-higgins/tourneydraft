@@ -6,7 +6,13 @@ export default function reducer(state = {}, action) {
   switch (action.type) {
     case LOGIN:
     case DRAFT_CHANGE:
-      return {...state, 'roundNum': action.data.tournament.last_round_completed + 1, 'sortBy': 'wins'};
+      const roundNum = action.data.tournament ?
+        action.data.tournament.last_round_completed + 1 : null;
+      return {
+        ...state,
+        'roundNum': roundNum,
+        'sortBy': 'wins'
+      };
     case LOGOUT:
       return null;
     case SET_ROUND:

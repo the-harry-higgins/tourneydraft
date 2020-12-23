@@ -5,15 +5,10 @@ import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-u
 
 let theme = createMuiTheme({
   fontFamily: [
-      'Ubuntu',
-      'sans-serif',
+    'Ubuntu',
+    'sans-serif',
   ].join(','),
   overrides: {
-    MuiButton: {
-      root: {
-        flexGrow: 1
-      }
-    },
     MuiListItem: {
       root: {
         paddingTop: 0,
@@ -22,22 +17,29 @@ let theme = createMuiTheme({
     },
     MuiBottomNavigation: {
       root: {
-        color: '#FFF',
         backgroundColor: '#1976d2',
-      }
+      },
     },
     MuiBottomNavigationAction: {
       root: {
         color: '#FFF',
-      }
+      },
     },
+    MuiButtonBase: {
+      root: {
+        '&$disabled': {
+          opacity: 0.5,
+        },
+      },
+      disabled: {},
+    }
   },
-  // spacing: [0, 4, 8, 16, 32, 64],
   typography: {
     fontFamily: [
       'Ubuntu',
       'sans-serif',
     ].join(','),
+    color: '#546e7a',
     button: {
       fontWeight: 'bold',
     },
@@ -59,7 +61,7 @@ let theme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: '#f57c00', 
+      main: '#f57c00',
       contrastText: '#ffffff',
     },
     secondary: {

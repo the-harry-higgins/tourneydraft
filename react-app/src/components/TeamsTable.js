@@ -72,12 +72,14 @@ function sorted(teams, sortBy) {
 }
 
 
-const StyledTableCell = withStyles((theme) => ({
+const StyledTableCell = withStyles((theme) => {
+  console.log(theme);
+return {
   root: {
     padding: 4,
   },
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: theme.palette.background.default,
     color: theme.palette.common.white,
     cursor: 'pointer',
     '&:hover': {
@@ -86,9 +88,9 @@ const StyledTableCell = withStyles((theme) => ({
   },
   body: {
     // fontSize: '0.8rem',
-    textTransform: 'capitalize',
+    // textTransform: 'capitalize',
   },
-}))(TableCell);
+}})(TableCell);
 
 const StyledTableRow = withStyles((theme) => ({
   root: {

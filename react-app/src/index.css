@@ -219,6 +219,7 @@
   justify-items: stretch;
   align-items: stretch;
   justify-content: stretch;
+  font-size: 0.8rem;
 }
 .round5 {
   grid-area: round5;

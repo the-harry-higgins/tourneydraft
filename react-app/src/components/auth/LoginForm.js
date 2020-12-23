@@ -31,6 +31,7 @@ const LoginForm = (props) => {
       noValidate 
       onSubmit={handleSubmit}>
       <TextField
+        color='secondary'
         variant="outlined"
         margin="normal"
         required
@@ -45,6 +46,7 @@ const LoginForm = (props) => {
         onChange={updateEmail}
       />
       <TextField
+        color='secondary'
         variant="outlined"
         margin="normal"
         required
@@ -61,7 +63,7 @@ const LoginForm = (props) => {
         type="submit"
         fullWidth
         variant="contained"
-        color="primary"
+        color="secondary"
       >
         Continue
       </Button>

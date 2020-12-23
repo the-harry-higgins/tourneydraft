@@ -4,6 +4,7 @@ import { Grid, Paper, Typography } from '@material-ui/core';
 import BracketRegion from './BracketRegion';
 import FinalFour from './FinalFour';
 import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
 export default function BracketPage() {
   const classes = useStyles();
   const tournament = useSelector(state => state.entities.tournament)
+
+  if (!tournament) {
+    return <Redirect to="/draft" />;
+  }
 
   return (
     <div className={classes.root}>

@@ -7,13 +7,21 @@ import { getDraftSocket } from '../services/socket';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginBottom: theme.spacing(10),
+    marginBottom: theme.spacing(8),
+    backgroundColor: 'rgb(0,0,0,0.1)',
+    minHeight: '100vh'
+  },
+  grid: {
+    padding: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    backgroundColor: theme.palette.secondary.main,
   },
   header: {
     padding: theme.spacing(2),
@@ -47,14 +55,12 @@ export default function DraftPage(props) {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Paper className={classes.header}>
-            <Typography variant='h1'>
-              Draft
-            </Typography>
-          </Paper>
-        </Grid>
+      <div className={classes.header}>
+        <Typography variant='h1'>
+          Draft
+        </Typography>
+      </div>
+      <Grid className={classes.grid} container spacing={3}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <h1>Drafting</h1>

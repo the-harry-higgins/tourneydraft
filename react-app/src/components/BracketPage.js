@@ -9,7 +9,16 @@ import { Redirect } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginBottom: theme.spacing(10),
+    marginBottom: theme.spacing(8),
+    backgroundColor: 'rgb(0,0,0,0.1)',
+    minHeight: '100vh'
+  },
+  grid: {
+    padding: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
   },
   paper: {
     padding: theme.spacing(2),
@@ -33,36 +42,34 @@ export default function BracketPage() {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Paper className={classes.header}>
-            <Typography variant='h1'>
-              Bracket
-            </Typography>
+      <div className={classes.header}>
+        <Typography variant='h1'>
+          Bracket
+        </Typography>
+      </div>
+      <Grid className={classes.grid} container spacing={3}>
+        <Grid item xs={12} md={6}>
+          <Paper className={classes.paper}>
+            <BracketRegion regionNum={1} region={tournament.region1} />
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.paper}>
-            <BracketRegion regionNum={1} region={tournament.region1}/>
+            <BracketRegion regionNum={3} region={tournament.region3} />
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.paper}>
-            <BracketRegion regionNum={3} region={tournament.region3}/>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Paper className={classes.paper}>
-            <BracketRegion regionNum={2} region={tournament.region2}/>
+            <BracketRegion regionNum={2} region={tournament.region2} />
           </Paper>        </Grid>
         <Grid item xs={12} md={6}>
           <Paper className={classes.paper}>
-            <BracketRegion regionNum={4} region={tournament.region4}/>
-          </Paper>       
+            <BracketRegion regionNum={4} region={tournament.region4} />
+          </Paper>
         </Grid>
         <Grid item sm={12}>
           <Paper className={classes.paper}>
-            <FinalFour/>
+            <FinalFour />
           </Paper>
         </Grid>
       </Grid>

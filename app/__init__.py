@@ -11,6 +11,7 @@ import eventlet
 
 from .models import db, User
 from .api.auth_routes import auth_routes
+from .api.league_routes import league_routes
 from .api.draft_routes import draft_routes
 
 from .seeds import seed_commands
@@ -35,6 +36,7 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(league_routes, url_prefix='/api/leagues')
 app.register_blueprint(
     draft_routes,
     url_prefix='/api/leagues/<int:league_id>/drafts'

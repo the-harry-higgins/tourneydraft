@@ -8,11 +8,21 @@ import { Redirect } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginBottom: theme.spacing(10),
+    marginBottom: theme.spacing(8),
+    backgroundColor: 'rgb(0,0,0,0.1)',
+    minHeight: '100vh'
+  },
+  grid: {
+    padding: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
   header: {
     padding: theme.spacing(2),
@@ -51,14 +61,12 @@ export default function LeaderboardPage() {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Paper className={classes.header}>
-            <Typography variant='h1'>
-              LeaderBoard
-            </Typography>
-          </Paper>
-        </Grid>
+      <div className={classes.header}>
+        <Typography variant='h1'>
+          LeaderBoard
+        </Typography>
+      </div>
+      <Grid className={classes.grid} container spacing={3}>
         {sorted.map((obj, index) => (
           <Grid key={`leader-${obj.id}`} item xs={12} md={6} lg={4}>
             <Paper className={classes.paper}>

@@ -6,6 +6,7 @@ import { Button, ClickAwayListener, Divider, List, ListItem, ListItemText, Paper
 import { ReactComponent as Logo } from '../images/basketball-game.svg';
 import { logoutThunk } from '../store/actions/authenticate';
 import { draftChangeThunk } from '../store/actions/drafts';
+import { showCreateDraft, toggleLeagueModal } from '../store/actions/ui';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     fill: '#FFF',
     marginRight: theme.spacing(1),
   },
+  indent: {
+    paddingLeft: theme.spacing(4)
+  }
 }));
 
 export default function UserMenu() {
@@ -34,6 +38,7 @@ export default function UserMenu() {
   const user = useSelector(state => state.entities.user);
   const leagues = useSelector(state => state.entities.leagues);
   const drafts = useSelector(state => state.entities.drafts);
+  const currentDraftId = useSelector(state => state.session.currentDraftId);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popper' : undefined;
@@ -52,6 +57,16 @@ export default function UserMenu() {
 
   const handleDraftChange = (draftId, leagueId) => () => {
     dispatch(draftChangeThunk(draftId, leagueId));
+  }
+
+  const handleNewLeague = () => () => {
+    dispatch(toggleLeagueModal());
+    handleClickAway();
+  }
+
+  const handleNewDraft = (leagueId) => () => {
+    dispatch(showCreateDraft());
+    handleClickAway();
   }
 
   return (
@@ -78,14 +93,33 @@ export default function UserMenu() {
                     <ListItem
                       key={`league-${leagueId}-draft-${id}`}
                       button
-                      selected={false}
-                      disabled={false}
-                      onClick={handleDraftChange(id, leagueId)}>
+                      selected={currentDraftId === id}
+                      disabled={currentDraftId === id}
+                      onClick={handleDraftChange(id, leagueId)}
+                      className={classes.indent}>
                       <ListItemText primary={`${drafts[id].year}`} />
                     </ListItem>
                   ))}
+                  {user.id === leagues[leagueId].admin_id ?
+                    <ListItem
+                      key={`createdraft-${leagueId}`}
+                      button
+                      onClick={handleNewDraft(leagueId)}
+                      className={classes.indent}
+                    >
+                      <ListItemText primary={'Create New Draft'} />
+                    </ListItem>:
+                    null
+                  }
+                  <Divider />
                 </div>
               ))}
+              <ListItem
+                button
+                onClick={handleNewLeague()}
+              >
+                <ListItemText primary={'New League'} />
+              </ListItem>
               <Divider />
               <ListItem button onClick={handleLogout}>
                 <ListItemText primary="Sign Out" />

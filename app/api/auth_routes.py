@@ -8,7 +8,7 @@ from .draft_routes import get_data_for_draft
 auth_routes = Blueprint('auth', __name__)
 
 
-def get_user_data(user):
+def get_user_data(user, league=None, league_user_id=None):
     session_data = {'currentUserId': user.id}
     messages_data = {'success': ['Successfully logged in']}
 
@@ -24,23 +24,42 @@ def get_user_data(user):
     games_data = None
     tournament_data = None
 
+    # When you are joining or creating a new league
+    if league and league_user_id:
+        session_data['currentLeagueId'] = league.id
+        session_data['currentLeagueUserId'] = league_user_id
+
+        draft_ids = leagues_data[league.id]['draft_ids']
+        # There are drafts
+        if draft_ids:
+            current_draft_id, drafting = determineDraftId(drafts_data, draft_ids)
+            if drafting:
+                messages_data['info'] = ['Your league is currently drafting']
+
+            session_data['currentDraftId'] = current_draft_id
+
+            (tournament_data,
+             league_users_data,
+             drafted_teams_data,
+             march_madness_teams_data,
+             games_data) = get_data_for_draft(current_draft_id)
+        # No drafts
+        else:
+            messages_data['info'] = ['Your league does not have any drafts.']
+
+            league_users_data = {
+                lu.id: lu.to_dict()
+                for lu in league.league_users
+            }
+
     # You are in at least one league
-    if user.league_users:
+    elif user.league_users:
         # There are drafts
         if drafts_data:
-            # Check if any draft is currently drafting
-            # Otherwise return most recent draft
-            current_draft_id = None
-            max_year = 0
-            for draft_id in drafts_data:
-                if drafts_data[draft_id]['drafting']:
-                    current_draft_id = draft_id
-                    messages_data['info'] = [
-                        'Your league is currently drafting']
-                    break
-                if drafts_data[draft_id]['year'] > max_year:
-                    max_year = drafts_data[draft_id]['year']
-                    current_draft_id = draft_id
+            current_draft_id, drafting = determineDraftId(drafts_data)
+            if drafting:
+                messages_data['info'] = [
+                    'Your league is currently drafting']
 
             session_data['currentDraftId'] = current_draft_id
 
@@ -86,6 +105,29 @@ def get_user_data(user):
         "session": session_data,
         'messages': messages_data,
     }
+
+
+def determineDraftId(drafts_data, draft_ids=None):
+    """
+    Check if any draft is currently drafting
+    Otherwise return most recent draft
+    """
+    if not draft_ids:
+        draft_ids = drafts_data.keys()
+
+    current_draft_id = None
+    max_year = 0
+    drafting = False
+    for draft_id in draft_ids:
+        if drafts_data[draft_id]['drafting']:
+            current_draft_id = draft_id
+            drafting = True
+            break
+        if drafts_data[draft_id]['year'] > max_year:
+            max_year = drafts_data[draft_id]['year']
+            current_draft_id = draft_id
+
+    return current_draft_id, drafting
 
 
 def validation_errors_to_error_messages(validation_errors):

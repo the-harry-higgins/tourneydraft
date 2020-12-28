@@ -50,6 +50,7 @@ export default function SimpleBottomNavigation() {
         icon={<ViewListIcon />}
         component={NavLink}
         to='/draft'
+        disabled={!currentDraftId}
         activeClassName={classes.active}
       />
     </BottomNavigation>

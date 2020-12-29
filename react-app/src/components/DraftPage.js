@@ -52,6 +52,7 @@ export default function DraftPage(props) {
   const leagueUsers = useSelector(state => state.entities.league_users);
   const draftedTeams = useSelector(state => state.entities.draftedTeams);
   const marchMadnessTeams = useSelector(state => state.entities.marchMadnessTeams);
+  const leagues = useSelector(state => state.entities.leagues);
   const user = useSelector(state => state.entities.user);
   const session = useSelector(state => state.session);
   const [selection, setSelection] = useState(null);
@@ -59,7 +60,7 @@ export default function DraftPage(props) {
 
 
   useEffect(() => {
-    if (draft.drafting) {
+    if (draft && draft.drafting) {
       const ws = getDraftSocket(draft, user);
 
       socket.current = ws;
@@ -100,6 +101,50 @@ export default function DraftPage(props) {
     }
   }
 
+  const makeSelections = () => {
+      const someJSX = draft['draft_order'].map((leagueUserId, i) => {
+        let team = '';
+        for (const key in draftedTeams) {
+            if (draftedTeams[key].selection_num === i + 1) {
+              team = marchMadnessTeams[draftedTeams[key].march_madness_team_id].name
+            }
+        }
+        return <li>{`${leagueUsers[leagueUserId].name} ${team}`}</li>
+      });
+      return (
+        <ol>
+          {someJSX}
+        </ol>
+      );
+  }
+
+  if (!draft) {
+    return (
+      <div className={classes.root}>
+        <div className={classes.header}>
+          <Typography variant='h1'>
+            Draft
+        </Typography>
+        </div>
+        <Grid className={classes.grid} container spacing={3}>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <Typography variant='h3'>
+                {leagues[session.currentLeagueId].name} doesn't have any drafts yet.
+              </Typography>
+              <Typography variant='h3'>
+                {leagues[session.currentLeagueId].admin_id === user.id ?
+                `You're the league admin. Set up a draft.` :
+                `Tell the league admin to set up a draft.`
+                }
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+      </div>
+    );
+  }
+
   return (
     <div className={classes.root}>
       <div className={classes.header}>
@@ -130,6 +175,7 @@ export default function DraftPage(props) {
             <Typography variant='h3'>
               Selections
             </Typography>
+            {makeSelections()}
             <ol>
               {draft['draft_order'].map((leagueUserId, i) => (
                 <li>{`${leagueUsers[leagueUserId].name}`}</li>

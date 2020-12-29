@@ -117,8 +117,7 @@ def on_leave(data):
 @socketio.on('draft team')
 def handle_my_custom_event(data):
     draft = Draft.query.filter(Draft.id == data['draft_id']).one()
-    # if draft.current_drafter_id == data['league_user_id'] and draft.draft_index == data['selection_num'] - 1:
-    if True:
+    if draft.current_drafter_id == data['league_user_id'] and draft.draft_index == data['selection_num'] - 1:
         try:
             drafted_team = Drafted_Team(
                 march_madness_team_id=data['march_madness_team_id'],
@@ -147,4 +146,4 @@ def handle_my_custom_event(data):
             emit('error', ['That team has already been drafted'])
 
     else:
-        emit('error', {'error': ['You are not the current drafter']})
+        emit('error', ['You are not the current drafter'])

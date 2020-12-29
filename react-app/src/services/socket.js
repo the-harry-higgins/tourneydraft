@@ -1,21 +1,20 @@
 import io from "socket.io-client";
 import { baseUrl } from "../config";
 
-export function getDraftSocket() {
+export function getDraftSocket(draft, user) {
   const socket = io.connect(baseUrl);
 
   socket.on('connect', () => {
     console.log('I connected', socket.id);
     socket.emit('I\'m connected!');
+    socket.emit('join', {
+      room: draft.id,
+      username: user.name,
+    });
   });
 
   socket.on('disconnect', (reason) => {
     console.log('I disconnected', reason);
-  });
-
-  socket.on('error', (error) => {
-    console.log('Error');
-    console.error(error);
   });
 
   socket.on('connect_error', (error) => {

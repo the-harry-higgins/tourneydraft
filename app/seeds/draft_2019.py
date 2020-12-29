@@ -343,70 +343,101 @@ def seed_draft_2019():
 
     db.session.commit()
 
-    game_1 = Game(game_num=1, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_1 = Game(game_num=1, round_num=1, winning_team_id=None,
+                  tournament_id=tournament.id)
     db.session.add(game_1)
     game_2 = Game(game_num=2, round_num=1, winning_team_id=None,
                   tournament_id=tournament.id)
     db.session.add(game_2)
-    game_3 = Game(game_num=3, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_3 = Game(game_num=3, round_num=1, winning_team_id=None,
+                  tournament_id=tournament.id)
     db.session.add(game_3)
-    game_4 = Game(game_num=4, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_4 = Game(game_num=4, round_num=1, winning_team_id=None,
+                  tournament_id=tournament.id)
     db.session.add(game_4)
-    game_5 = Game(game_num=5, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_5 = Game(game_num=5, round_num=1, winning_team_id=None,
+                  tournament_id=tournament.id)
     db.session.add(game_5)
-    game_6 = Game(game_num=6, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_6 = Game(game_num=6, round_num=1, winning_team_id=None,
+                  tournament_id=tournament.id)
     db.session.add(game_6)
-    game_7 = Game(game_num=7, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_7 = Game(game_num=7, round_num=1, winning_team_id=None,
+                  tournament_id=tournament.id)
     db.session.add(game_7)
-    game_8 = Game(game_num=8, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_8 = Game(game_num=8, round_num=1, winning_team_id=None,
+                  tournament_id=tournament.id)
     db.session.add(game_8)
-    game_9 = Game(game_num=9, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_9 = Game(game_num=9, round_num=1, winning_team_id=None,
+                  tournament_id=tournament.id)
     db.session.add(game_9)
-    game_10 = Game(game_num=10, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_10 = Game(game_num=10, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_10)
-    game_11 = Game(game_num=11, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_11 = Game(game_num=11, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_11)
-    game_12 = Game(game_num=12, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_12 = Game(game_num=12, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_12)
-    game_13 = Game(game_num=13, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_13 = Game(game_num=13, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_13)
-    game_14 = Game(game_num=14, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_14 = Game(game_num=14, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_14)
-    game_15 = Game(game_num=15, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_15 = Game(game_num=15, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_15)
-    game_16 = Game(game_num=16, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_16 = Game(game_num=16, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_16)
-    game_17 = Game(game_num=17, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_17 = Game(game_num=17, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_17)
-    game_18 = Game(game_num=18, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_18 = Game(game_num=18, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_18)
-    game_19 = Game(game_num=19, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_19 = Game(game_num=19, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_19)
-    game_20 = Game(game_num=20, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_20 = Game(game_num=20, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_20)
-    game_21 = Game(game_num=21, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_21 = Game(game_num=21, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_21)
-    game_22 = Game(game_num=22, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_22 = Game(game_num=22, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_22)
-    game_23 = Game(game_num=23, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_23 = Game(game_num=23, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_23)
-    game_24 = Game(game_num=24, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_24 = Game(game_num=24, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_24)
-    game_25 = Game(game_num=25, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_25 = Game(game_num=25, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_25)
-    game_26 = Game(game_num=26, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_26 = Game(game_num=26, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_26)
-    game_27 = Game(game_num=27, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_27 = Game(game_num=27, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_27)
-    game_28 = Game(game_num=28, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_28 = Game(game_num=28, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_28)
-    game_29 = Game(game_num=29, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_29 = Game(game_num=29, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_29)
-    game_30 = Game(game_num=30, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_30 = Game(game_num=30, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_30)
-    game_31 = Game(game_num=31, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_31 = Game(game_num=31, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_31)
-    game_32 = Game(game_num=32, round_num=1, winning_team_id=None, tournament_id=tournament.id)
+    game_32 = Game(game_num=32, round_num=1,
+                   winning_team_id=None, tournament_id=tournament.id)
     db.session.add(game_32)
 
     db.session.commit()
@@ -677,7 +708,7 @@ def seed_draft_2019():
 
     draft = Draft(league_id=league.id,
                   tournament_id=tournament.id, draft_order=json.dumps(draft_order), draft_index=0,
-                  draft_time=datetime.now(), drafting=True, current_drafter_id=None,
+                  draft_time=datetime.now(), drafting=True, current_drafter_id=lu_ids['Will'],
                   time_limit_mins=None)
     db.session.add(draft)
     db.session.commit()
@@ -754,7 +785,7 @@ def seed_draft_2019():
 
     draft = Draft(league_id=league.id,
                   tournament_id=tournament.id, draft_order=json.dumps(draft_order), draft_index=64,
-                  draft_time=datetime.now(), drafting=False, current_drafter_id=None,
+                  draft_time=datetime.now(), drafting=False, current_drafter_id=lu_ids['Will'],
                   time_limit_mins=None)
     db.session.add(draft)
     db.session.commit()

@@ -9,7 +9,7 @@ from flask_socketio import join_room, leave_room
 import json
 import eventlet
 
-from .models import db, User
+from .models import db, User, Draft, Drafted_Team
 from .api.auth_routes import auth_routes
 from .api.league_routes import league_routes
 from .api.draft_routes import draft_routes
@@ -100,25 +100,51 @@ def test_disconnect():
 @socketio.on('join')
 def on_join(data):
     print('Join received message: ', json.dumps(data))
-    emit('join_draft', {'Draft': 'New draft'})
+    username = data['username']
+    room = data['room']
+    join_room(room)
+    emit('join_draft', username + ' has entered the room.', room=room)
 
 
-# @socketio.on('my event')
-# def handle_my_custom_event(json):
-#     print('received json: ' + str(json))
+@socketio.on('leave')
+def on_leave(data):
+    username = data['username']
+    room = data['room']
+    leave_room(room)
+    send(username + ' has left the room.', room=room)
 
 
-# @socketio.on('join')
-# def on_join(data):
-#     username = data['username']
-#     room = data['room']
-#     join_room(room)
-#     send(username + ' has entered the room.', room=room)
+@socketio.on('draft team')
+def handle_my_custom_event(data):
+    draft = Draft.query.filter(Draft.id == data['draft_id']).one()
+    # if draft.current_drafter_id == data['league_user_id'] and draft.draft_index == data['selection_num'] - 1:
+    if True:
+        try:
+            drafted_team = Drafted_Team(
+                march_madness_team_id=data['march_madness_team_id'],
+                league_user_id=data['league_user_id'],
+                draft_id=data['draft_id'],
+                selection_num=data['selection_num'])
+            draft.draft_index += 1
+            order = json.loads(draft.draft_order)
+            draft.current_drafter_id = order[draft.draft_index]
+            db.session.add(draft)
+            db.session.add(drafted_team)
+            db.session.commit()
+            response = {
+                'messages': [data['username'] + ' has drafted ' +
+                            drafted_team.march_madness_team.college.name],
+                'draftedTeams': {
+                    drafted_team.id: drafted_team.to_dict()
+                    for drafted_team in draft.drafted_teams
+                },
+                'draft': draft.to_dict()
+            }
+            print(response)
+            emit('draft team', response, room=data['room'])
+        except Exception as err:
+            print('\n\n\n\n\nERROR', err)
+            emit('error', ['That team has already been drafted'])
 
-
-# @socketio.on('leave')
-# def on_leave(data):
-#     username = data['username']
-#     room = data['room']
-#     leave_room(room)
-#     send(username + ' has left the room.', room=room)
+    else:
+        emit('error', {'error': ['You are not the current drafter']})

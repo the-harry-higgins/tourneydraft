@@ -34,7 +34,7 @@ class Draft(db.Model):
             "year": self.tournament.year,
             "draft_order": json.loads(self.draft_order),
             "draft_index": self.draft_index,
-            "draft_time": self.draft_time,
+            # "draft_time": json.dumps(self.draft_time),
             "drafting": self.drafting,
             "current_drafter_id": self.current_drafter_id,
             "time_limit_mins": self.time_limit_mins,

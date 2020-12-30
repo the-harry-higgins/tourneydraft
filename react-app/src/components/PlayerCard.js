@@ -6,7 +6,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    // backgroundColor: theme.palette.secondary.main,
   },
   topRow: {
     display: 'grid',
@@ -16,6 +15,8 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.background.default,
   }
 }))
+
+
 export default function PlayerCard(props) {
   const classes = useStyles();
   return (

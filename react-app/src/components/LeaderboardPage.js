@@ -1,35 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import PlayerCard from './PlayerCard';
 import { Redirect } from 'react-router-dom';
+import { usePageStyles } from './styles/PageStyles';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginBottom: theme.spacing(8),
-    backgroundColor: 'rgb(0,0,0,0.1)',
-    minHeight: '100vh'
-  },
-  grid: {
-    padding: theme.spacing(2),
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: 0,
-      paddingRight: 0,
-    },
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  header: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    backgroundColor: theme.palette.secondary.main,
-  },
-}));
 
 function sort(players, draftedTeams, marchMadnessTeams) {
   const obj = {}
@@ -48,7 +23,7 @@ function sort(players, draftedTeams, marchMadnessTeams) {
 }
 
 export default function LeaderboardPage() {
-  const classes = useStyles();
+  const classes = usePageStyles();
   const players = useSelector(state => state.entities.league_users);
   const draftedTeams = useSelector(state => state.entities.draftedTeams);
   const marchMadnessTeams = useSelector(state => state.entities.marchMadnessTeams);

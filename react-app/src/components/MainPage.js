@@ -21,7 +21,7 @@ export default function MainPage(props) {
       dispatch(toggleLeagueModal())
     }
 
-  }, [currentLeagueUserId, toggleLeagueModal, dispatch]);
+  }, [currentLeagueUserId, dispatch]);
 
   return (
     <>

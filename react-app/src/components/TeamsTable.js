@@ -73,24 +73,24 @@ function sorted(teams, sortBy) {
 
 
 const StyledTableCell = withStyles((theme) => {
-  console.log(theme);
-return {
-  root: {
-    padding: 4,
-  },
-  head: {
-    backgroundColor: theme.palette.background.default,
-    color: theme.palette.common.white,
-    cursor: 'pointer',
-    '&:hover': {
-      background: theme.palette.primary.main,
+  return {
+    root: {
+      padding: 4,
     },
-  },
-  body: {
-    // fontSize: '0.8rem',
-    // textTransform: 'capitalize',
-  },
-}})(TableCell);
+    head: {
+      backgroundColor: theme.palette.background.default,
+      color: theme.palette.common.white,
+      cursor: 'pointer',
+      '&:hover': {
+        background: theme.palette.primary.main,
+      },
+    },
+    body: {
+      color: theme.palette.background.default,
+      textTransform: 'capitalize',
+    },
+  }
+})(TableCell);
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
@@ -135,7 +135,7 @@ export default function TeamsTable(props) {
               <StyledTableRow key={team.name}>
                 <StyledTableCell align='center'>{team.selectionNum}</StyledTableCell>
                 <StyledTableCell className={`${color}`}>
-                  <LeaderboardTeam team={team}/>
+                  <LeaderboardTeam team={team} />
                 </StyledTableCell>
                 <StyledTableCell align='right'>{team.seed_number}</StyledTableCell>
                 <StyledTableCell align='right'>{team.wins}</StyledTableCell>

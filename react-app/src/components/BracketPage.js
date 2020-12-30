@@ -1,39 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import BracketRegion from './BracketRegion';
 import FinalFour from './FinalFour';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginBottom: theme.spacing(8),
-    backgroundColor: 'rgb(0,0,0,0.1)',
-    minHeight: '100vh'
-  },
-  grid: {
-    padding: theme.spacing(2),
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: 0,
-      paddingRight: 0,
-    },
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  header: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    backgroundColor: theme.palette.secondary.main,
-  },
-}));
+import { usePageStyles } from './styles/PageStyles';
 
 export default function BracketPage() {
-  const classes = useStyles();
+  const classes = usePageStyles();
   const tournament = useSelector(state => state.entities.tournament)
 
   if (!tournament) {

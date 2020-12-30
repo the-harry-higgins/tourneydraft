@@ -1,38 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import TheRules from './TheRules';
-// import { useSelector } from 'react-redux';
+import { usePageStyles } from './styles/PageStyles';
 
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    paddingBottom: theme.spacing(8),
-    backgroundColor: 'rgb(0,0,0,0.1)',
-    minHeight: '90vh'
-  },
-  grid: {
-    padding: theme.spacing(2),
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: 0,
-      paddingRight: 0,
-    },
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  header: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    backgroundColor: theme.palette.secondary.main,
-  },
-}));
 
 export default function HelpPage(props) {
-  const classes = useStyles();
+  const classes = usePageStyles();
 
   return (
     <div className={classes.root}>

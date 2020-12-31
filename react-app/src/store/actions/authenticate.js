@@ -12,7 +12,6 @@ export const authenticateThunk = (callback, ...params) => async (dispatch) => {
     dispatch(loginAction(success));
     let path = '/';
     if (success.messages.info) {
-      // console.log(success.messages);
       if (success.messages.info[0] === 'Your league is currently drafting') {
         path = '/draft'
       }

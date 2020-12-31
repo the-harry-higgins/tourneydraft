@@ -7,6 +7,7 @@ import DraftPage from './DraftPage';
 import BracketPage from './BracketPage';
 import LeaderboardPage from './LeaderboardPage';
 import LeagueModal from './LeagueModal';
+import DraftModal from './DraftModal';
 import SimpleBottomNavigation from './SimpleBottomNavigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleLeagueModal } from '../store/actions/ui';
@@ -28,6 +29,7 @@ export default function MainPage(props) {
       <UserMenu />
       {!currentLeagueUserId ?
         <HelpPage /> :
+
         <Switch>
           <Route path='/draft' exact={true} >
             <DraftPage />
@@ -47,6 +49,7 @@ export default function MainPage(props) {
         </Switch>
       }
       <LeagueModal />
+      <DraftModal />
       <SimpleBottomNavigation />
     </>
   )

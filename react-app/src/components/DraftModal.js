@@ -4,8 +4,8 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleLeagueModal } from '../store/actions/ui';
-import LeagueForm from './LeagueForm';
+import { toggleDraftModal } from '../store/actions/ui';
+import DraftForm from './DraftForm';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TransitionsModal(props) {
   const classes = useStyles();
-  const showJoinLeague = useSelector(state => state.ui.showJoinLeague);
+  const showCreateDraft = useSelector(state => state.ui.showCreateDraft);
   const dispatch = useDispatch();
 
   const handleClose = () => {
-    dispatch(toggleLeagueModal());
+    dispatch(toggleDraftModal(null));
   };
 
   return (
@@ -30,7 +30,7 @@ export default function TransitionsModal(props) {
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       className={classes.modal}
-      open={Boolean(showJoinLeague)}
+      open={Boolean(showCreateDraft)}
       onClose={handleClose}
       closeAfterTransition
       BackdropComponent={Backdrop}
@@ -38,9 +38,9 @@ export default function TransitionsModal(props) {
         timeout: 500,
       }}
     >
-      <Fade in={Boolean(showJoinLeague)}>
+      <Fade in={Boolean(showCreateDraft)}>
         <div>
-          <LeagueForm />
+          <DraftForm leagueId={showCreateDraft} handleClose={handleClose}/>
         </div>
       </Fade>
     </Modal>

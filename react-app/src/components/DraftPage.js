@@ -25,7 +25,6 @@ export default function DraftPage(props) {
   const [selection, setSelection] = useState(null);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     if (draft && draft.drafting) {
       dispatch(draftedTeamsThunk(draft.id, draft.league_id));
@@ -52,7 +51,7 @@ export default function DraftPage(props) {
         }
       }
     }
-  }, [draft, dispatch, user]);
+  }, [dispatch, user]);
 
 
   const onClick = () => {

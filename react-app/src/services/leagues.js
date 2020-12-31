@@ -32,3 +32,13 @@ export const joinLeague = async (name) => {
   });
   return await response.json();
 }
+
+export const deleteLeague = async (leagueId) => {
+  const response = await fetch(`/api/leagues/${leagueId}/`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  });
+  return await response.json();
+}

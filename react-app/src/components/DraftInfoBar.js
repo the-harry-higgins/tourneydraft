@@ -2,14 +2,26 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Button } from '@material-ui/core';
 import { DraftTeam } from './Team';
+import { toggleDraftModal } from '../store/actions/ui';
+import { useDispatch } from 'react-redux';
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
-    // flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     padding: theme.spacing(2),
+  },
+  container2: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: theme.spacing(2),
+  },
+  sentence: {
+    paddingBottom: theme.spacing(2),
   },
   space: {
     paddingLeft: theme.spacing(2),
@@ -19,19 +31,38 @@ const useStyles = makeStyles((theme) => ({
 export default function DraftInfoBar(props) {
   const { user, marchMadnessTeams, draft, league, leagueUsers, selection, handleClick } = props;
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+
+  const handleNewDraft = () => {
+    dispatch(toggleDraftModal(league.id));
+  }
 
   if (!draft) {
     return (
       <>
         <Typography variant='h3'>
-          {league.name} doesn't have any drafts yet.
+          No Drafts
         </Typography>
-        <Typography variant='h3'>
+        <div className={classes.container2}>
+          <Typography variant='body1' className={classes.sentence}>
+            {league.name} doesn't have any drafts yet.
+          </Typography>
           {league.admin_id === user.id ?
-            `You're the league admin. Set up a draft.` :
-            `Tell the league admin to set up a draft.`
+            <>
+              <Typography variant='body1' className={classes.sentence}>
+                You're the league admin. Set up a draft.
+              </Typography>
+              <Button variant='contained' color='secondary' onClick={handleNewDraft}>
+                Create Draft
+              </Button>
+            </>
+            :
+            <Typography variant='body1' className={classes.sentence}>
+              Tell the league admin to set up a draft.
+            </Typography>
           }
-        </Typography>
+        </div>
       </>
     );
   } else if (draft.drafting) {
@@ -43,9 +74,9 @@ export default function DraftInfoBar(props) {
         <div className={classes.container}>
           <Typography variant='body1'>Selected Team:</Typography>
           {selection ?
-          <div className={classes.space}>
-            <DraftTeam  team={marchMadnessTeams[selection]} />
-          </div>
+            <div className={classes.space}>
+              <DraftTeam team={marchMadnessTeams[selection]} />
+            </div>
             : null}
         </div>
         <Button variant='contained' color='secondary' onClick={handleClick}>Draft Team</Button>

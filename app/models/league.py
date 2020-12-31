@@ -1,5 +1,6 @@
 from .db import db
 
+
 class League(db.Model):
     __tablename__ = 'leagues'
 
@@ -8,8 +9,10 @@ class League(db.Model):
     admin_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     admin = db.relationship('User')
-    drafts = db.relationship('Draft', back_populates='league')
-    league_users = db.relationship('League_User', back_populates='league')
+    drafts = db.relationship(
+        'Draft', back_populates='league', cascade='all, delete-orphan')
+    league_users = db.relationship(
+        'League_User', back_populates='league', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {

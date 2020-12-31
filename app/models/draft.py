@@ -24,7 +24,8 @@ class Draft(db.Model):
     league = db.relationship('League', back_populates='drafts')
     tournament = db.relationship('Tournament')
     current_drafter = db.relationship('League_User')
-    drafted_teams = db.relationship('Drafted_Team', back_populates='draft')
+    drafted_teams = db.relationship(
+        'Drafted_Team', back_populates='draft', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {

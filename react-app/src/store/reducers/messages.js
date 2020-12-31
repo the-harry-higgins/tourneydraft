@@ -1,7 +1,8 @@
 import { SET_ERRORS } from '../actions/errors';
 import { LOGIN } from '../actions/authenticate';
 import { SET_ROUND, SET_SORT } from '../actions/ui';
-import { DRAFT_CHANGE, SET_DRAFT_DATA } from '../actions/drafts';
+import { DRAFT_CHANGE, SET_DRAFT_DATA, CREATE_DRAFT } from '../actions/drafts';
+import { DELETE_CURRENT_LEAGUE, DELETE_LEAGUE } from '../actions/leagues';
 
 
 const roundMessages = ['','Round 1', 'Round 2', 'Sweet Sixteen', 'Elite Eight', 'Final Four', 'Championship', 'Final Results']
@@ -11,6 +12,9 @@ export default function reducer(state = null, action) {
     case SET_ERRORS:
       return {'error': action.errors};
     case LOGIN:
+    case DELETE_CURRENT_LEAGUE:
+    case DELETE_LEAGUE:
+    case CREATE_DRAFT:
     case DRAFT_CHANGE:
       return action.data.messages;
     case SET_DRAFT_DATA:

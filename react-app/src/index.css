@@ -295,3 +295,7 @@
 .round4 {
   text-align: center;
 }
+
+#simple-popper {
+  z-index: 5;
+}

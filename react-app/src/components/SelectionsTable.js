@@ -39,7 +39,6 @@ const StyledTableRow = withStyles((theme) => ({
 
 const makeSelectionsArray = (draftedTeams, draft, leagueUsers, marchMadnessTeams) => {
   const sorted = Object.values(draftedTeams).sort((a, b) => a.selection_num - b.selection_num);
-  console.log('SORTED', sorted);
   return draft['draft_order'].map((leagueUserId, i) => {
     let selection_num = i + 1;
     let drafter = leagueUsers[leagueUserId].name;
@@ -49,7 +48,6 @@ const makeSelectionsArray = (draftedTeams, draft, leagueUsers, marchMadnessTeams
         console.log('ERROR: you got some bugs.');
       }
       team = marchMadnessTeams[sorted[i].march_madness_team_id]
-      console.log('TEAM', team);
     }
     return {
       selection_num,

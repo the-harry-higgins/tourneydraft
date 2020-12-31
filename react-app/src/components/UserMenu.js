@@ -17,10 +17,11 @@ const useStyles = makeStyles((theme) => ({
     height: 50,
     marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
+    zIndex: 5,
   },
   button: {
     padding: theme.spacing(1),
-    color: '#FFF',
+    color: '#FFF', 
   },
   logo: {
     width: 26,

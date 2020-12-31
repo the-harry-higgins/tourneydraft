@@ -4,6 +4,8 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Button } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -13,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #546e7a',
+    // border: '2px solid #546e7a',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     maxWidth: props => props.width,
@@ -22,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     width: 300,
   },
+  close: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+  }
 }));
 
 export default function TransitionsModal(props) {
@@ -55,6 +62,9 @@ export default function TransitionsModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
+            <IconButton onClick={handleClose} className={classes.close}>
+              <CloseIcon />
+            </IconButton>
             { props.children }
           </div>
         </Fade>

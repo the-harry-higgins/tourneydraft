@@ -74,3 +74,18 @@ def draft(league_id, draft_id):
         'session': session_data,
         'messages': messages_data,
     }
+
+
+@draft_routes.route('/<int:draft_id>/drafted_teams')
+@login_required
+def draftedTeams(league_id, draft_id):
+    draft = Draft.query.get(draft_id)
+    drafted_teams_data = {
+        drafted_team.id: drafted_team.to_dict()
+        for drafted_team in draft.drafted_teams
+    }
+    return {
+      'draft': draft.to_dict(),
+      'draftedTeams': drafted_teams_data
+    }
+    

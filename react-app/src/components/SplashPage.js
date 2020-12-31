@@ -95,12 +95,12 @@ const SplashPage = (props) => {
   const demoLogin = (email, password) => async () => {
     const success = await dispatch(authenticateThunk(login, email, password));
     if (success) {
-      setRedirect(true);
+      setRedirect(success);
     }
   };
 
   if (redirect) {
-    return <Redirect to="/" />;
+    return <Redirect to={redirect} />;
   }
 
   return (

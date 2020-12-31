@@ -21,7 +21,7 @@ For example: #16 seed UMBC upsets #1 seed UVA in the first round and you receive
 This point system places a lot of value on upsets and cinderella teams, which we have anecdotally found makes the tournament even more fun to watch.
 
 ## LIVE LINK
-
+https://tourneydraft.herokuapp.com/
 ## TECHNOLOGIES USED
 
 ### FRONTEND

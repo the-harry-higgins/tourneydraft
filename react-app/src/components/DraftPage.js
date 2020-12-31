@@ -3,6 +3,7 @@ import { Grid, Paper, Typography } from '@material-ui/core';
 import { getDraftSocket } from '../services/socket';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDraftDataAction } from '../store/actions/drafts';
+import { draftedTeamsThunk } from '../store/actions/draftedTeams';
 import { setErrors } from '../store/actions/errors';
 import { usePageStyles } from './styles/PageStyles';
 import DraftInfoBar from './DraftInfoBar';
@@ -27,17 +28,21 @@ export default function DraftPage(props) {
 
   useEffect(() => {
     if (draft && draft.drafting) {
+      dispatch(draftedTeamsThunk(draft.id, draft.league_id));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (draft && draft.drafting) {
       const ws = getDraftSocket(draft, user);
 
       socket.current = ws;
 
       socket.current.on('draft team', function (data) {
-        console.log(data);
         dispatch(setDraftDataAction(data))
       });
 
       socket.current.on('error', (error) => {
-        console.error(error);
         dispatch(setErrors(error))
       });
 
@@ -52,7 +57,6 @@ export default function DraftPage(props) {
 
   const onClick = () => {
     if (socket.current !== null) {
-      console.log('Sending my draft pick...');
       socket.current.emit('draft team', {
         username: user.name,
         room: draft.id,
@@ -85,26 +89,42 @@ export default function DraftPage(props) {
             />
           </Paper>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Paper className={classes.paper}>
-            <AvailableTeamsTable 
-              draftedTeams={draftedTeams} 
-              marchMadnessTeams={marchMadnessTeams} 
-              setSelection={setSelection} 
-              selection={selection}
-            />
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Paper className={classes.paper}>
-            <SelectionsTable
-              draftedTeams={draftedTeams}
-              draft={draft}
-              leagueUsers={leagueUsers}
-              marchMadnessTeams={marchMadnessTeams}
-            />
-          </Paper>
-        </Grid>
+        {draft && draft.drafting ?
+          <>
+            <Grid item xs={12} md={6}>
+              <Paper className={classes.paper}>
+                <AvailableTeamsTable
+                  draftedTeams={draftedTeams}
+                  marchMadnessTeams={marchMadnessTeams}
+                  setSelection={setSelection}
+                  selection={selection}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Paper className={classes.paper}>
+                <SelectionsTable
+                  draftedTeams={draftedTeams}
+                  draft={draft}
+                  leagueUsers={leagueUsers}
+                  marchMadnessTeams={marchMadnessTeams}
+                />
+              </Paper>
+            </Grid>
+          </>
+          : draft ?
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <SelectionsTable
+                draftedTeams={draftedTeams}
+                draft={draft}
+                leagueUsers={leagueUsers}
+                marchMadnessTeams={marchMadnessTeams}
+              />
+            </Paper>
+          </Grid>
+          : null
+        }
       </Grid>
     </div>
   );

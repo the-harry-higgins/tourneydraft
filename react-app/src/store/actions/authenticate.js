@@ -10,7 +10,14 @@ export const logoutAction = () => ({ type: LOGOUT });
 export const authenticateThunk = (callback, ...params) => async (dispatch) => {
   function onSuccess(success) {
     dispatch(loginAction(success));
-    return true;
+    let path = '/';
+    if (success.messages.info) {
+      // console.log(success.messages);
+      if (success.messages.info[0] === 'Your league is currently drafting') {
+        path = '/draft'
+      }
+    }
+    return path;
   }
   function onError(errors) {
     dispatch(setErrors(errors));

@@ -82,8 +82,9 @@ def inject_csrf_token(response):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
-    if path:
+    if path and path not in ['draft', 'bracket', 'leaderboard']:
         return app.send_static_file(path)
+    print(path)
     return app.send_static_file('index.html')
 
 

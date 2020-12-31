@@ -14,7 +14,10 @@ export default function reducer(state = null, action) {
     case DRAFT_CHANGE:
       return action.data.messages;
     case SET_DRAFT_DATA:
-      return {'success': action.data.messages};
+      if (action.data.messages) {
+        return {'success': action.data.messages};
+      }
+      return null;
     case SET_ROUND:
       return {'success': [`Viewing ${roundMessages[action.roundNum]}`]};
     case SET_SORT:

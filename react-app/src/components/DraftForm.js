@@ -24,14 +24,16 @@ const DraftForm = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { tournaments } = await getAvailableTournaments(leagueId);
-      if (tournaments.length) {
-        setAvailableTournaments(tournaments);
+    if (leagueId){
+      const fetchData = async () => {
+        const { tournaments } = await getAvailableTournaments(leagueId);
+        if (tournaments.length) {
+          setAvailableTournaments(tournaments);
+        }
       }
+  
+      fetchData();
     }
-
-    fetchData();
   }, [leagueId]);
 
   const handleSubmit = async (e) => {

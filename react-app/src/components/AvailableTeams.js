@@ -9,7 +9,7 @@ import { DraftTeam } from './Team';
 
 const useStyles = makeStyles({
   container: {
-    maxHeight: 400,
+    // maxHeight: 400,
   },
 });
 
@@ -29,6 +29,7 @@ const StyledTableCell = withStyles((theme) => {
   return {
     root: {
       padding: theme.spacing(1),
+      paddingRight: theme.spacing(0),
     },
     head: {
       backgroundColor: theme.palette.background.default,
@@ -70,7 +71,7 @@ export default function AvailableTeamsTable(props) {
         Available Teams
       </Typography>
       <TableContainer className={classes.container} component={Paper}>
-        <Table stickyHeader className={classes.table} aria-label="simple table">
+        <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <StyledTableRow>
               <StyledTableCell align='center'>Select</StyledTableCell>
@@ -81,7 +82,7 @@ export default function AvailableTeamsTable(props) {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <StyledTableRow hover key={row.id}>
+              <StyledTableRow key={row.id}>
                 <StyledTableCell align='center'>
                   <Radio
                     checked={Number(selection) === row.id}

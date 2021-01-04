@@ -32,6 +32,11 @@ let theme = createMuiTheme({
         },
       },
       disabled: {},
+    },
+    PrivateSwitchBase: {
+      root: {
+        padding: 0,
+      }
     }
   },
   typography: {

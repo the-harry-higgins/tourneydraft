@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(2),
   },
   draftLogo: {
-    height: 30,
+    height: 25,
     paddingRight: theme.spacing(2),
   },
   bracketLogo: {

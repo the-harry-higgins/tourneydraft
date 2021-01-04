@@ -51,7 +51,7 @@ export default function DraftPage(props) {
         }
       }
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, currentDraftId]);
 
 
   const onClick = () => {
@@ -90,7 +90,7 @@ export default function DraftPage(props) {
         </Grid>
         {draft && draft.drafting ?
           <>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <Paper className={classes.paper}>
                 <AvailableTeamsTable
                   draftedTeams={draftedTeams}
@@ -100,7 +100,7 @@ export default function DraftPage(props) {
                 />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <Paper className={classes.paper}>
                 <SelectionsTable
                   draftedTeams={draftedTeams}

@@ -9,7 +9,7 @@ import { DraftTeam } from './Team';
 
 const useStyles = makeStyles({
   container: {
-    maxHeight: 400,
+    // maxHeight: 400,
   },
 });
 
@@ -17,6 +17,7 @@ const StyledTableCell = withStyles((theme) => {
   return {
     root: {
       padding: theme.spacing(1),
+      paddingRight: theme.spacing(0),
     },
     head: {
       backgroundColor: theme.palette.background.default,
@@ -73,7 +74,7 @@ export default function SelectionsTable(props) {
         Selections
       </Typography>
       <TableContainer className={classes.container} component={Paper}>
-        <Table stickyHeader className={classes.table} aria-label="simple table">
+        <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <StyledTableRow>
               <StyledTableCell align='center'>Pick</StyledTableCell>
@@ -85,7 +86,7 @@ export default function SelectionsTable(props) {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <StyledTableRow hover key={row.selection_num}>
+              <StyledTableRow key={row.selection_num}>
                 <StyledTableCell align='center' component="th" scope="row">
                   {row.selection_num}
                 </StyledTableCell>

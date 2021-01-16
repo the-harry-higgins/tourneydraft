@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, ClickAwayListener, Divider, List, ListItem, ListItemText, Paper, Popper } from '@material-ui/core';
+import { Button, ClickAwayListener, Divider, Hidden, List, ListItem, ListItemText, Paper, Popper } from '@material-ui/core';
 import { ReactComponent as Logo } from '../images/basketball-game.svg';
 import { logoutThunk } from '../store/actions/authenticate';
 import { draftChangeThunk } from '../store/actions/drafts';
@@ -12,12 +12,23 @@ import { deleteLeagueThunk } from '../store/actions/leagues';
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
-    top: 0,
+    top: 46.5,
     right: 0,
     height: 50,
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(4),
     zIndex: 5,
+    [theme.breakpoints.down('md')]: {
+      top: 40.5,
+      marginRight: theme.spacing(3),
+    },
+    [theme.breakpoints.down('sm')]: {
+      top: 34.5,
+      marginRight: theme.spacing(1),
+    },
+    [theme.breakpoints.down('xs')]: {
+      top: 23.5,
+      marginRight: theme.spacing(1),
+    },
   },
   button: {
     padding: theme.spacing(1),
@@ -80,7 +91,9 @@ export default function UserMenu() {
       <div className={classes.root}>
         <Button variant="contained" color="primary" onClick={handleClick} className={classes.button}>
           <Logo className={classes.logo} />
-          {user.name}
+          <Hidden smDown>
+            {user.name}
+          </Hidden>
           {open ? <ExpandLess /> : <ExpandMore />}
         </Button>
         <Popper id={id} open={open} placement='top-end' anchorEl={anchorEl}>
@@ -122,7 +135,7 @@ export default function UserMenu() {
                         onClick={handleDeleteLeague(leagueId)}
                         className={classes.indent}
                       >
-                        <ListItemText primary={'Delete League'} color='primary'/>
+                        <ListItemText primary={'Delete League'} color='primary' />
                       </ListItem>
                     </>
                     :

@@ -2,18 +2,30 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, ClickAwayListener, List, ListItem, ListItemText, Paper, Popper } from '@material-ui/core';
+import { Button, ClickAwayListener, Hidden, List, ListItem, ListItemText, Paper, Popper } from '@material-ui/core';
 import { setRound } from '../store/actions/ui';
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
-    top: 0,
+    top: 46.5,
     left: 0,
     height: 50,
-    marginTop: theme.spacing(1),
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(4),
+    zIndex: 5,
+    [theme.breakpoints.down('md')]: {
+      top: 40.5,
+      marginLeft: theme.spacing(3),
+    },
+    [theme.breakpoints.down('sm')]: {
+      top: 34.5,
+      marginLeft: theme.spacing(1),
+    },
+    [theme.breakpoints.down('xs')]: {
+      top: 23.5,
+      marginLeft: theme.spacing(1),
+    },
   },
   button: {
     padding: theme.spacing(1),
@@ -65,7 +77,12 @@ export default function RoundsMenu() {
     <ClickAwayListener onClickAway={handleClickAway}>
       <div className={classes.root}>
         <Button variant="contained" color="primary" size='large' onClick={handleClick} className={classes.button}>
-          Rounds
+          <Hidden smDown>
+            Rounds
+          </Hidden>
+          <Hidden mdUp>
+            Rnd
+          </Hidden>
           {open ? <ExpandLess /> : <ExpandMore />}
         </Button>
         <Popper id={id} open={open} placement='top-start' anchorEl={anchorEl}>

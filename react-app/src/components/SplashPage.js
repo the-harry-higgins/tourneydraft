@@ -10,6 +10,7 @@ import SignUpForm from './auth/SignUpForm';
 import { authenticateThunk } from "../store/actions/authenticate";
 import { login } from '../services/auth';
 import TheRules from './TheRules';
+import Contact from "./Contact";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,12 +44,27 @@ const useStyles = makeStyles((theme) => ({
   },
   rulesButton: {
     position: 'absolute',
-    top: '50%',
+    top: '45%',
     left: '50%',
     width: 300,
     height: 30,
     marginLeft: -150,
     marginTop: -18,
+    [theme.breakpoints.down('sm')]: {
+      top: '35%',
+    },
+  },
+  contactButton: {
+    position: 'absolute',
+    top: '55%',
+    left: '50%',
+    width: 300,
+    height: 30,
+    marginLeft: -150,
+    marginTop: -18,
+    [theme.breakpoints.down('sm')]: {
+      top: '65%',
+    },
   },
   logoContainer: {
     display: 'flex',
@@ -112,6 +128,11 @@ const SplashPage = (props) => {
         <div className={classes.rulesButton}>
           <TransitionModal name='Learn how to Play' variant='outlined' color='primary' width={600}>
               <TheRules />
+          </TransitionModal>
+        </div>
+        <div className={classes.contactButton}>
+          <TransitionModal name='Contact the Developer' variant='outlined' color='primary' width={600}>
+            <Contact />
           </TransitionModal>
         </div>
       </Box>

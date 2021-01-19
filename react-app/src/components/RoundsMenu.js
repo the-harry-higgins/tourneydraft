@@ -36,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     fill: '#FFF',
     marginRight: theme.spacing(2),
   },
+  menu: {
+    maxHeight: '60vh',
+    overflow: 'auto',
+  }
 }));
 
 const rounds = [

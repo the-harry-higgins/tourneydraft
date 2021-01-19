@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
   },
   indent: {
     paddingLeft: theme.spacing(4)
+  },
+  menu: {
+    maxHeight: '60vh',
+    overflow: 'auto',
   }
 }));
 

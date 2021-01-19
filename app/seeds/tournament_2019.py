@@ -5,7 +5,7 @@ from datetime import datetime
 
 def seed_2019_tournament():
     tournament = Tournament(year=2019, region1='East',
-                            region2='South', region3='Midwest', region4='West')
+                            region2='South', region3='Midwest', region4='West', last_round_completed=6)
     db.session.add(tournament)
     db.session.commit()
 
@@ -15,7 +15,8 @@ def seed_2019_tournament():
         tournament_id=tournament.id, seed_number=1, region='East', college_id=Duke.id)
     db.session.add(duke)
 
-    Michigan_State = College.query.filter(College.name == 'Michigan State').one()
+    Michigan_State = College.query.filter(
+        College.name == 'Michigan State').one()
     michigan_State = March_Madness_Team(
         tournament_id=tournament.id, seed_number=2, region='East', college_id=Michigan_State.id)
     db.session.add(michigan_State)
@@ -30,7 +31,8 @@ def seed_2019_tournament():
         tournament_id=tournament.id, seed_number=4, region='East', college_id=Virginia_Tech.id)
     db.session.add(virginia_Tech)
 
-    Mississippi_State = College.query.filter(College.name == 'Mississippi State').one()
+    Mississippi_State = College.query.filter(
+        College.name == 'Mississippi State').one()
     mississippi_State = March_Madness_Team(
         tournament_id=tournament.id, seed_number=5, region='East', college_id=Mississippi_State.id)
     db.session.add(mississippi_State)
@@ -60,8 +62,8 @@ def seed_2019_tournament():
         tournament_id=tournament.id, seed_number=10, region='East', college_id=Minnesota.id)
     db.session.add(minnesota)
 
-    belmont = College.query.filter(College.name == 'Belmont').one()
-    Belmont = March_Madness_Team(
+    Belmont = College.query.filter(College.name == 'Belmont').one()
+    belmont = March_Madness_Team(
         tournament_id=tournament.id, seed_number=11, region='East', college_id=Belmont.id)
     db.session.add(belmont)
 
@@ -85,12 +87,11 @@ def seed_2019_tournament():
         tournament_id=tournament.id, seed_number=15, region='East', college_id=Bradley.id)
     db.session.add(bradley)
 
-    North_Dakota_State = College.query.filter(College.name == 'North Dakota State').one()
+    North_Dakota_State = College.query.filter(
+        College.name == 'North Dakota State').one()
     north_Dakota_State = March_Madness_Team(
         tournament_id=tournament.id, seed_number=16, region='East', college_id=North_Dakota_State.id)
     db.session.add(north_Dakota_State)
-
-
 
     # South
     Virginia = College.query.filter(College.name == 'Virginia').one()
@@ -175,11 +176,10 @@ def seed_2019_tournament():
         tournament_id=tournament.id, seed_number=16, region='South', college_id=Gardner_Webb.id)
     db.session.add(gardner_Webb)
 
-
-
     # Midwest
-    north_Carolina = College.query.filter(College.name == 'North Carolina').one()
-    North_Carolina = March_Madness_Team(
+    North_Carolina = College.query.filter(
+        College.name == 'North Carolina').one()
+    north_Carolina = March_Madness_Team(
         tournament_id=tournament.id, seed_number=1, region='Midwest', college_id=North_Carolina.id)
     db.session.add(north_Carolina)
 
@@ -235,7 +235,8 @@ def seed_2019_tournament():
         tournament_id=tournament.id, seed_number=11, region='Midwest', college_id=Ohio_State.id)
     db.session.add(ohio_State)
 
-    New_Mexico_State = College.query.filter(College.name == 'New Mexico State').one()
+    New_Mexico_State = College.query.filter(
+        College.name == 'New Mexico State').one()
     new_Mexico_State = March_Madness_Team(
         tournament_id=tournament.id, seed_number=12, region='Midwest', college_id=New_Mexico_State.id)
     db.session.add(new_Mexico_State)
@@ -250,7 +251,8 @@ def seed_2019_tournament():
         tournament_id=tournament.id, seed_number=14, region='Midwest', college_id=Georgia_State.id)
     db.session.add(georgia_State)
 
-    Abilene_Christian = College.query.filter(College.name == 'Abilene Christian').one()
+    Abilene_Christian = College.query.filter(
+        College.name == 'Abilene Christian').one()
     abilene_Christian = March_Madness_Team(
         tournament_id=tournament.id, seed_number=15, region='Midwest', college_id=Abilene_Christian.id)
     db.session.add(abilene_Christian)
@@ -259,8 +261,6 @@ def seed_2019_tournament():
     iona = March_Madness_Team(
         tournament_id=tournament.id, seed_number=16, region='Midwest', college_id=Iona.id)
     db.session.add(iona)
-
-
 
     # West
     Gonzaga = College.query.filter(College.name == 'Gonzaga').one()
@@ -330,7 +330,8 @@ def seed_2019_tournament():
         tournament_id=tournament.id, seed_number=13, region='West', college_id=Vermont.id)
     db.session.add(vermont)
 
-    Northern_Kentucky = College.query.filter(College.name == 'Northern Kentucky').one()
+    Northern_Kentucky = College.query.filter(
+        College.name == 'Northern Kentucky').one()
     northern_Kentucky = March_Madness_Team(
         tournament_id=tournament.id, seed_number=14, region='West', college_id=Northern_Kentucky.id)
     db.session.add(northern_Kentucky)
@@ -340,21 +341,18 @@ def seed_2019_tournament():
         tournament_id=tournament.id, seed_number=15, region='West', college_id=Montana.id)
     db.session.add(montana)
 
-    Fairleigh_Dickinson = College.query.filter(College.name == 'Fairleigh Dickinson').one()
+    Fairleigh_Dickinson = College.query.filter(
+        College.name == 'Fairleigh Dickinson').one()
     fairleigh_Dickinson = March_Madness_Team(
         tournament_id=tournament.id, seed_number=16, region='West', college_id=Fairleigh_Dickinson.id)
     db.session.add(fairleigh_Dickinson)
-
-
-
-
 
     db.session.commit()
 
     game_1 = Game(game_num=1, round_num=1, winning_team_id=duke.id,
                   tournament_id=tournament.id)
     db.session.add(game_1)
-    game_2 = Game(game_num=2, round_num=1, winning_team_id=uCf.id,
+    game_2 = Game(game_num=2, round_num=1, winning_team_id=uCF.id,
                   tournament_id=tournament.id)
     db.session.add(game_2)
     game_3 = Game(game_num=3, round_num=1, winning_team_id=liberty.id,
@@ -542,199 +540,446 @@ def seed_2019_tournament():
     db.session.add(game_63)
     db.session.commit()
 
-    # game_1_win_score = Game_Team_Score(
-    #     game_id=game_1.id, team_id=uMBC.id)
-    # game_1_lose_score = Game_Team_Score(
-    #     game_id=game_1.id, team_id=virginia.id)
-    # game_1.game_team_scores = [game_1_win_score, game_1_lose_score]
+    game_1_win_score = Game_Team_Score(
+        game_id=game_1.id, team_id=duke.id, score=85)
+    game_1_lose_score = Game_Team_Score(
+        game_id=game_1.id, team_id=north_Dakota_State.id, score=62)
+    game_1.game_team_scores = [game_1_win_score, game_1_lose_score]
+    game_1.child_game_id = game_33.id
 
-    # game_2_win_score = Game_Team_Score(
-    #     game_id=game_2.id, team_id=kansas_State.id)
-    # game_2_lose_score = Game_Team_Score(
-    #     game_id=game_2.id, team_id=creighton.id)
-    # game_2.game_team_scores = [game_2_win_score, game_2_lose_score]
+    game_2_win_score = Game_Team_Score(
+        game_id=game_2.id, team_id=uCF.id, score=73)
+    game_2_lose_score = Game_Team_Score(
+        game_id=game_2.id, team_id=vCU.id, score=58)
+    game_2.game_team_scores = [game_2_win_score, game_2_lose_score]
+    game_2.child_game_id = game_33.id
 
-    # game_3_win_score = Game_Team_Score(
-    #     game_id=game_3.id, team_id=kentucky.id)
-    # game_3_lose_score = Game_Team_Score(
-    #     game_id=game_3.id, team_id=davidson.id)
-    # game_3.game_team_scores = [game_3_win_score, game_3_lose_score]
+    game_3_win_score = Game_Team_Score(
+        game_id=game_3.id, team_id=liberty.id, score=80)
+    game_3_lose_score = Game_Team_Score(
+        game_id=game_3.id, team_id=mississippi_State.id, score=76)
+    game_3.game_team_scores = [game_3_win_score, game_3_lose_score]
+    game_3.child_game_id = game_34.id
 
-    # game_4_win_score = Game_Team_Score(
-    #     game_id=game_4.id, team_id=buffalo.id)
-    # game_4_lose_score = Game_Team_Score(
-    #     game_id=game_4.id, team_id=arizona.id)
-    # game_4.game_team_scores = [game_4_win_score, game_4_lose_score]
+    game_4_win_score = Game_Team_Score(
+        game_id=game_4.id, team_id=virginia_Tech.id, score=66)
+    game_4_lose_score = Game_Team_Score(
+        game_id=game_4.id, team_id=saint_Louis.id, score=52)
+    game_4.game_team_scores = [game_4_win_score, game_4_lose_score]
+    game_4.child_game_id = game_34.id
 
-    # game_5_win_score = Game_Team_Score(
-    #     game_id=game_5.id, team_id=loyola_Chicago.id)
-    # game_5_lose_score = Game_Team_Score(
-    #     game_id=game_5.id, team_id=miami.id)
-    # game_5.game_team_scores = [game_5_win_score, game_5_lose_score]
+    game_5_win_score = Game_Team_Score(
+        game_id=game_5.id, team_id=maryland.id, score=79)
+    game_5_lose_score = Game_Team_Score(
+        game_id=game_5.id, team_id=belmont.id, score=77)
+    game_5.game_team_scores = [game_5_win_score, game_5_lose_score]
+    game_5.child_game_id = game_35.id
 
-    # game_6_win_score = Game_Team_Score(
-    #     game_id=game_6.id, team_id=tennessee.id)
-    # game_6_lose_score = Game_Team_Score(
-    #     game_id=game_6.id, team_id=wright_State.id)
-    # game_6.game_team_scores = [game_6_win_score, game_6_lose_score]
+    game_6_win_score = Game_Team_Score(
+        game_id=game_6.id, team_id=lSU.id, score=79)
+    game_6_lose_score = Game_Team_Score(
+        game_id=game_6.id, team_id=yale.id, score=74)
+    game_6.game_team_scores = [game_6_win_score, game_6_lose_score]
+    game_6.child_game_id = game_35.id
 
-    # game_7_win_score = Game_Team_Score(
-    #     game_id=game_7.id, team_id=nevada.id)
-    # game_7_lose_score = Game_Team_Score(
-    #     game_id=game_7.id, team_id=texas.id)
-    # game_7.game_team_scores = [game_7_win_score, game_7_lose_score]
+    game_7_win_score = Game_Team_Score(
+        game_id=game_7.id, team_id=minnesota.id, score=86)
+    game_7_lose_score = Game_Team_Score(
+        game_id=game_7.id, team_id=louisville.id, score=76)
+    game_7.game_team_scores = [game_7_win_score, game_7_lose_score]
+    game_7.child_game_id = game_36.id
 
-    # game_8_win_score = Game_Team_Score(
-    #     game_id=game_8.id, team_id=cincinnati.id)
-    # game_8_lose_score = Game_Team_Score(
-    #     game_id=game_8.id, team_id=georgia_State.id)
-    # game_8.game_team_scores = [game_8_win_score, game_8_lose_score]
+    game_8_win_score = Game_Team_Score(
+        game_id=game_8.id, team_id=michigan_State.id, score=76)
+    game_8_lose_score = Game_Team_Score(
+        game_id=game_8.id, team_id=bradley.id, score=65)
+    game_8.game_team_scores = [game_8_win_score, game_8_lose_score]
+    game_8.child_game_id = game_36.id
 
-    # game_9_win_score = Game_Team_Score(
-    #     game_id=game_9.id, team_id=xavier.id)
-    # game_9_lose_score = Game_Team_Score(
-    #     game_id=game_9.id, team_id=texas_Southern.id)
-    # game_9.game_team_scores = [game_9_win_score, game_9_lose_score]
+    game_9_win_score = Game_Team_Score(
+        game_id=game_9.id, team_id=gonzaga.id, score=87)
+    game_9_lose_score = Game_Team_Score(
+        game_id=game_9.id, team_id=fairleigh_Dickinson.id, score=49)
+    game_9.game_team_scores = [game_9_win_score, game_9_lose_score]
+    game_9.child_game_id = game_37.id
 
-    # game_10_win_score = Game_Team_Score(
-    #     game_id=game_10.id, team_id=florida_State.id)
-    # game_10_lose_score = Game_Team_Score(
-    #     game_id=game_10.id, team_id=missouri.id)
-    # game_10.game_team_scores = [game_10_win_score, game_10_lose_score]
+    game_10_win_score = Game_Team_Score(
+        game_id=game_10.id, team_id=baylor.id, score=78)
+    game_10_lose_score = Game_Team_Score(
+        game_id=game_10.id, team_id=syracuse.id, score=69)
+    game_10.game_team_scores = [game_10_win_score, game_10_lose_score]
+    game_10.child_game_id = game_37.id
 
-    # game_11_win_score = Game_Team_Score(
-    #     game_id=game_11.id, team_id=ohio_State.id)
-    # game_11_lose_score = Game_Team_Score(
-    #     game_id=game_11.id, team_id=south_Dakota_State.id)
-    # game_11.game_team_scores = [game_11_win_score, game_11_lose_score]
+    game_11_win_score = Game_Team_Score(
+        game_id=game_11.id, team_id=murray_State.id, score=83)
+    game_11_lose_score = Game_Team_Score(
+        game_id=game_11.id, team_id=marquette.id, score=64)
+    game_11.game_team_scores = [game_11_win_score, game_11_lose_score]
+    game_11.child_game_id = game_38.id
 
-    # game_12_win_score = Game_Team_Score(
-    #     game_id=game_12.id, team_id=gonzaga.id)
-    # game_12_lose_score = Game_Team_Score(
-    #     game_id=game_12.id, team_id=uNC_Greensboro.id)
-    # game_12.game_team_scores = [game_12_win_score, game_12_lose_score]
+    game_12_win_score = Game_Team_Score(
+        game_id=game_12.id, team_id=florida_State.id, score=76)
+    game_12_lose_score = Game_Team_Score(
+        game_id=game_12.id, team_id=vermont.id, score=69)
+    game_12.game_team_scores = [game_12_win_score, game_12_lose_score]
+    game_12.child_game_id = game_38.id
 
-    # game_13_win_score = Game_Team_Score(
-    #     game_id=game_13.id, team_id=houston.id)
-    # game_13_lose_score = Game_Team_Score(
-    #     game_id=game_13.id, team_id=san_Diego_State.id)
-    # game_13.game_team_scores = [game_13_win_score, game_13_lose_score]
+    game_13_win_score = Game_Team_Score(
+        game_id=game_13.id, team_id=buffalo.id, score=91)
+    game_13_lose_score = Game_Team_Score(
+        game_id=game_13.id, team_id=arizona_State.id, score=74)
+    game_13.game_team_scores = [game_13_win_score, game_13_lose_score]
+    game_13.child_game_id = game_39.id
 
-    # game_14_win_score = Game_Team_Score(
-    #     game_id=game_14.id, team_id=michigan.id)
-    # game_14_lose_score = Game_Team_Score(
-    #     game_id=game_14.id, team_id=montana.id)
-    # game_14.game_team_scores = [game_14_win_score, game_14_lose_score]
+    game_14_win_score = Game_Team_Score(
+        game_id=game_14.id, team_id=texas_Tech.id, score=72)
+    game_14_lose_score = Game_Team_Score(
+        game_id=game_14.id, team_id=northern_Kentucky.id, score=57)
+    game_14.game_team_scores = [game_14_win_score, game_14_lose_score]
+    game_14.child_game_id = game_39.id
 
-    # game_15_win_score = Game_Team_Score(
-    #     game_id=game_15.id, team_id=texas_AM.id)
-    # game_15_lose_score = Game_Team_Score(
-    #     game_id=game_15.id, team_id=providence.id)
-    # game_15.game_team_scores = [game_15_win_score, game_15_lose_score]
+    game_15_win_score = Game_Team_Score(
+        game_id=game_15.id, team_id=florida.id, score=70)
+    game_15_lose_score = Game_Team_Score(
+        game_id=game_15.id, team_id=nevada.id, score=61)
+    game_15.game_team_scores = [game_15_win_score, game_15_lose_score]
+    game_15.child_game_id = game_40.id
 
-    # game_16_win_score = Game_Team_Score(
-    #     game_id=game_16.id, team_id=north_Carolina.id)
-    # game_16_lose_score = Game_Team_Score(
-    #     game_id=game_16.id, team_id=lipscomb.id)
-    # game_16.game_team_scores = [game_16_win_score, game_16_lose_score]
+    game_16_win_score = Game_Team_Score(
+        game_id=game_16.id, team_id=michigan.id, score=74)
+    game_16_lose_score = Game_Team_Score(
+        game_id=game_16.id, team_id=montana.id, score=55)
+    game_16.game_team_scores = [game_16_win_score, game_16_lose_score]
+    game_16.child_game_id = game_40.id
 
-    # game_17_win_score = Game_Team_Score(
-    #     game_id=game_17.id, team_id=villanova.id)
-    # game_17_lose_score = Game_Team_Score(
-    #     game_id=game_17.id, team_id=radford.id)
-    # game_17.game_team_scores = [game_17_win_score, game_17_lose_score]
+    game_17_win_score = Game_Team_Score(
+        game_id=game_17.id, team_id=virginia.id, score=71)
+    game_17_lose_score = Game_Team_Score(
+        game_id=game_17.id, team_id=gardner_Webb.id, score=56)
+    game_17.game_team_scores = [game_17_win_score, game_17_lose_score]
+    game_17.child_game_id = game_41.id
 
-    # game_18_win_score = Game_Team_Score(
-    #     game_id=game_18.id, team_id=alabama.id)
-    # game_18_lose_score = Game_Team_Score(
-    #     game_id=game_18.id, team_id=virginia_Tech.id)
-    # game_18.game_team_scores = [game_18_win_score, game_18_lose_score]
+    game_18_win_score = Game_Team_Score(
+        game_id=game_18.id, team_id=oklahoma.id, score=95)
+    game_18_lose_score = Game_Team_Score(
+        game_id=game_18.id, team_id=ole_Miss.id, score=72)
+    game_18.game_team_scores = [game_18_win_score, game_18_lose_score]
+    game_18.child_game_id = game_41.id
 
-    # game_19_win_score = Game_Team_Score(
-    #     game_id=game_19.id, team_id=west_Virginia.id)
-    # game_19_lose_score = Game_Team_Score(
-    #     game_id=game_19.id, team_id=murray_State.id)
-    # game_19.game_team_scores = [game_19_win_score, game_19_lose_score]
+    game_19_win_score = Game_Team_Score(
+        game_id=game_19.id, team_id=oregon.id, score=72)
+    game_19_lose_score = Game_Team_Score(
+        game_id=game_19.id, team_id=wisconsin.id, score=54)
+    game_19.game_team_scores = [game_19_win_score, game_19_lose_score]
+    game_19.child_game_id = game_42.id
 
-    # game_20_win_score = Game_Team_Score(
-    #     game_id=game_20.id, team_id=marshall.id)
-    # game_20_lose_score = Game_Team_Score(
-    #     game_id=game_20.id, team_id=wichita_State.id)
-    # game_20.game_team_scores = [game_20_win_score, game_20_lose_score]
+    game_20_win_score = Game_Team_Score(
+        game_id=game_20.id, team_id=uC_Irvine.id, score=70)
+    game_20_lose_score = Game_Team_Score(
+        game_id=game_20.id, team_id=kansas_State.id, score=64)
+    game_20.game_team_scores = [game_20_win_score, game_20_lose_score]
+    game_20.child_game_id = game_42.id
 
-    # game_21_win_score = Game_Team_Score(
-    #     game_id=game_21.id, team_id=florida.id)
-    # game_21_lose_score = Game_Team_Score(
-    #     game_id=game_21.id, team_id=st_Bonaventure.id)
-    # game_21.game_team_scores = [game_21_win_score, game_21_lose_score]
+    game_21_win_score = Game_Team_Score(
+        game_id=game_21.id, team_id=villanova.id, score=61)
+    game_21_lose_score = Game_Team_Score(
+        game_id=game_21.id, team_id=saint_Marys.id, score=57)
+    game_21.game_team_scores = [game_21_win_score, game_21_lose_score]
+    game_21.child_game_id = game_43.id
 
-    # game_22_win_score = Game_Team_Score(
-    #     game_id=game_22.id, team_id=texas_Tech.id)
-    # game_22_lose_score = Game_Team_Score(
-    #     game_id=game_22.id, team_id=stephen_F_Austin.id)
-    # game_22.game_team_scores = [game_22_win_score, game_22_lose_score]
+    game_22_win_score = Game_Team_Score(
+        game_id=game_22.id, team_id=purdue.id, score=61)
+    game_22_lose_score = Game_Team_Score(
+        game_id=game_22.id, team_id=old_Dominion.id, score=48)
+    game_22.game_team_scores = [game_22_win_score, game_22_lose_score]
+    game_22.child_game_id = game_43.id
 
-    # game_23_win_score = Game_Team_Score(
-    #     game_id=game_23.id, team_id=butler.id)
-    # game_23_lose_score = Game_Team_Score(
-    #     game_id=game_23.id, team_id=arkansas.id)
-    # game_23.game_team_scores = [game_23_win_score, game_23_lose_score]
+    game_23_win_score = Game_Team_Score(
+        game_id=game_23.id, team_id=iowa.id, score=79)
+    game_23_lose_score = Game_Team_Score(
+        game_id=game_23.id, team_id=cincinnati.id, score=72)
+    game_23.game_team_scores = [game_23_win_score, game_23_lose_score]
+    game_23.child_game_id = game_44.id
 
-    # game_24_win_score = Game_Team_Score(
-    #     game_id=game_24.id, team_id=purdue.id)
-    # game_24_lose_score = Game_Team_Score(
-    #     game_id=game_24.id, team_id=cal_State_Fullerton.id)
-    # game_24.game_team_scores = [game_24_win_score, game_24_lose_score]
+    game_24_win_score = Game_Team_Score(
+        game_id=game_24.id, team_id=tennessee.id, score=77)
+    game_24_lose_score = Game_Team_Score(
+        game_id=game_24.id, team_id=colgate.id, score=70)
+    game_24.game_team_scores = [game_24_win_score, game_24_lose_score]
+    game_24.child_game_id = game_44.id
 
-    # game_25_win_score = Game_Team_Score(
-    #     game_id=game_25.id, team_id=kansas.id)
-    # game_25_lose_score = Game_Team_Score(
-    #     game_id=game_25.id, team_id=penn.id)
-    # game_25.game_team_scores = [game_25_win_score, game_25_lose_score]
+    game_25_win_score = Game_Team_Score(
+        game_id=game_25.id, team_id=north_Carolina.id, score=88)
+    game_25_lose_score = Game_Team_Score(
+        game_id=game_25.id, team_id=iona.id, score=73)
+    game_25.game_team_scores = [game_25_win_score, game_25_lose_score]
+    game_25.child_game_id = game_45.id
 
-    # game_26_win_score = Game_Team_Score(
-    #     game_id=game_26.id, team_id=seton_Hall.id)
-    # game_26_lose_score = Game_Team_Score(
-    #     game_id=game_26.id, team_id=north_Carolina_State.id)
-    # game_26.game_team_scores = [game_26_win_score, game_26_lose_score]
+    game_26_win_score = Game_Team_Score(
+        game_id=game_26.id, team_id=washington.id, score=78)
+    game_26_lose_score = Game_Team_Score(
+        game_id=game_26.id, team_id=utah_State.id, score=61)
+    game_26.game_team_scores = [game_26_win_score, game_26_lose_score]
+    game_26.child_game_id = game_45.id
 
-    # game_27_win_score = Game_Team_Score(
-    #     game_id=game_27.id, team_id=clemson.id)
-    # game_27_lose_score = Game_Team_Score(
-    #     game_id=game_27.id, team_id=new_Mexico_State.id)
-    # game_27.game_team_scores = [game_27_win_score, game_27_lose_score]
+    game_27_win_score = Game_Team_Score(
+        game_id=game_27.id, team_id=auburn.id, score=78)
+    game_27_lose_score = Game_Team_Score(
+        game_id=game_27.id, team_id=new_Mexico_State.id, score=77)
+    game_27.game_team_scores = [game_27_win_score, game_27_lose_score]
+    game_27.child_game_id = game_46.id
 
-    # game_28_win_score = Game_Team_Score(
-    #     game_id=game_28.id, team_id=auburn.id)
-    # game_28_lose_score = Game_Team_Score(
-    #     game_id=game_28.id, team_id=charleston.id)
-    # game_28.game_team_scores = [game_28_win_score, game_28_lose_score]
+    game_28_win_score = Game_Team_Score(
+        game_id=game_28.id, team_id=kansas.id, score=87)
+    game_28_lose_score = Game_Team_Score(
+        game_id=game_28.id, team_id=northeastern.id, score=53)
+    game_28.game_team_scores = [game_28_win_score, game_28_lose_score]
+    game_28.child_game_id = game_46.id
 
-    # game_29_win_score = Game_Team_Score(
-    #     game_id=game_29.id, team_id=syracuse.id)
-    # game_29_lose_score = Game_Team_Score(
-    #     game_id=game_29.id, team_id=tCU.id)
-    # game_29.game_team_scores = [game_29_win_score, game_29_lose_score]
+    game_29_win_score = Game_Team_Score(
+        game_id=game_29.id, team_id=ohio_State.id, score=62)
+    game_29_lose_score = Game_Team_Score(
+        game_id=game_29.id, team_id=iowa_State.id, score=59)
+    game_29.game_team_scores = [game_29_win_score, game_29_lose_score]
+    game_29.child_game_id = game_47.id
 
-    # game_30_win_score = Game_Team_Score(
-    #     game_id=game_30.id, team_id=michigan_State.id)
-    # game_30_lose_score = Game_Team_Score(
-    #     game_id=game_30.id, team_id=bucknell.id)
-    # game_30.game_team_scores = [game_30_win_score, game_30_lose_score]
+    game_30_win_score = Game_Team_Score(
+        game_id=game_30.id, team_id=houston.id, score=84)
+    game_30_lose_score = Game_Team_Score(
+        game_id=game_30.id, team_id=georgia_State.id, score=55)
+    game_30.game_team_scores = [game_30_win_score, game_30_lose_score]
+    game_30.child_game_id = game_47.id
 
-    # game_31_win_score = Game_Team_Score(
-    #     game_id=game_31.id, team_id=rhode_Island.id)
-    # game_31_lose_score = Game_Team_Score(
-    #     game_id=game_31.id, team_id=oklahoma.id)
-    # game_31.game_team_scores = [game_31_win_score, game_31_lose_score]
+    game_31_win_score = Game_Team_Score(
+        game_id=game_31.id, team_id=wofford.id, score=84)
+    game_31_lose_score = Game_Team_Score(
+        game_id=game_31.id, team_id=seton_Hall.id, score=68)
+    game_31.game_team_scores = [game_31_win_score, game_31_lose_score]
+    game_31.child_game_id = game_48.id
 
-    # game_32_win_score = Game_Team_Score(
-    #     game_id=game_32.id, team_id=duke.id)
-    # game_32_lose_score = Game_Team_Score(
-    #     game_id=game_32.id, team_id=iona.id)
-    # game_32.game_team_scores = [game_32_win_score, game_32_lose_score]
+    game_32_win_score = Game_Team_Score(
+        game_id=game_32.id, team_id=kentucky.id, score=79)
+    game_32_lose_score = Game_Team_Score(
+        game_id=game_32.id, team_id=abilene_Christian.id, score=44)
+    game_32.game_team_scores = [game_32_win_score, game_32_lose_score]
+    game_32.child_game_id = game_48.id
 
-    # db.session.commit()
+    game_33_win_score = Game_Team_Score(
+        game_id=game_33.id, team_id=duke.id, score=77)
+    game_33_lose_score = Game_Team_Score(
+        game_id=game_33.id, team_id=uCF.id, score=76)
+    game_33.game_team_scores = [game_33_win_score, game_33_lose_score]
+    game_33.child_game_id = game_49.id
+
+    game_34_win_score = Game_Team_Score(
+        game_id=game_34.id, team_id=virginia_Tech.id, score=67)
+    game_34_lose_score = Game_Team_Score(
+        game_id=game_34.id, team_id=liberty.id, score=58)
+    game_34.game_team_scores = [game_34_win_score, game_34_lose_score]
+    game_34.child_game_id = game_49.id
+
+    game_35_win_score = Game_Team_Score(
+        game_id=game_35.id, team_id=lSU.id, score=69)
+    game_35_lose_score = Game_Team_Score(
+        game_id=game_35.id, team_id=maryland.id, score=67)
+    game_35.game_team_scores = [game_35_win_score, game_35_lose_score]
+    game_35.child_game_id = game_50.id
+
+    game_36_win_score = Game_Team_Score(
+        game_id=game_36.id, team_id=michigan_State.id, score=70)
+    game_36_lose_score = Game_Team_Score(
+        game_id=game_36.id, team_id=minnesota.id, score=50)
+    game_36.game_team_scores = [game_36_win_score, game_36_lose_score]
+    game_36.child_game_id = game_50.id
+
+    game_37_win_score = Game_Team_Score(
+        game_id=game_37.id, team_id=gonzaga.id, score=83)
+    game_37_lose_score = Game_Team_Score(
+        game_id=game_37.id, team_id=baylor.id, score=71)
+    game_37.game_team_scores = [game_37_win_score, game_37_lose_score]
+    game_37.child_game_id = game_51.id
+
+    game_38_win_score = Game_Team_Score(
+        game_id=game_38.id, team_id=florida_State.id, score=90)
+    game_38_lose_score = Game_Team_Score(
+        game_id=game_38.id, team_id=murray_State.id, score=62)
+    game_38.game_team_scores = [game_38_win_score, game_38_lose_score]
+    game_38.child_game_id = game_51.id
+
+    game_39_win_score = Game_Team_Score(
+        game_id=game_39.id, team_id=texas_Tech.id, score=78)
+    game_39_lose_score = Game_Team_Score(
+        game_id=game_39.id, team_id=buffalo.id, score=58)
+    game_39.game_team_scores = [game_39_win_score, game_39_lose_score]
+    game_39.child_game_id = game_52.id
+
+    game_40_win_score = Game_Team_Score(
+        game_id=game_40.id, team_id=michigan.id, score=64)
+    game_40_lose_score = Game_Team_Score(
+        game_id=game_40.id, team_id=florida.id, score=49)
+    game_40.game_team_scores = [game_40_win_score, game_40_lose_score]
+    game_40.child_game_id = game_52.id
+
+    game_41_win_score = Game_Team_Score(
+        game_id=game_41.id, team_id=virginia.id, score=63)
+    game_41_lose_score = Game_Team_Score(
+        game_id=game_41.id, team_id=oklahoma.id, score=51)
+    game_41.game_team_scores = [game_41_win_score, game_41_lose_score]
+    game_41.child_game_id = game_53.id
+
+    game_42_win_score = Game_Team_Score(
+        game_id=game_42.id, team_id=oregon.id, score=73)
+    game_42_lose_score = Game_Team_Score(
+        game_id=game_42.id, team_id=uC_Irvine.id, score=54)
+    game_42.game_team_scores = [game_42_win_score, game_42_lose_score]
+    game_42.child_game_id = game_53.id
+
+    game_43_win_score = Game_Team_Score(
+        game_id=game_43.id, team_id=purdue.id, score=87)
+    game_43_lose_score = Game_Team_Score(
+        game_id=game_43.id, team_id=villanova.id, score=61)
+    game_43.game_team_scores = [game_43_win_score, game_43_lose_score]
+    game_43.child_game_id = game_54.id
+
+    game_44_win_score = Game_Team_Score(
+        game_id=game_44.id, team_id=tennessee.id, score=83)
+    game_44_lose_score = Game_Team_Score(
+        game_id=game_44.id, team_id=iowa.id, score=77)
+    game_44.game_team_scores = [game_44_win_score, game_44_lose_score]
+    game_44.child_game_id = game_54.id
+
+    game_45_win_score = Game_Team_Score(
+        game_id=game_45.id, team_id=north_Carolina.id, score=81)
+    game_45_lose_score = Game_Team_Score(
+        game_id=game_45.id, team_id=washington.id, score=59)
+    game_45.game_team_scores = [game_45_win_score, game_45_lose_score]
+    game_45.child_game_id = game_55.id
+
+    game_46_win_score = Game_Team_Score(
+        game_id=game_46.id, team_id=auburn.id, score=89)
+    game_46_lose_score = Game_Team_Score(
+        game_id=game_46.id, team_id=kansas.id, score=75)
+    game_46.game_team_scores = [game_46_win_score, game_46_lose_score]
+    game_46.child_game_id = game_55.id
+
+    game_47_win_score = Game_Team_Score(
+        game_id=game_47.id, team_id=houston.id, score=74)
+    game_47_lose_score = Game_Team_Score(
+        game_id=game_47.id, team_id=ohio_State.id, score=59)
+    game_47.game_team_scores = [game_47_win_score, game_47_lose_score]
+    game_47.child_game_id = game_56.id
+
+    game_48_win_score = Game_Team_Score(
+        game_id=game_48.id, team_id=kentucky.id, score=62)
+    game_48_lose_score = Game_Team_Score(
+        game_id=game_48.id, team_id=wofford.id, score=56)
+    game_48.game_team_scores = [game_48_win_score, game_48_lose_score]
+    game_48.child_game_id = game_56.id
+
+    game_49_win_score = Game_Team_Score(
+        game_id=game_49.id, team_id=duke.id, score=75)
+    game_49_lose_score = Game_Team_Score(
+        game_id=game_49.id, team_id=virginia_Tech.id, score=73)
+    game_49.game_team_scores = [game_49_win_score, game_49_lose_score]
+    game_49.child_game_id = game_57.id
+
+    game_50_win_score = Game_Team_Score(
+        game_id=game_50.id, team_id=michigan_State.id, score=80)
+    game_50_lose_score = Game_Team_Score(
+        game_id=game_50.id, team_id=lSU.id, score=63)
+    game_50.game_team_scores = [game_50_win_score, game_50_lose_score]
+    game_50.child_game_id = game_57.id
+
+    game_51_win_score = Game_Team_Score(
+        game_id=game_51.id, team_id=gonzaga.id, score=72)
+    game_51_lose_score = Game_Team_Score(
+        game_id=game_51.id, team_id=florida_State.id, score=58)
+    game_51.game_team_scores = [game_51_win_score, game_51_lose_score]
+    game_51.child_game_id = game_58.id
+
+    game_52_win_score = Game_Team_Score(
+        game_id=game_52.id, team_id=texas_Tech.id, score=63)
+    game_52_lose_score = Game_Team_Score(
+        game_id=game_52.id, team_id=michigan.id, score=44)
+    game_52.game_team_scores = [game_52_win_score, game_52_lose_score]
+    game_52.child_game_id = game_58.id
+
+    game_53_win_score = Game_Team_Score(
+        game_id=game_53.id, team_id=virginia.id, score=53)
+    game_53_lose_score = Game_Team_Score(
+        game_id=game_53.id, team_id=oregon.id, score=49)
+    game_53.game_team_scores = [game_53_win_score, game_53_lose_score]
+    game_53.child_game_id = game_59.id
+
+    game_54_win_score = Game_Team_Score(
+        game_id=game_54.id, team_id=purdue.id, score=99)
+    game_54_lose_score = Game_Team_Score(
+        game_id=game_54.id, team_id=tennessee.id, score=94)
+    game_54.game_team_scores = [game_54_win_score, game_54_lose_score]
+    game_54.child_game_id = game_59.id
+
+    game_55_win_score = Game_Team_Score(
+        game_id=game_55.id, team_id=auburn.id, score=97)
+    game_55_lose_score = Game_Team_Score(
+        game_id=game_55.id, team_id=north_Carolina.id, score=80)
+    game_55.game_team_scores = [game_55_win_score, game_55_lose_score]
+    game_55.child_game_id = game_60.id
+
+    game_56_win_score = Game_Team_Score(
+        game_id=game_56.id, team_id=kentucky.id, score=62)
+    game_56_lose_score = Game_Team_Score(
+        game_id=game_56.id, team_id=houston.id, score=58)
+    game_56.game_team_scores = [game_56_win_score, game_56_lose_score]
+    game_56.child_game_id = game_60.id
+
+    game_57_win_score = Game_Team_Score(
+        game_id=game_57.id, team_id=michigan_State.id, score=68)
+    game_57_lose_score = Game_Team_Score(
+        game_id=game_57.id, team_id=duke.id, score=67)
+    game_57.game_team_scores = [game_57_win_score, game_57_lose_score]
+    game_57.child_game_id = game_61.id
+
+    game_58_win_score = Game_Team_Score(
+        game_id=game_58.id, team_id=texas_Tech.id, score=75)
+    game_58_lose_score = Game_Team_Score(
+        game_id=game_58.id, team_id=gonzaga.id, score=69)
+    game_58.game_team_scores = [game_58_win_score, game_58_lose_score]
+    game_58.child_game_id = game_61.id
+
+    game_59_win_score = Game_Team_Score(
+        game_id=game_59.id, team_id=virginia.id, score=80)
+    game_59_lose_score = Game_Team_Score(
+        game_id=game_59.id, team_id=purdue.id, score=75)
+    game_59.game_team_scores = [game_59_win_score, game_59_lose_score]
+    game_59.child_game_id = game_62.id
+
+    game_60_win_score = Game_Team_Score(
+        game_id=game_60.id, team_id=auburn.id, score=77)
+    game_60_lose_score = Game_Team_Score(
+        game_id=game_60.id, team_id=kentucky.id, score=71)
+    game_60.game_team_scores = [game_60_win_score, game_60_lose_score]
+    game_60.child_game_id = game_62.id
+
+    game_61_win_score = Game_Team_Score(
+        game_id=game_61.id, team_id=texas_Tech.id, score=61)
+    game_61_lose_score = Game_Team_Score(
+        game_id=game_61.id, team_id=michigan_State.id, score=51)
+    game_61.game_team_scores = [game_61_win_score, game_61_lose_score]
+    game_61.child_game_id = game_63.id
+
+    game_62_win_score = Game_Team_Score(
+        game_id=game_62.id, team_id=virginia.id, score=63)
+    game_62_lose_score = Game_Team_Score(
+        game_id=game_62.id, team_id=auburn.id, score=62)
+    game_62.game_team_scores = [game_62_win_score, game_62_lose_score]
+    game_62.child_game_id = game_63.id
+
+    game_63_win_score = Game_Team_Score(
+        game_id=game_63.id, team_id=virginia.id, score=85)
+    game_63_lose_score = Game_Team_Score(
+        game_id=game_63.id, team_id=texas_Tech.id, score=77)
+    game_63.game_team_scores = [game_63_win_score, game_63_lose_score]
+    db.session.commit()
 
 
 def undo_2019_tournament():

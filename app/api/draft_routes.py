@@ -82,16 +82,13 @@ def draft(league_id, draft_id):
 def generate_draft_order(league_id):
     league = League.query.filter(League.id == league_id).one()
     league_user_ids = [league_user.id for league_user in league.league_users]
-    print(league_user_ids)
 
     loops = 64 / (len(league_user_ids) * 2)
-    print(loops)
 
     draft_order = []
     for loop in range(int(loops)):
         random.shuffle(league_user_ids)
         draft_order.extend(league_user_ids + list(reversed(league_user_ids)))
-        print(draft_order)
     return draft_order
 
 

@@ -115,6 +115,13 @@ const SplashPage = (props) => {
     }
   };
 
+  const demoDraftLogin = (email, password) => async () => {
+    const success = await dispatch(authenticateThunk(login, email, password));
+    if (success) {
+      setRedirect('/demo-draft');
+    }
+  };
+
   if (redirect) {
     return <Redirect to={redirect} />;
   }
@@ -170,8 +177,8 @@ const SplashPage = (props) => {
             </TransitionModal>
           </>
         }
-        <Button className={classes.button} color="primary" variant='contained' onClick={demoLogin('demodraft@aa.io', 'password')}>Demo Draft</Button>
-        <Button className={classes.buttonBottom} color="primary" variant='outlined' onClick={demoLogin('demo@aa.io', 'password')}>Demo Site</Button>
+        <Button className={classes.button} color="primary" variant='contained' onClick={demoLogin('demo@aa.io', 'password')}>Demo Site</Button>
+        <Button className={classes.buttonBottom} color="primary" variant='outlined' onClick={demoDraftLogin('demodraft@aa.io', 'password')}>Demo Draft</Button>
       </Box>
     </Box>
   )

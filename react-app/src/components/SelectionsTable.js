@@ -45,8 +45,11 @@ const makeSelectionsArray = (draftedTeams, draft, leagueUsers, marchMadnessTeams
     let drafter = leagueUsers[leagueUserId].name;
     let team = {};
     if (sorted[i]) {
-      if (sorted[i].selection_num !== selection_num || sorted[i].league_user_id !== leagueUserId) {
-        console.log('ERROR: you got some bugs.');
+      if (sorted[i].selection_num !== selection_num) {
+        console.log(`ERROR: selection numbers dont match, expected: ${selection_num} actual: ${sorted[i].selection_num}`);
+        
+      } else if(sorted[i].league_user_id !== leagueUserId) {
+        console.log(`ERROR: league users dont match, expected: ${leagueUserId} actual: ${sorted[i].league_user_id}`);
       }
       team = marchMadnessTeams[sorted[i].march_madness_team_id]
     }

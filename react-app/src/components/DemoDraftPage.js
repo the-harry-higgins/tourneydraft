@@ -1,19 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Grid, Paper, Typography } from '@material-ui/core';
-import { getDraftSocket } from '../services/socket';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDraftDataAction } from '../store/actions/drafts';
-import { draftedTeamsThunk } from '../store/actions/draftedTeams';
+import { setDemoDraftDataAction } from '../store/actions/drafts';
 import { setErrors } from '../store/actions/errors';
 import { usePageStyles } from './styles/PageStyles';
 import DraftInfoBar from './DraftInfoBar';
 import SelectionsTable from './SelectionsTable';
 import AvailableTeamsTable from './AvailableTeams';
+import { getAvailableTeams } from './AvailableTeams';
 
 
-export default function DraftPage(props) {
+export default function DemoDraftPage(props) {
   const classes = usePageStyles();
-  const socket = useRef(null);
   const currentDraftId = useSelector(state => state.session.currentDraftId);
   const draft = useSelector(state => state.entities.drafts[currentDraftId]);
   const leagueUsers = useSelector(state => state.entities.league_users);
@@ -25,45 +23,48 @@ export default function DraftPage(props) {
   const [selection, setSelection] = useState(null);
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     if (draft && draft.drafting) {
-      dispatch(draftedTeamsThunk(draft.id, draft.league_id));
+      setTimeout(draftTeam, 3000);
     }
-  }, [dispatch]);
+  }, [draft]);
 
-  useEffect(() => {
-    if (draft && draft.drafting) {
-      const ws = getDraftSocket(draft, user);
-
-      socket.current = ws;
-
-      socket.current.on('draft team', function (data) {
-        dispatch(setDraftDataAction(data))
-      });
-
-      socket.current.on('error', (error) => {
-        dispatch(setErrors(error))
-      });
-
-      return function cleanup() {
-        if (socket.current !== null) {
-          socket.current.disconnect();
-        }
+  const draftTeam = (leagueUserId=null, selection=null) => {
+    if (!leagueUserId && session.currentLeagueUserId === draft.current_drafter_id){
+      return null;
+    } else {
+      if (!selection) {
+        const availableTeams = getAvailableTeams(marchMadnessTeams, draftedTeams);
+        selection = availableTeams[Math.floor(Math.random() * availableTeams.length)].id
       }
+      const draftedTeam = {
+        'id': draft.draft_index,
+        'march_madness_team_id': Number(selection),
+        'league_user_id': draft.current_drafter_id,
+        'draft_id': draft.id,
+        'selection_num': draft.draft_index + 1,
+      }
+      const newDraft = {...draft}
+      newDraft.draft_index += 1;
+      newDraft.current_drafter_id = newDraft.draft_order[newDraft.draft_index];
+      newDraft.drafted_team_ids.push(selection);
+      const data = {
+        'draft': newDraft, 
+        draftedTeam,
+        'messages': [leagueUsers[draft.current_drafter_id].name + ' has drafted ' +
+          marchMadnessTeams[selection].name],
+      }
+      dispatch(setDemoDraftDataAction(data));
     }
-  }, [dispatch, user, currentDraftId]);
+  }
 
 
   const onClick = () => {
-    if (socket.current !== null) {
-      socket.current.emit('draft team', {
-        username: user.name,
-        room: draft.id,
-        march_madness_team_id: selection,
-        league_user_id: session.currentLeagueUserId,
-        draft_id: draft.id,
-        selection_num: draft.draft_index + 1
-      });
+    if (session.currentLeagueUserId === draft.current_drafter_id) {
+      draftTeam(session.currentLeagueUserId, selection)
+    } else {
+      dispatch(setErrors(['You are not the current drafter']));
     }
   }
 
@@ -112,17 +113,17 @@ export default function DraftPage(props) {
             </Grid>
           </>
           : draft ?
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <SelectionsTable
-                draftedTeams={draftedTeams}
-                draft={draft}
-                leagueUsers={leagueUsers}
-                marchMadnessTeams={marchMadnessTeams}
-              />
-            </Paper>
-          </Grid>
-          : null
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <SelectionsTable
+                  draftedTeams={draftedTeams}
+                  draft={draft}
+                  leagueUsers={leagueUsers}
+                  marchMadnessTeams={marchMadnessTeams}
+                />
+              </Paper>
+            </Grid>
+            : null
         }
       </Grid>
     </div>

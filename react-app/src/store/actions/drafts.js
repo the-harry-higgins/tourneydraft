@@ -3,10 +3,12 @@ import { createDraft } from '../../services/drafts';
 
 export const DRAFT_CHANGE = 'drafts/DRAFT_CHANGE';
 export const SET_DRAFT_DATA = 'drafts/SET_DRAFT_DATA';
+export const SET_DEMO_DRAFT_DATA = 'drafts/SET_DEMO_DRAFT_DATA';
 export const CREATE_DRAFT = 'drafts/CREATE_DRAFT';
 
 export const draftChangeAction = (data) => ({ type: DRAFT_CHANGE, data });
 export const setDraftDataAction = (data) => ({ type: SET_DRAFT_DATA, data });
+export const setDemoDraftDataAction = (data) => ({ type: SET_DEMO_DRAFT_DATA, data });
 export const createDraftAction = (data) => ({ type: CREATE_DRAFT, data });
 
 export const draftChangeThunk = (draftId, leagueId) => async (dispatch) => {

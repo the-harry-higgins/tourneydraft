@@ -5,7 +5,7 @@ from datetime import datetime
 
 def seed_2019_tournament():
     tournament = Tournament(year=2019, region1='East',
-                            region2='South', region3='Midwest', region4='West', last_round_completed=6)
+                            region2='West', region3='South', region4='Midwest', last_round_completed=6)
     db.session.add(tournament)
     db.session.commit()
 

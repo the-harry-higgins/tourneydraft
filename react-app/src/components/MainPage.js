@@ -4,6 +4,7 @@ import HelpPage from './HelpPage';
 import UserMenu from './UserMenu';
 import RoundsMenu from './RoundsMenu';
 import DraftPage from './DraftPage';
+import DemoDraftPage from './DemoDraftPage';
 import BracketPage from './BracketPage';
 import LeaderboardPage from './LeaderboardPage';
 import LeagueModal from './LeagueModal';
@@ -33,6 +34,9 @@ export default function MainPage(props) {
         <Switch>
           <Route path='/draft' exact={true} >
             <DraftPage />
+          </Route>
+          <Route path='/demo-draft' exact={true} >
+            <DemoDraftPage />
           </Route>
           <Route path='/'>
             <RoundsMenu />

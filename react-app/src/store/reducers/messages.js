@@ -1,7 +1,7 @@
 import { SET_ERRORS } from '../actions/errors';
 import { LOGIN } from '../actions/authenticate';
 import { SET_ROUND, SET_SORT } from '../actions/ui';
-import { DRAFT_CHANGE, SET_DRAFT_DATA, CREATE_DRAFT } from '../actions/drafts';
+import { DRAFT_CHANGE, SET_DRAFT_DATA, SET_DEMO_DRAFT_DATA, CREATE_DRAFT } from '../actions/drafts';
 import { DELETE_CURRENT_LEAGUE, DELETE_LEAGUE } from '../actions/leagues';
 
 
@@ -17,6 +17,7 @@ export default function reducer(state = null, action) {
     case CREATE_DRAFT:
     case DRAFT_CHANGE:
       return action.data.messages;
+    case SET_DEMO_DRAFT_DATA:
     case SET_DRAFT_DATA:
       if (action.data.messages) {
         return {'success': action.data.messages};

@@ -82,7 +82,7 @@ def inject_csrf_token(response):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
-    if path and path not in ['draft', 'bracket', 'leaderboard', 'splash']:
+    if path and path not in ['draft', 'bracket', 'leaderboard', 'splash', 'demo-draft']:
         return app.send_static_file(path)
     print(path)
     return app.send_static_file('index.html')
@@ -116,7 +116,7 @@ def on_leave(data):
 
 
 @socketio.on('draft team')
-def handle_my_custom_event(data):
+def draft_team(data):
     draft = Draft.query.filter(Draft.id == data['draft_id']).one()
     if draft.current_drafter_id == data['league_user_id'] and draft.draft_index == data['selection_num'] - 1:
         try:

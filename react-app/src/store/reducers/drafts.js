@@ -1,5 +1,5 @@
 import { LOGIN, LOGOUT } from '../actions/authenticate';
-import { SET_DRAFT_DATA, CREATE_DRAFT } from '../actions/drafts';
+import { SET_DRAFT_DATA, CREATE_DRAFT, SET_DEMO_DRAFT_DATA } from '../actions/drafts';
 import { DELETE_CURRENT_LEAGUE, DELETE_LEAGUE } from '../actions/leagues';
 
 
@@ -8,6 +8,7 @@ export default function reducer(state = null, action) {
     case LOGIN:
       return action.data.drafts;
     case SET_DRAFT_DATA:
+    case SET_DEMO_DRAFT_DATA:
     case CREATE_DRAFT:
       return {
         ...state,

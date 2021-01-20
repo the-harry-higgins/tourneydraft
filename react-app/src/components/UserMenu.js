@@ -133,14 +133,17 @@ export default function UserMenu() {
                       >
                         <ListItemText primary={'Create New Draft'} />
                       </ListItem>
-                      <ListItem
-                        key={`deletedraft-${leagueId}`}
-                        button
-                        onClick={handleDeleteLeague(leagueId)}
-                        className={classes.indent}
-                      >
-                        <ListItemText primary={'Delete League'} color='primary' />
-                      </ListItem>
+                      { (user.name !== 'DemoDraft' && user.name !== 'Demo') ?
+                        <ListItem
+                          key={`deleteleague-${leagueId}`}
+                          button
+                          onClick={handleDeleteLeague(leagueId)}
+                          className={classes.indent}
+                        >
+                          <ListItemText primary={'Delete League'} color='primary' />
+                        </ListItem>
+                        : null
+                      }
                     </>
                     :
                     null

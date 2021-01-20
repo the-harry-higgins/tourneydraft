@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
 });
 
-const getAvailableTeams = (marchMadnessTeams, draftedTeams) => {
+export const getAvailableTeams = (marchMadnessTeams, draftedTeams) => {
   const teams = [];
   const ids = Object.values(draftedTeams).map(team => team.march_madness_team_id);
   Object.keys(marchMadnessTeams).forEach(id => {

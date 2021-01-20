@@ -1,4 +1,7 @@
-# MVP FEATURES
+# Feature List
+
+## MVP FEATURES
+
 - Leagues
 - Games
 - Users
@@ -7,18 +10,21 @@
 - Teams
 - Live Draft
 - Round by Round Bracket Visualization
-- Round by Round Points Visualization
+- Round by Round Leaderboard Visualization
 
-# STRETCH FEATURES
+## STRETCH FEATURES
+
 - Vegas odds
 - User icons
 - Team logos
 - Email invitations
 
-# SCHEMA
+## SCHEMA
+
 ![ERD](database.png)
 
-# BACKEND ENDPOINTS
+## BACKEND ENDPOINTS
+
 - GET /api/auth
 - POST /api/auth/login
 - GET /api/auth/logout
@@ -46,7 +52,8 @@
 - SOCKETS
   - During a draft for a specific game
 
-# FRONTEND ROUTES
+## FRONTEND ROUTES
+
 - /
   - login and signup accessible from a button on splash page
 - /users/:id/create-league

@@ -1,6 +1,7 @@
 # TourneyDraft
 
 ## ABOUT
+
 A game I played with family and friends that I turned into an app.
 
 TLDR:
@@ -20,33 +21,44 @@ You receive the number value of the seed of your team plus the number value of t
 For example: #16 seed UMBC upsets #1 seed UVA in the first round and you receive 16 + 1 = 17 points.
 This point system places a lot of value on upsets and cinderella teams, which we have anecdotally found makes the tournament even more fun to watch.
 
-## LIVE LINK
-https://tourneydraft.herokuapp.com/
+## [LIVE LINK](https://tourneydraft.herokuapp.com/)
+
 ## TECHNOLOGIES USED
 
 ### FRONTEND
-  - react
-  - socket.io
-  - material-ui
+
+- react
+- socket.io
+- material-ui
 
 ### BACKEND
-  - python
-  - flask
-  - flask-login
-  - socket.io
-  - flask-sqlalchemy
-  - flask-migrate
-  - alembic
-  - postgresql
+
+- python
+- flask
+- flask-login
+- socket.io
+- flask-sqlalchemy
+- flask-migrate
+- alembic
+- postgresql
 
 ## FEATURES
 
-### Highlight Feature #1
-### Highlight Feature #2
+### Data Visualizations
 
-## CHALLENGES FACED
+![Data Visualizations](./documentation/TourneyDraft-Data.gif)
 
-## CODE SNIPPETS
+A large feature of this application is to have good data visualizations
+of the current state of the tournament via the Bracket Page. Additionally, the 
+LeaderBoard Page displays the state of the game with respect to the other
+players.
+
+### Live Drafting
+
+![Live Draft](./documentation/TourneyDraft-Draft.gif)
+
+When the league admin sets up a draft, the rest of the players are able to 
+login and draft with eachother in real-time.
 
 # DEV STUFF
 
@@ -60,7 +72,7 @@ https://tourneydraft.herokuapp.com/
 1. Clone this repository (only this branch)
 
    ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
+   git clone https://github.com/the-harry-higgins/tourneydraft.git
    ```
 
 2. Install dependencies

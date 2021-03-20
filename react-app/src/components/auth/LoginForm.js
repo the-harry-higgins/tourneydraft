@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import { authenticateThunk } from "../../store/actions/authenticate";
-import { login } from '../../services/auth';
+import { login } from "../../services/auth";
 
 const LoginForm = (props) => {
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ const LoginForm = (props) => {
   };
 
   const updateEmail = (e) => {
-    setEmail(e.target.value);
+    setEmail(e.target.value.toLowerCase());
   };
 
   const updatePassword = (e) => {
@@ -27,11 +27,9 @@ const LoginForm = (props) => {
   };
 
   return (
-    <form 
-      noValidate 
-      onSubmit={handleSubmit}>
+    <form noValidate onSubmit={handleSubmit}>
       <TextField
-        color='secondary'
+        color="secondary"
         variant="outlined"
         margin="normal"
         required
@@ -46,7 +44,7 @@ const LoginForm = (props) => {
         onChange={updateEmail}
       />
       <TextField
-        color='secondary'
+        color="secondary"
         variant="outlined"
         margin="normal"
         required
@@ -59,12 +57,7 @@ const LoginForm = (props) => {
         value={password}
         onChange={updatePassword}
       />
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="secondary"
-      >
+      <Button type="submit" fullWidth variant="contained" color="secondary">
         Continue
       </Button>
     </form>

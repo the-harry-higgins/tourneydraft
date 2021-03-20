@@ -117,6 +117,7 @@ def on_leave(data):
 
 @socketio.on('draft team')
 def draft_team(data):
+    print('\n\n\nHERE')
     draft = Draft.query.filter(Draft.id == data['draft_id']).one()
     if draft.current_drafter_id == data['league_user_id'] and draft.draft_index == data['selection_num'] - 1:
         try:
@@ -125,15 +126,25 @@ def draft_team(data):
                 league_user_id=data['league_user_id'],
                 draft_id=data['draft_id'],
                 selection_num=data['selection_num'])
+
             draft.draft_index += 1
             order = json.loads(draft.draft_order)
-            draft.current_drafter_id = order[draft.draft_index]
+
+            print('Draft Index', draft.draft_index)
+            print('Draft Order Length', len(order))
+
+            if draft.draft_index == len(order):
+                draft.current_drafter_id = None
+                draft.drafting = False
+            else:
+                draft.current_drafter_id = order[draft.draft_index]
+
             db.session.add(draft)
             db.session.add(drafted_team)
             db.session.commit()
             response = {
                 'messages': [data['username'] + ' has drafted ' +
-                            drafted_team.march_madness_team.college.name],
+                             drafted_team.march_madness_team.college.name],
                 'draftedTeams': {
                     drafted_team.id: drafted_team.to_dict()
                     for drafted_team in draft.drafted_teams

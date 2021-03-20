@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import { authenticateThunk } from "../../store/actions/authenticate";
-import { signUp } from '../../services/auth';
-
+import { signUp } from "../../services/auth";
 
 const SignUpForm = (props) => {
   const [name, setName] = useState("");
@@ -14,7 +13,9 @@ const SignUpForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await dispatch(authenticateThunk(signUp, name, email, password));
+    const success = await dispatch(
+      authenticateThunk(signUp, name, email, password)
+    );
     if (success) {
       props.setRedirect(true);
     }
@@ -25,7 +26,7 @@ const SignUpForm = (props) => {
   };
 
   const updateEmail = (e) => {
-    setEmail(e.target.value);
+    setEmail(e.target.value.toLowerCase());
   };
 
   const updatePassword = (e) => {
@@ -33,9 +34,7 @@ const SignUpForm = (props) => {
   };
 
   return (
-    <form
-      noValidate
-      onSubmit={handleSubmit}>
+    <form noValidate onSubmit={handleSubmit}>
       <TextField
         autoComplete="fname"
         name="name"
@@ -75,12 +74,7 @@ const SignUpForm = (props) => {
         value={password}
         onChange={updatePassword}
       />
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="primary"
-      >
+      <Button type="submit" fullWidth variant="contained" color="primary">
         Continue
       </Button>
     </form>

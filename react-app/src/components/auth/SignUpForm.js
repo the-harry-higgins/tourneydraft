@@ -98,7 +98,6 @@ const SignUpForm = (props) => {
         label="Confirm Password"
         type="password"
         id="password"
-        // autoComplete="current-password"
         value={confirmPassword}
         onChange={updateConfirmPassword}
       />

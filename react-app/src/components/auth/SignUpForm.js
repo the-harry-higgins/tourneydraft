@@ -4,11 +4,13 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { authenticateThunk } from "../../store/actions/authenticate";
 import { signUp } from "../../services/auth";
+import { Typography } from "@material-ui/core";
 
 const SignUpForm = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -31,6 +33,14 @@ const SignUpForm = (props) => {
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
+  };
+
+  const updateConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const matchPassword = () => {
+    return password.length > 0 && password === confirmPassword;
   };
 
   return (
@@ -74,7 +84,31 @@ const SignUpForm = (props) => {
         value={password}
         onChange={updatePassword}
       />
-      <Button type="submit" fullWidth variant="contained" color="primary">
+      {password !== confirmPassword ? (
+        <div>
+          <Typography>Passwords must match</Typography>
+        </div>
+      ) : null}
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        name="confirmpassword"
+        label="Confirm Password"
+        type="password"
+        id="password"
+        // autoComplete="current-password"
+        value={confirmPassword}
+        onChange={updateConfirmPassword}
+      />
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        color="primary"
+        disabled={matchPassword() ? false : true}
+      >
         Continue
       </Button>
     </form>

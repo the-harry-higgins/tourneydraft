@@ -1,5 +1,6 @@
 from .db import db
 
+
 class March_Madness_Team(db.Model):
     __tablename__ = 'march_madness_teams'
 
@@ -9,7 +10,8 @@ class March_Madness_Team(db.Model):
     seed_number = db.Column(db.Integer,  nullable=False)
     region = db.Column(db.String(50), nullable=False)
     # Nullable because of those dumb fake first round games
-    college_id = db.Column(db.Integer, db.ForeignKey('colleges.id'), nullable=True)
+    college_id = db.Column(db.Integer, db.ForeignKey(
+        'colleges.id'), nullable=True)
 
     tournament = db.relationship(
         'Tournament', back_populates='march_madness_teams')
@@ -19,10 +21,9 @@ class March_Madness_Team(db.Model):
     games = db.relationship(
         'Game', secondary='game_team_scores', back_populates='teams')
 
-
     def calculate_points(self, round):
         won_rounds = [game.round_num for game in self.won_games]
-        return sum([round + self.seed_number for round in range(1,round) if round in won_rounds])
+        return sum([round - 1 + self.seed_number for round in range(1, round) if round in won_rounds])
 
     def to_dict(self, round=1):
         return {

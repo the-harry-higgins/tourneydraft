@@ -1,8 +1,7 @@
-import { LOGIN, LOGOUT } from '../actions/authenticate';
-import { SET_ROUND } from '../actions/ui';
-import { DRAFT_CHANGE, CREATE_DRAFT } from '../actions/drafts';
-import { DELETE_CURRENT_LEAGUE } from '../actions/leagues';
-
+import { LOGIN, LOGOUT } from "../actions/authenticate";
+import { SET_ROUND } from "../actions/ui";
+import { DRAFT_CHANGE, CREATE_DRAFT } from "../actions/drafts";
+import { DELETE_CURRENT_LEAGUE } from "../actions/leagues";
 
 function calculatePoints(team, round) {
   let points = 0;
@@ -11,7 +10,7 @@ function calculatePoints(team, round) {
       break;
     }
     if (team.won_game_ids.includes(team.games_by_round[i])) {
-      points += team.seed_number + i;
+      points += team.seed_number + i - 1;
     }
   }
   return points;
@@ -28,11 +27,11 @@ export default function reducer(state = null, action) {
       return null;
     case SET_ROUND:
       const newState = {};
-      Object.keys(state).forEach(id => {
+      Object.keys(state).forEach((id) => {
         newState[id] = {
           ...state[id],
-          points: calculatePoints(state[id], action.roundNum)
-        }
+          points: calculatePoints(state[id], action.roundNum),
+        };
       });
       return newState;
     default:

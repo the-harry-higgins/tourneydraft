@@ -55,10 +55,10 @@ def seed_2021_tournament():
         tournament_id=tournament.id, seed_number=6, region='West', college_id=USC.id)
     db.session.add(uSC)
 
-    Wichita_State = College.query.filter(College.name == 'Wichita State').one()
-    wichita_State = March_Madness_Team(
-        tournament_id=tournament.id, seed_number=11, region='West', college_id=Wichita_State.id)
-    db.session.add(wichita_State)
+    Drake = College.query.filter(College.name == 'Drake').one()
+    drake = March_Madness_Team(
+        tournament_id=tournament.id, seed_number=11, region='West', college_id=Drake.id)
+    db.session.add(drake)
 
     Kansas = College.query.filter(College.name == 'Kansas').one()
     kansas = March_Madness_Team(
@@ -265,11 +265,11 @@ def seed_2021_tournament():
         tournament_id=tournament.id, seed_number=1, region='East', college_id=Michigan.id)
     db.session.add(michigan)
 
-    Mount_St_Marys = College.query.filter(
-        College.name == 'Mount St. Mary\'s').one()
-    mount_St_Marys = March_Madness_Team(
-        tournament_id=tournament.id, seed_number=16, region='East', college_id=Mount_St_Marys.id)
-    db.session.add(mount_St_Marys)
+    Texas_Southern = College.query.filter(
+        College.name == 'Texas Southern').one()
+    texas_Southern = March_Madness_Team(
+        tournament_id=tournament.id, seed_number=16, region='East', college_id=Texas_Southern.id)
+    db.session.add(texas_Southern)
 
     LSU = College.query.filter(College.name == 'LSU').one()
     lSU = March_Madness_Team(
@@ -308,11 +308,11 @@ def seed_2021_tournament():
         tournament_id=tournament.id, seed_number=6, region='East', college_id=BYU.id)
     db.session.add(bYU)
 
-    Michigan_State = College.query.filter(
-        College.name == 'Michigan State').one()
-    michigan_State = March_Madness_Team(
-        tournament_id=tournament.id, seed_number=11, region='East', college_id=Michigan_State.id)
-    db.session.add(michigan_State)
+    UCLA = College.query.filter(
+        College.name == 'UCLA').one()
+    uCLA = March_Madness_Team(
+        tournament_id=tournament.id, seed_number=11, region='East', college_id=UCLA.id)
+    db.session.add(uCLA)
 
     Texas = College.query.filter(College.name == 'Texas').one()
     texas = March_Madness_Team(
@@ -473,7 +473,7 @@ def seed_2021_tournament():
     game_5_win_score = Game_Team_Score(
         game_id=game_5.id, team_id=uSC.id, score=None)
     game_5_lose_score = Game_Team_Score(
-        game_id=game_5.id, team_id=wichita_State.id, score=None)
+        game_id=game_5.id, team_id=drake.id, score=None)
     game_5.game_team_scores = [game_5_win_score, game_5_lose_score]
 
     game_6_win_score = Game_Team_Score(
@@ -497,7 +497,7 @@ def seed_2021_tournament():
     game_9_win_score = Game_Team_Score(
         game_id=game_9.id, team_id=michigan.id, score=None)
     game_9_lose_score = Game_Team_Score(
-        game_id=game_9.id, team_id=mount_St_Marys.id, score=None)
+        game_id=game_9.id, team_id=texas_Southern.id, score=None)
     game_9.game_team_scores = [game_9_win_score, game_9_lose_score]
 
     game_10_win_score = Game_Team_Score(
@@ -521,7 +521,7 @@ def seed_2021_tournament():
     game_13_win_score = Game_Team_Score(
         game_id=game_13.id, team_id=bYU.id, score=None)
     game_13_lose_score = Game_Team_Score(
-        game_id=game_13.id, team_id=michigan_State.id, score=None)
+        game_id=game_13.id, team_id=uCLA.id, score=None)
     game_13.game_team_scores = [game_13_win_score, game_13_lose_score]
 
     game_14_win_score = Game_Team_Score(
@@ -645,7 +645,17 @@ def undo_2021_tournament():
     tournament = Tournament.query.filter(Tournament.year == 2021).one()
 
     db.session.execute(
+        '''DELETE from game_team_scores WHERE game_id in(
+          SELECT id FROM games WHERE tournament_id = :id
+        )''', {'id': tournament.id})
+    db.session.execute(
         'DELETE from games WHERE tournament_id = :id', {'id': tournament.id})
+    db.session.execute(
+        '''DELETE from drafted_teams WHERE march_madness_team_id in(
+          SELECT id FROM march_madness_teams WHERE tournament_id = :id
+        )''', {'id': tournament.id})
+    db.session.execute(
+        'DELETE from drafts WHERE tournament_id = :id', {'id': tournament.id})
     db.session.execute(
         'DELETE from march_madness_teams WHERE tournament_id = :id', {'id': tournament.id})
     db.session.execute(

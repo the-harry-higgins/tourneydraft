@@ -1,63 +1,73 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import { makeStyles } from '@material-ui/core/styles';
-import { Button, ClickAwayListener, Divider, Hidden, List, ListItem, ListItemText, Paper, Popper } from '@material-ui/core';
-import { ReactComponent as Logo } from '../images/basketball-game.svg';
-import { logoutThunk } from '../store/actions/authenticate';
-import { draftChangeThunk } from '../store/actions/drafts';
-import { toggleDraftModal, toggleLeagueModal } from '../store/actions/ui';
-import { deleteLeagueThunk } from '../store/actions/leagues';
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Button,
+  ClickAwayListener,
+  Divider,
+  Hidden,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Popper,
+} from "@material-ui/core";
+import { ReactComponent as Logo } from "../images/basketball-game.svg";
+import { logoutThunk } from "../store/actions/authenticate";
+import { draftChangeThunk } from "../store/actions/drafts";
+import { toggleDraftModal, toggleLeagueModal } from "../store/actions/ui";
+import { deleteLeagueThunk } from "../store/actions/leagues";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: 'fixed',
+    position: "fixed",
     top: 46.5,
     right: 0,
     height: 50,
     marginRight: theme.spacing(4),
     zIndex: 5,
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down("md")]: {
       top: 40.5,
       marginRight: theme.spacing(3),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down("sm")]: {
       top: 34.5,
       marginRight: theme.spacing(1),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down("xs")]: {
       top: 23.5,
       marginRight: theme.spacing(1),
     },
   },
   button: {
     padding: theme.spacing(1),
-    color: '#FFF',
+    color: "#FFF",
   },
   logo: {
     width: 26,
-    fill: '#FFF',
+    fill: "#FFF",
     marginRight: theme.spacing(1),
   },
   indent: {
-    paddingLeft: theme.spacing(4)
+    paddingLeft: theme.spacing(4),
   },
   menu: {
-    maxHeight: '60vh',
-    overflow: 'auto',
-  }
+    maxHeight: "60vh",
+    overflow: "auto",
+  },
 }));
 
 export default function UserMenu() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const user = useSelector(state => state.entities.user);
-  const leagues = useSelector(state => state.entities.leagues);
-  const drafts = useSelector(state => state.entities.drafts);
-  const session = useSelector(state => state.session);
+  const user = useSelector((state) => state.entities.user);
+  const leagues = useSelector((state) => state.entities.leagues);
+  const drafts = useSelector((state) => state.entities.drafts);
+  const session = useSelector((state) => state.session);
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popper' : undefined;
+  const id = open ? "simple-popper" : undefined;
 
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -73,57 +83,61 @@ export default function UserMenu() {
 
   const handleDraftChange = (draftId, leagueId) => () => {
     dispatch(draftChangeThunk(draftId, leagueId));
-  }
+  };
 
   const handleNewLeague = () => () => {
     dispatch(toggleLeagueModal());
     handleClickAway();
-  }
+  };
 
   const handleNewDraft = (leagueId) => () => {
     dispatch(toggleDraftModal(leagueId));
     handleClickAway();
-  }
+  };
 
   const handleDeleteLeague = (leagueId) => () => {
     dispatch(deleteLeagueThunk(leagueId, session.currentLeagueId));
     handleClickAway();
-  }
+  };
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <div className={classes.root}>
-        <Button variant="contained" color="primary" onClick={handleClick} className={classes.button}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleClick}
+          className={classes.button}
+        >
           <Logo className={classes.logo} />
-          <Hidden smDown>
-            {user.name}
-          </Hidden>
+          <Hidden smDown>{user.name}</Hidden>
           {open ? <ExpandLess /> : <ExpandMore />}
         </Button>
-        <Popper id={id} open={open} placement='top-end' anchorEl={anchorEl}>
+        <Popper id={id} open={open} placement="top-end" anchorEl={anchorEl}>
           <Paper className={classes.menu}>
             <List>
               <ListItem disabled>
                 <ListItemText primary={user.email} />
               </ListItem>
               <Divider />
-              {Object.keys(leagues).map(leagueId => (
+              {Object.keys(leagues).map((leagueId) => (
                 <div key={`league-${leagueId}`}>
                   <ListItem disabled>
                     <ListItemText primary={leagues[leagueId].name} />
                   </ListItem>
-                  {leagues[leagueId].draft_ids.map(id => (
+                  {leagues[leagueId].draft_ids.map((id) => (
                     <ListItem
                       key={`league-${leagueId}-draft-${id}`}
                       button
                       selected={session.currentDraftId === id}
                       disabled={session.currentDraftId === id}
                       onClick={handleDraftChange(id, leagueId)}
-                      className={classes.indent}>
+                      className={classes.indent}
+                    >
                       <ListItemText primary={`${drafts[id].year}`} />
                     </ListItem>
                   ))}
-                  {user.id === leagues[leagueId].admin_id ?
+                  {user.id === leagues[leagueId].admin_id ? (
                     <>
                       <ListItem
                         key={`createdraft-${leagueId}`}
@@ -131,9 +145,9 @@ export default function UserMenu() {
                         onClick={handleNewDraft(leagueId)}
                         className={classes.indent}
                       >
-                        <ListItemText primary={'Create New Draft'} />
+                        <ListItemText primary={"Create New Draft"} />
                       </ListItem>
-                      { (user.name !== 'DemoDraft' && user.name !== 'Demo') ?
+                      {/* { (user.name !== 'DemoDraft' && user.name !== 'Demo') ?
                         <ListItem
                           key={`deleteleague-${leagueId}`}
                           button
@@ -143,19 +157,14 @@ export default function UserMenu() {
                           <ListItemText primary={'Delete League'} color='primary' />
                         </ListItem>
                         : null
-                      }
+                      } */}
                     </>
-                    :
-                    null
-                  }
+                  ) : null}
                   <Divider />
                 </div>
               ))}
-              <ListItem
-                button
-                onClick={handleNewLeague()}
-              >
-                <ListItemText primary={'New League'} />
+              <ListItem button onClick={handleNewLeague()}>
+                <ListItemText primary={"New League"} />
               </ListItem>
               <Divider />
               <ListItem button onClick={handleLogout}>

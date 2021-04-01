@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import {
-  Table, TableBody, TableCell, TableContainer, TableHead,
-  TableRow, Paper, Typography, Radio
-} from '@material-ui/core';
-import { DraftTeam } from './Team';
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+  Radio,
+} from '@material-ui/core';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+import { DraftTeam } from './Team';
 
 const useStyles = makeStyles({
   container: {
@@ -21,11 +29,11 @@ export const getAvailableTeams = (marchMadnessTeams, draftedTeams) => {
       teams.push(marchMadnessTeams[id]);
     }
   });
-  teams.sort((a, b) => a.seed_number - b.seed_number)
+  teams.sort((a, b) => a.seed_number - b.seed_number);
   return teams;
-}
+};
 
-const StyledTableCell = withStyles((theme) => {
+const StyledTableCell = withStyles(theme => {
   return {
     root: {
       padding: theme.spacing(1),
@@ -39,10 +47,10 @@ const StyledTableCell = withStyles((theme) => {
       color: theme.palette.background.default,
       textTransform: 'capitalize',
     },
-  }
+  };
 })(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
+const StyledTableRow = withStyles(theme => ({
   root: {
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
@@ -50,28 +58,24 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-
 export default function AvailableTeamsTable(props) {
   const { draftedTeams, marchMadnessTeams, setSelection, selection } = props;
   const [rows, setRows] = useState([]);
   const classes = useStyles();
 
-
   useEffect(() => {
     setRows(getAvailableTeams(marchMadnessTeams, draftedTeams));
-  }, [draftedTeams, marchMadnessTeams])
+  }, [draftedTeams, marchMadnessTeams]);
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setSelection(event.target.value);
   };
 
   return (
     <>
-      <Typography variant='h3'>
-        Available Teams
-      </Typography>
+      <Typography variant='h3'>Available Teams</Typography>
       <TableContainer className={classes.container} component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
+        <Table className={classes.table} aria-label='simple table'>
           <TableHead>
             <StyledTableRow>
               <StyledTableCell align='center'>Select</StyledTableCell>
@@ -81,14 +85,10 @@ export default function AvailableTeamsTable(props) {
             </StyledTableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.map(row => (
               <StyledTableRow key={row.id}>
                 <StyledTableCell align='center'>
-                  <Radio
-                    checked={Number(selection) === row.id}
-                    onChange={handleChange}
-                    value={row.id}
-                  />
+                  <Radio checked={Number(selection) === row.id} onChange={handleChange} value={row.id} />
                 </StyledTableCell>
                 <StyledTableCell align='center'>{row.seed_number}</StyledTableCell>
                 <StyledTableCell align='center'>

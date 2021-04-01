@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
+
 import { Grid, Paper, Typography } from '@material-ui/core';
-import { getDraftSocket } from '../services/socket';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDraftDataAction } from '../store/actions/drafts';
+
+import { getDraftSocket } from '../services/socket';
 import { draftedTeamsThunk } from '../store/actions/draftedTeams';
+import { setDraftDataAction } from '../store/actions/drafts';
 import { setErrors } from '../store/actions/errors';
-import { usePageStyles } from './styles/PageStyles';
+import AvailableTeamsTable from './AvailableTeams';
 import DraftInfoBar from './DraftInfoBar';
 import SelectionsTable from './SelectionsTable';
-import AvailableTeamsTable from './AvailableTeams';
+import usePageStyles from './styles/PageStyles';
 
-
-export default function DraftPage(props) {
+export default function DraftPage() {
   const classes = usePageStyles();
   const socket = useRef(null);
   const currentDraftId = useSelector(state => state.session.currentDraftId);
@@ -38,21 +39,20 @@ export default function DraftPage(props) {
       socket.current = ws;
 
       socket.current.on('draft team', function (data) {
-        dispatch(setDraftDataAction(data))
+        dispatch(setDraftDataAction(data));
       });
 
-      socket.current.on('error', (error) => {
-        dispatch(setErrors(error))
+      socket.current.on('error', error => {
+        dispatch(setErrors(error));
       });
 
       return function cleanup() {
         if (socket.current !== null) {
           socket.current.disconnect();
         }
-      }
+      };
     }
   }, [dispatch, user, currentDraftId]);
-
 
   const onClick = () => {
     if (socket.current !== null) {
@@ -62,17 +62,15 @@ export default function DraftPage(props) {
         march_madness_team_id: selection,
         league_user_id: session.currentLeagueUserId,
         draft_id: draft.id,
-        selection_num: draft.draft_index + 1
+        selection_num: draft.draft_index + 1,
       });
     }
-  }
+  };
 
   return (
     <div className={classes.root}>
       <div className={classes.header}>
-        <Typography variant='h1'>
-          Draft
-        </Typography>
+        <Typography variant='h1'>Draft</Typography>
       </div>
       <Grid className={classes.grid} container spacing={3}>
         <Grid item xs={12}>
@@ -88,7 +86,7 @@ export default function DraftPage(props) {
             />
           </Paper>
         </Grid>
-        {draft && draft.drafting ?
+        {draft && draft.drafting ? (
           <>
             <Grid item xs={12} sm={6}>
               <Paper className={classes.paper}>
@@ -111,7 +109,7 @@ export default function DraftPage(props) {
               </Paper>
             </Grid>
           </>
-          : draft ?
+        ) : draft ? (
           <Grid item xs={12}>
             <Paper className={classes.paper}>
               <SelectionsTable
@@ -122,8 +120,7 @@ export default function DraftPage(props) {
               />
             </Paper>
           </Grid>
-          : null
-        }
+        ) : null}
       </Grid>
     </div>
   );

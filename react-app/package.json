@@ -19,14 +19,20 @@
     "redux-thunk": "^2.3.0",
     "socket.io-client": "^3.0.4"
   },
+  "devDependencies": {
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.23.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "2.2.1"
+  },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "format": "prettier --write './**/*.js'",
+    "lint": "npx eslint --fix './**/*.js'"
   },
   "browserslist": {
     "production": [

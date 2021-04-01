@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
-import { Box, Button, Typography } from '@material-ui/core';
-import { ReactComponent as Logo } from '../images/basketball-game.svg';
-import { Redirect, Link } from 'react-router-dom';
-import TransitionModal from './TransitionModal';
-import LoginForm from './auth/LoginForm';
-import { makeStyles } from '@material-ui/core/styles';
-import SignUpForm from './auth/SignUpForm';
-import { authenticateThunk } from "../store/actions/authenticate";
-import { login } from '../services/auth';
-import TheRules from './TheRules';
-import Contact from "./Contact";
+import React, { useState } from 'react';
 
-const useStyles = makeStyles((theme) => ({
+import { Box, Button, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch } from 'react-redux';
+import { Redirect, Link } from 'react-router-dom';
+
+import { ReactComponent as Logo } from '../images/basketball-game.svg';
+import { login } from '../services/auth';
+import { authenticateThunk } from '../store/actions/authenticate';
+import LoginForm from './auth/LoginForm';
+import SignUpForm from './auth/SignUpForm';
+import Contact from './Contact';
+import TheRules from './TheRules';
+import TransitionModal from './TransitionModal';
+
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     minHeight: '100vh',
@@ -70,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     height: '100%',
     [theme.breakpoints.down('sm')]: {
-      flexDirection: 'row-reverse'
+      flexDirection: 'row-reverse',
     },
   },
   logoBig: {
@@ -91,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#FFF',
     fontSize: '1.3rem',
     fontWeight: 'bold',
-    fontFamily: theme.fontFamily
+    fontFamily: theme.fontFamily,
   },
   button: {
     marginBottom: theme.spacing(2),
@@ -103,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SplashPage = (props) => {
+const SplashPage = props => {
   const classes = useStyles();
   const [redirect, setRedirect] = useState(false);
   const dispatch = useDispatch();
@@ -134,7 +136,7 @@ const SplashPage = (props) => {
         </div>
         <div className={classes.rulesButton}>
           <TransitionModal name='Learn how to Play' variant='outlined' color='primary' width={600}>
-              <TheRules />
+            <TheRules />
           </TransitionModal>
         </div>
         <div className={classes.contactButton}>
@@ -146,28 +148,24 @@ const SplashPage = (props) => {
       <Box className={classes.rightPane}>
         <Box>
           <Logo className={classes.logoSmall} />
-          <Typography variant='h1'>
-            Tourney Draft
-          </Typography>
+          <Typography variant='h1'>Tourney Draft</Typography>
         </Box>
         <Box className={classes.text}>
-          <div>
-            Join a league.
-          </div>
-          <div>
-            Draft March Madness Teams.
-          </div>
-          <div>
-            Compete against your friends.
-          </div>
+          <div>Join a league.</div>
+          <div>Draft March Madness Teams.</div>
+          <div>Compete against your friends.</div>
         </Box>
-        {props.authenticated ?
-          <Button className={classes.button} variant='contained' color='secondary'
+        {props.authenticated ? (
+          <Button
+            className={classes.button}
+            variant='contained'
+            color='secondary'
             component={Link}
             to='/bracket'
           >
             Home
-            </Button> :
+          </Button>
+        ) : (
           <>
             <TransitionModal name='Login' variant='contained' color='secondary' width={400}>
               <LoginForm setRedirect={setRedirect} />
@@ -176,12 +174,26 @@ const SplashPage = (props) => {
               <SignUpForm setRedirect={setRedirect} />
             </TransitionModal>
           </>
-        }
-        <Button className={classes.button} color="primary" variant='contained' onClick={demoLogin('demo@aa.io', 'password')}>Demo Site</Button>
-        <Button className={classes.buttonBottom} color="primary" variant='outlined' onClick={demoDraftLogin('demodraft@aa.io', 'password')}>Demo Draft</Button>
+        )}
+        <Button
+          className={classes.button}
+          color='primary'
+          variant='contained'
+          onClick={demoLogin('demo@aa.io', 'password')}
+        >
+          Demo Site
+        </Button>
+        <Button
+          className={classes.buttonBottom}
+          color='primary'
+          variant='outlined'
+          onClick={demoDraftLogin('demodraft@aa.io', 'password')}
+        >
+          Demo Draft
+        </Button>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 export default SplashPage;

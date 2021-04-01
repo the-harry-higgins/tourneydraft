@@ -10,6 +10,7 @@ import json
 import eventlet
 
 from .models import db, User, Draft, Drafted_Team
+from .api.admin_routes import admin_routes
 from .api.auth_routes import auth_routes
 from .api.league_routes import league_routes
 from .api.draft_routes import draft_routes
@@ -35,6 +36,7 @@ app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
 
+app.register_blueprint(admin_routes, url_prefix='/api/admin')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(league_routes, url_prefix='/api/leagues')
 app.register_blueprint(
@@ -86,6 +88,11 @@ def react_root(path):
         return app.send_static_file(path)
     print(path)
     return app.send_static_file('index.html')
+
+
+@app.route('/test')
+def test():
+    return "You did it"
 
 
 @socketio.on('connect')

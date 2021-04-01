@@ -2,7 +2,8 @@
   display: grid;
   grid-template-columns: 8fr 1fr 8fr 1fr 8fr 1fr 8fr;
   grid-template-rows: 1.75fr repeat(17, 1fr);
-  grid-template-areas: 'region region region region region region region'
+  grid-template-areas:
+    'region region region region region region region'
     'round1 . round2 . round3 . round4'
     'game1 . . . . . .'
     'game1 link1to9 game9 . . . .'
@@ -29,8 +30,9 @@
 .bracket-region__right {
   display: grid;
   grid-template-columns: 8fr 1fr 8fr 1fr 8fr 1fr 8fr;
-  grid-template-rows:  1.75fr repeat(17, 1fr);
-  grid-template-areas: 'region region region region region region region'
+  grid-template-rows: 1.75fr repeat(17, 1fr);
+  grid-template-areas:
+    'region region region region region region region'
     'round4 . round3 . round2 . round1'
     '. . . . . . game1'
     '. . . . game9 link1to9 game1'
@@ -53,7 +55,6 @@
   justify-content: stretch;
   text-align: right;
 }
-
 
 .region {
   grid-area: region;

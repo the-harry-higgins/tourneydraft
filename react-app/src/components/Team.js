@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   logo: {
     width: '20%',
     paddingRight: theme.spacing(2),
@@ -15,22 +16,20 @@ const useStyles = makeStyles((theme) => ({
   },
   teamCell: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   draftCell: {
     display: 'flex',
     alignItems: 'center',
-  }
+  },
 }));
 
 export function LeaderboardTeam(props) {
   const classes = useStyles();
   return (
-    <div className={classes.teamCell}>      
+    <div className={classes.teamCell}>
       <img className={classes.logo} src={`/images/logos/${props.team.logo}`} alt='Logo' />
-      <div>
-        {props.team.name}
-      </div>
+      <div>{props.team.name}</div>
     </div>
   );
 }
@@ -42,9 +41,7 @@ export function BracketTeam(props) {
   return (
     <div className={classes.teamCell}>
       <img className={classes.bracketLogo} src={`/images/logos/${props.team.logo}`} alt='Logo' />
-      <div>
-        {`${props.team.seed_number} ${props.team.name}`}
-      </div>
+      <div>{`${props.team.seed_number} ${props.team.name}`}</div>
     </div>
   );
 }
@@ -54,9 +51,7 @@ export function DraftTeam(props) {
   return (
     <div className={classes.draftCell}>
       <img className={classes.draftLogo} src={`/images/logos/${props.team.logo}`} alt='Logo' />
-      <div>
-        {props.team.name}
-      </div>
+      <div>{props.team.name}</div>
     </div>
   );
 }

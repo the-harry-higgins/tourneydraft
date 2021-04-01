@@ -1,7 +1,9 @@
 import React from 'react';
+
+import { Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+
 import { BracketTeam } from './Team';
-import {Typography} from '@material-ui/core';
 
 function getGameByNum(games, num) {
   for (const game of Object.values(games)) {
@@ -21,7 +23,7 @@ export default function FinalFour(props) {
   let semi1winner = '';
   let semi2winner = '';
   let championshipWinner = '';
-  const colors = ['','','','','','','']
+  const colors = ['', '', '', '', '', '', ''];
 
   if (roundNum >= 5) {
     region1winner = marchMadnessTeams[getGameByNum(games, 57).winning_team_id];
@@ -74,25 +76,25 @@ export default function FinalFour(props) {
         <Typography variant='subtitle1'>National Championship</Typography>
       </div>
       <div className={`region1 ${colors[0]}`}>
-        <BracketTeam team={region1winner} default=''/>
+        <BracketTeam team={region1winner} default='' />
       </div>
       <div className={`region2 ${colors[1]}`}>
         <BracketTeam team={region2winner} default='' />
       </div>
       <div className={`region3 ${colors[2]}`}>
-        <BracketTeam team={region3winner} default=''/>
+        <BracketTeam team={region3winner} default='' />
       </div>
       <div className={`region4 ${colors[3]}`}>
-        <BracketTeam team={region4winner} default=''/>
+        <BracketTeam team={region4winner} default='' />
       </div>
       <div className={`semi1 ${colors[4]}`}>
-        <BracketTeam team={semi1winner} default=''/>
+        <BracketTeam team={semi1winner} default='' />
       </div>
       <div className={`semi2 ${colors[5]}`}>
-        <BracketTeam team={semi2winner} default=''/>
+        <BracketTeam team={semi2winner} default='' />
       </div>
       <div className={`champion ${colors[6]}`}>
-        <BracketTeam team={championshipWinner} default='Champion'/>
+        <BracketTeam team={championshipWinner} default='Champion' />
       </div>
       <div className='link1' />
       <div className='link2' />

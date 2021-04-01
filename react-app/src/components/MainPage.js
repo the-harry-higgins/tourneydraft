@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
-import { Redirect, Route, Switch } from "react-router-dom";
-import HelpPage from './HelpPage';
-import UserMenu from './UserMenu';
-import RoundsMenu from './RoundsMenu';
-import DraftPage from './DraftPage';
-import DemoDraftPage from './DemoDraftPage';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, Route, Switch } from 'react-router-dom';
+
+import { toggleLeagueModal } from '../store/actions/ui';
 import BracketPage from './BracketPage';
+import DemoDraftPage from './DemoDraftPage';
+import DraftModal from './DraftModal';
+import DraftPage from './DraftPage';
+import HelpPage from './HelpPage';
 import LeaderboardPage from './LeaderboardPage';
 import LeagueModal from './LeagueModal';
-import DraftModal from './DraftModal';
+import RoundsMenu from './RoundsMenu';
 import SimpleBottomNavigation from './SimpleBottomNavigation';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleLeagueModal } from '../store/actions/ui';
-
+import UserMenu from './UserMenu';
 
 export default function MainPage(props) {
   const currentLeagueUserId = useSelector(state => state.session.currentLeagueUserId);
@@ -20,41 +21,40 @@ export default function MainPage(props) {
 
   useEffect(() => {
     if (!currentLeagueUserId) {
-      dispatch(toggleLeagueModal())
+      dispatch(toggleLeagueModal());
     }
-
   }, [currentLeagueUserId, dispatch]);
 
   return (
     <>
       <UserMenu />
-      {!currentLeagueUserId ?
-        <HelpPage /> :
-
+      {!currentLeagueUserId ? (
+        <HelpPage />
+      ) : (
         <Switch>
-          <Route path='/draft' exact={true} >
+          <Route path='/draft' exact>
             <DraftPage />
           </Route>
-          <Route path='/demo-draft' exact={true} >
+          <Route path='/demo-draft' exact>
             <DemoDraftPage />
           </Route>
           <Route path='/'>
             <RoundsMenu />
             <Switch>
-              <Route path='/leaderboard' exact={true} >
+              <Route path='/leaderboard' exact>
                 <LeaderboardPage />
               </Route>
-              <Route path='/bracket' exact={true}>
+              <Route path='/bracket' exact>
                 <BracketPage />
               </Route>
               <Redirect from='/' to='/bracket' />
             </Switch>
           </Route>
         </Switch>
-      }
+      )}
       <LeagueModal />
       <DraftModal />
       <SimpleBottomNavigation />
     </>
-  )
+  );
 }

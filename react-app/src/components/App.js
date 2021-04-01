@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import MainPage from './MainPage';
-import SplashPage from './SplashPage';
-import PrivateRoute from "./auth/PrivateRoute";
+import React, { useEffect, useState } from 'react';
+
 import { CssBaseline, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Theme from './Theme';
 import { SnackbarProvider, useSnackbar } from 'notistack';
-import { authenticateThunk } from "../store/actions/authenticate";
-import { authenticate } from '../services/auth';
-import SimpleBackdrop from './SimpleBackdrop';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+import { authenticate } from '../services/auth';
+import { authenticateThunk } from '../store/actions/authenticate';
+import PrivateRoute from './auth/PrivateRoute';
+import MainPage from './MainPage';
+import SimpleBackdrop from './SimpleBackdrop';
+import SplashPage from './SplashPage';
+import Theme from './Theme';
+
+const useStyles = makeStyles(() => ({
   button: {
     color: '#FFF',
   },
@@ -20,14 +22,14 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  const isNotLoggedIn = useSelector((state) => !state.session.currentUserId);
-  const messages = useSelector((state) => state.messages);
+  const isNotLoggedIn = useSelector(state => !state.session.currentUserId);
+  const messages = useSelector(state => state.messages);
   const [loaded, setLoaded] = useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticateThunk(authenticate));
       setLoaded(true);
     })();
@@ -37,26 +39,28 @@ function App() {
     if (messages) {
       Object.keys(messages).forEach(key => {
         messages[key].forEach(message => {
-          enqueueSnackbar(message, {variant: key,
+          enqueueSnackbar(message, {
+            variant: key,
             action: (
-              <Button className={classes.button} size="small" onClick={() => closeSnackbar()}>
+              <Button className={classes.button} size='small' onClick={() => closeSnackbar()}>
                 Close
               </Button>
-            ),});
+            ),
+          });
         });
-      })
+      });
     }
-  }, [messages, closeSnackbar, enqueueSnackbar, classes.button])
+  }, [messages, closeSnackbar, enqueueSnackbar, classes.button]);
 
   if (!loaded) {
-    return <SimpleBackdrop/>;
+    return <SimpleBackdrop />;
   }
 
   return (
     <>
       <BrowserRouter>
         <Switch>
-          <Route path='/splash' exact={true} >
+          <Route path='/splash' exact>
             <SplashPage authenticated={!isNotLoggedIn} />
           </Route>
           <PrivateRoute path='/' authenticated={!isNotLoggedIn}>
@@ -78,5 +82,5 @@ export default function AppContainer() {
         </SnackbarProvider>
       </Theme>
     </>
-  )
-};
+  );
+}

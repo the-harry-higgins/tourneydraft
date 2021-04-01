@@ -12,8 +12,8 @@ export default function reducer(state = null, action) {
     case SET_DEMO_DRAFT_DATA:
       return {
         ...state,
-        [action.data.draftedTeam.id]: action.data.draftedTeam
-      }
+        [action.data.draftedTeam.id]: action.data.draftedTeam,
+      };
     case DELETE_CURRENT_LEAGUE:
     case LOGOUT:
       return {};

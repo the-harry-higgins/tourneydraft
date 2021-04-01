@@ -1,12 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import SportsBasketballIcon from '@material-ui/icons/SportsBasketball';
+import { makeStyles } from '@material-ui/core/styles';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
+import SportsBasketballIcon from '@material-ui/icons/SportsBasketball';
 import ViewListIcon from '@material-ui/icons/ViewList';
-import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   stickToBottom: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
   active: {
     color: theme.palette.primary.main,
-  }
+  },
 }));
 
 export default function SimpleBottomNavigation() {
@@ -25,12 +26,9 @@ export default function SimpleBottomNavigation() {
   const draftedTeams = useSelector(state => state.entities.draftedTeams);
 
   return (
-    <BottomNavigation
-      showLabels
-      className={classes.stickToBottom}
-    >
+    <BottomNavigation showLabels className={classes.stickToBottom}>
       <BottomNavigationAction
-        label="Bracket"
+        label='Bracket'
         icon={<SportsBasketballIcon />}
         component={NavLink}
         to='/bracket'
@@ -38,7 +36,7 @@ export default function SimpleBottomNavigation() {
         activeClassName={classes.active}
       />
       <BottomNavigationAction
-        label="Leaderboard"
+        label='Leaderboard'
         icon={<EmojiEventsIcon />}
         component={NavLink}
         to='/leaderboard'
@@ -46,7 +44,7 @@ export default function SimpleBottomNavigation() {
         activeClassName={classes.active}
       />
       <BottomNavigationAction
-        label="Draft"
+        label='Draft'
         icon={<ViewListIcon />}
         component={NavLink}
         to='/draft'

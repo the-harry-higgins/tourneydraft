@@ -1,7 +1,7 @@
-import { LOGIN, LOGOUT } from "../actions/authenticate";
-import { SET_ROUND } from "../actions/ui";
-import { DRAFT_CHANGE, CREATE_DRAFT } from "../actions/drafts";
-import { DELETE_CURRENT_LEAGUE } from "../actions/leagues";
+import { LOGIN, LOGOUT } from '../actions/authenticate';
+import { DRAFT_CHANGE, CREATE_DRAFT } from '../actions/drafts';
+import { DELETE_CURRENT_LEAGUE } from '../actions/leagues';
+import { SET_ROUND } from '../actions/ui';
 
 function calculatePoints(team, round) {
   let points = 0;
@@ -27,7 +27,7 @@ export default function reducer(state = null, action) {
       return null;
     case SET_ROUND:
       const newState = {};
-      Object.keys(state).forEach((id) => {
+      Object.keys(state).forEach(id => {
         newState[id] = {
           ...state[id],
           points: calculatePoints(state[id], action.roundNum),

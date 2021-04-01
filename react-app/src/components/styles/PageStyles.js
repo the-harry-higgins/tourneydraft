@@ -1,12 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const usePageStyles = makeStyles((theme) => ({
+const usePageStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     overflow: 'hidden',
     marginBottom: theme.spacing(7),
     backgroundColor: 'rgb(0,0,0,0.1)',
-    minHeight: '100vh'
+    minHeight: '100vh',
   },
   grid: {
     padding: theme.spacing(2),
@@ -26,3 +26,5 @@ export const usePageStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
 }));
+
+export default usePageStyles;

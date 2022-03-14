@@ -31,6 +31,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build": "react-scripts build",
     "format": "prettier --write './**/*.js'",
     "lint": "npx eslint --fix './**/*.js'"
   },

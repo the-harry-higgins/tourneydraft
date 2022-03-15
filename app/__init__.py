@@ -1,22 +1,24 @@
 import os
-from flask import Flask, render_template, request, session
+import eventlet
+import json
+
+from flask import Flask, render_template, request, session, redirect
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
-from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
+from flask_mail import Mail, Message
 from flask_socketio import SocketIO, emit, send
 from flask_socketio import join_room, leave_room
-import json
-import eventlet
+from flask_wtf.csrf import CSRFProtect, generate_csrf
 
 from .models import db, User, Draft, Drafted_Team
 from .api.admin_routes import admin_routes
 from .api.auth_routes import auth_routes
 from .api.league_routes import league_routes
 from .api.draft_routes import draft_routes
-
+from .forms import ForgotPasswordForm, ResetPasswordForm
 from .seeds import seed_commands
-
 from .config import Config
 
 app = Flask(__name__)
@@ -44,7 +46,6 @@ app.register_blueprint(
     url_prefix='/api/leagues/<int:league_id>/drafts'
 )
 
-
 db.init_app(app)
 Migrate(app, db)
 
@@ -59,6 +60,8 @@ socketio = SocketIO(
     async_mode='eventlet'
 )
 
+mail = Mail(app)
+jwt = JWTManager(app)
 
 @app.before_request
 def redirect_https():
@@ -81,18 +84,52 @@ def inject_csrf_token(response):
     return response
 
 
+@app.route('/forgot_password', methods=['POST'])
+def forgot_password():
+    """
+    Requests a password reset
+    """
+    form = ForgotPasswordForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        user = User.query.filter(User.email == form.data['email']).first()
+        token = user.get_reset_token()
+        base_url = os.environ.get('REACT_APP_BASE_URL')
+        msg = Message()
+        msg.subject = "Tourneydraft Password Reset"
+        msg.recipients = [user.email]
+        msg.sender = 'harryrhiggins@gmail.com'
+        msg.body = f'Hello {user.name},\nYou requested a password reset for Tourneydraft.\n\nFollow this link to continue.\n{base_url}/reset-password/{token}'
+        mail.send(msg)
+        return {'messages': { 'success': ['Password reset request accepted']} }
+    return {'error': ['Request failed']}
+
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    user = User.verify_reset_token(token)
+    if not user:
+        return {'error': ['No user found']}
+
+    form = ResetPasswordForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        password = form.data['password']
+        user.password = password
+        db.session.add(user)
+        db.session.commit()
+        return {'messages': { 'success': ['Password reset successful']} }
+
+    return {'error': ['Reset password failed']}
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
-    if path and path not in ['draft', 'bracket', 'leaderboard', 'splash', 'demo-draft']:
+    if path and path not in ['draft', 'bracket', 'leaderboard', 'splash', 'demo-draft', 'reset-password']:
         return app.send_static_file(path)
     print(path)
     return app.send_static_file('index.html')
-
-
-@app.route('/test')
-def test():
-    return "You did it"
 
 
 @socketio.on('connect')

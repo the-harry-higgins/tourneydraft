@@ -44,3 +44,29 @@ export const signUp = async (name, email, password) => {
   });
   return await response.json();
 };
+
+export const forgotPassword = async (email) => {
+  const response = await fetch('/forgot_password', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email,
+    }),
+  });
+  return await response.json();
+};
+
+export const resetPassword = async (password, token) => {
+  const response = await fetch(`/reset_password/${token}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      password,
+    }),
+  });
+  return await response.json();
+};

@@ -16,10 +16,10 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    // border: '2px solid #546e7a',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     maxWidth: props => props.width,
+    minWidth: 350,
   },
   button: {
     marginBottom: theme.spacing(2),

@@ -13,6 +13,7 @@ import SignUpForm from './auth/SignUpForm';
 import Contact from './Contact';
 import TheRules from './TheRules';
 import TransitionModal from './TransitionModal';
+import ForgotPasswordForm from './auth/ForgotPasswordForm';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -172,6 +173,9 @@ const SplashPage = props => {
             </TransitionModal>
             <TransitionModal name='Signup' variant='outlined' color='secondary' width={400}>
               <SignUpForm setRedirect={setRedirect} />
+            </TransitionModal>
+            <TransitionModal name='Forgot Password' variant='outlined' color='secondary' width={400}>
+              <ForgotPasswordForm setRedirect={setRedirect} />
             </TransitionModal>
           </>
         )}

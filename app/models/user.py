@@ -1,6 +1,9 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from time import time
+import os
+import jwt
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -34,3 +37,18 @@ class User(db.Model, UserMixin):
             "league_user_ids": [league_user.id for league_user in self.league_users],
             "league_ids": [league.id for league in self.leagues]
         }
+
+    def get_reset_token(self, expires=500):
+        return jwt.encode({'reset_password': self.email,
+                           'exp':    time() + expires},
+                           key=os.getenv('SECRET_KEY')).decode('utf-8')
+
+    @staticmethod
+    def verify_reset_token(token):
+        try:
+            email = jwt.decode(token, key=os.getenv('SECRET_KEY'), algorithms=['HS256'])['reset_password']
+            print(email)
+        except Exception as e:
+            print(e)
+            return
+        return User.query.filter_by(email=email).first()

@@ -13,6 +13,7 @@ import MainPage from './MainPage';
 import SimpleBackdrop from './SimpleBackdrop';
 import SplashPage from './SplashPage';
 import Theme from './Theme';
+import ResetPasswordForm from './auth/ResetPasswordForm';
 
 const useStyles = makeStyles(() => ({
   button: {
@@ -60,6 +61,9 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
+          <Route path='/reset-password/:token'>
+            <ResetPasswordForm />
+          </Route>
           <Route path='/splash' exact>
             <SplashPage authenticated={!isNotLoggedIn} />
           </Route>

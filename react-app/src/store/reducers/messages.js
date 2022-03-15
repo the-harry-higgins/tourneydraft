@@ -1,4 +1,4 @@
-import { LOGIN } from '../actions/authenticate';
+import { LOGIN, FORGOT_PASSWORD, RESET_PASSWORD } from '../actions/authenticate';
 import { DRAFT_CHANGE, SET_DRAFT_DATA, SET_DEMO_DRAFT_DATA, CREATE_DRAFT } from '../actions/drafts';
 import { SET_ERRORS } from '../actions/errors';
 import { DELETE_CURRENT_LEAGUE, DELETE_LEAGUE } from '../actions/leagues';
@@ -24,6 +24,8 @@ export default function reducer(state = null, action) {
     case DELETE_LEAGUE:
     case CREATE_DRAFT:
     case DRAFT_CHANGE:
+    case FORGOT_PASSWORD:
+    case RESET_PASSWORD:
       return action.data.messages;
     case SET_DEMO_DRAFT_DATA:
     case SET_DRAFT_DATA:

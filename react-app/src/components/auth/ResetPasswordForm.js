@@ -4,31 +4,22 @@ import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { useDispatch } from 'react-redux';
+import { useParams, useHistory } from "react-router-dom";
+import { resetPasswordThunk } from '../../store/actions/authenticate';
 
-import { signUp } from '../../services/auth';
-import { authenticateThunk } from '../../store/actions/authenticate';
-
-const SignUpForm = props => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+const ResetPasswordForm = props => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { token } = useParams();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const success = await dispatch(authenticateThunk(signUp, name, email, password));
+    const success = await dispatch(resetPasswordThunk(password, token));
     if (success) {
-      props.setRedirect(true);
+      history.push('/');
     }
-  };
-
-  const updateName = e => {
-    setName(e.target.value);
-  };
-
-  const updateEmail = e => {
-    setEmail(e.target.value.toLowerCase());
   };
 
   const updatePassword = e => {
@@ -45,32 +36,6 @@ const SignUpForm = props => {
 
   return (
     <form noValidate onSubmit={handleSubmit}>
-      <TextField
-        autoComplete='fname'
-        name='name'
-        variant='outlined'
-        required
-        fullWidth
-        id='name'
-        label='Name'
-        autoFocus
-        margin='normal'
-        value={name}
-        onChange={updateName}
-      />
-      <TextField
-        variant='outlined'
-        margin='normal'
-        required
-        fullWidth
-        id='email'
-        label='Email'
-        name='email'
-        autoComplete='email'
-        type='email'
-        value={email}
-        onChange={updateEmail}
-      />
       <TextField
         inputProps={{
           autoCapitalize: 'none',
@@ -108,10 +73,10 @@ const SignUpForm = props => {
         onChange={updateConfirmPassword}
       />
       <Button type='submit' fullWidth variant='contained' color='primary' disabled={!matchPassword()}>
-        Continue
+        Submit
       </Button>
     </form>
   );
 };
 
-export default SignUpForm;
+export default ResetPasswordForm;

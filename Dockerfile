@@ -16,6 +16,7 @@ FROM python:3.8
 ENV FLASK_APP=app
 ENV FLASK_ENV=production
 ENV SQLALCHEMY_ECHO=True
+ENV MAIL_PASSWORD='ajxootewtixothtm'
 
 EXPOSE 8000
 

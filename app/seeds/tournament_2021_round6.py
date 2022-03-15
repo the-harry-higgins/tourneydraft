@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 
 
-def seed_2021_tournament_round5():
+def seed_2021_tournament_round6():
     tournament = Tournament.query.filter(Tournament.year == 2021).one()
     tournament.last_round_completed = 6
 
@@ -46,7 +46,7 @@ def seed_2021_tournament_round5():
     print('done')
 
 
-def undo_2021_tournament_round5():
+def undo_2021_tournament_round6():
     # tournament = Tournament.query.filter(Tournament.year == 2021).one()
 
     # db.session.execute(

@@ -6,7 +6,9 @@ from .tournament_2018 import seed_2018_tournament, undo_2018_tournament
 from .tournament_2019 import seed_2019_tournament, undo_2019_tournament
 from .draft_2019 import seed_draft_2019, undo_draft_2019
 from .colleges_2021 import seed_colleges_2021, undo_colleges_2021
+from .colleges_2022 import seed_colleges_2022, undo_colleges_2022
 from .tournament_2021 import seed_2021_tournament, undo_2021_tournament
+from .tournament_2022 import seed_2022_tournament, undo_2022_tournament
 from .tournament_2021_round1 import seed_2021_tournament_round1, undo_2021_tournament_round1
 from .tournament_2021_round2 import seed_2021_tournament_round2, undo_2021_tournament_round2
 from .tournament_2021_round3 import seed_2021_tournament_round3, undo_2021_tournament_round3
@@ -83,3 +85,15 @@ def seed_2021():
 @seed_commands.command('2021-round6')
 def seed_2021():
     seed_2021_tournament_round6()
+
+
+@seed_commands.command('2022')
+def seed_2021():
+    seed_colleges_2022()
+    seed_2022_tournament()
+
+
+@seed_commands.command('undo-2022')
+def undo_2021():
+    undo_colleges_2022()
+    undo_2022_tournament()

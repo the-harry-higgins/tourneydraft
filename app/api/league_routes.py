@@ -16,8 +16,8 @@ def get_joinable_leagues():
                         if len(league.league_users) < 8]}
 
 
-@ league_routes.route('/join/', methods=['POST'])
-@ login_required
+@league_routes.route('/join/', methods=['POST'])
+@login_required
 def join_league():
     req_data = json.loads(request.data)
     name = req_data['name']

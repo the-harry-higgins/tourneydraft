@@ -45,7 +45,7 @@ export const signUp = async (name, email, password) => {
   return await response.json();
 };
 
-export const forgotPassword = async (email) => {
+export const forgotPassword = async (email, password) => {
   const response = await fetch('/forgot_password', {
     method: 'POST',
     headers: {
@@ -53,6 +53,7 @@ export const forgotPassword = async (email) => {
     },
     body: JSON.stringify({
       email,
+      password,
     }),
   });
   return await response.json();

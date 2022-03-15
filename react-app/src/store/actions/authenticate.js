@@ -38,8 +38,8 @@ export const logoutThunk = () => async dispatch => {
   dispatch(logoutAction());
 };
 
-export const forgotPasswordThunk = (email) => async dispatch => {
-  const data = await forgotPassword(email)
+export const forgotPasswordThunk = (email, password) => async dispatch => {
+  const data = await forgotPassword(email, password)
 
   if (!data.errors) {
     dispatch(forgotPasswordAction(data));

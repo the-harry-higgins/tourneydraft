@@ -93,14 +93,18 @@ def forgot_password():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User.query.filter(User.email == form.data['email']).first()
-        token = user.get_reset_token()
-        base_url = os.environ.get('REACT_APP_BASE_URL')
-        msg = Message()
-        msg.subject = "Tourneydraft Password Reset"
-        msg.recipients = [user.email]
-        msg.sender = 'harryrhiggins@gmail.com'
-        msg.body = f'Hello {user.name},\nYou requested a password reset for Tourneydraft.\n\nFollow this link to continue.\n{base_url}/reset-password/{token}'
-        mail.send(msg)
+        # token = user.get_reset_token()
+        # base_url = os.environ.get('REACT_APP_BASE_URL')
+        # msg = Message()
+        # msg.subject = "Tourneydraft Password Reset"
+        # msg.recipients = [user.email]
+        # msg.sender = 'harryrhiggins@gmail.com'
+        # msg.body = f'Hello {user.name},\nYou requested a password reset for Tourneydraft.\n\nFollow this link to continue.\n{base_url}/reset-password/{token}'
+        # mail.send(msg)
+        password = form.data['password']
+        user.password = password
+        db.session.add(user)
+        db.session.commit()
         return {'messages': { 'success': ['Password reset request accepted']} }
     return {'error': ['Request failed']}
 

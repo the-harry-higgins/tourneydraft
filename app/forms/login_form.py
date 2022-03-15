@@ -29,6 +29,7 @@ class LoginForm(FlaskForm):
 
 class ForgotPasswordForm(FlaskForm):
     email = StringField('email', validators=[DataRequired(), user_exists])
+    password = StringField('password', validators=[DataRequired()])
 
 
 class ResetPasswordForm(FlaskForm):

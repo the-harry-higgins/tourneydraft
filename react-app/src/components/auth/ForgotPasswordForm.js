@@ -9,6 +9,7 @@ import { forgotPasswordThunk } from '../../store/actions/authenticate';
 
 const ForgotPasswordForm = props => {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [finished, setFinished] = useState(false);
   const [message, setMessage] = useState('');
@@ -18,7 +19,7 @@ const ForgotPasswordForm = props => {
     e.preventDefault();
     setLoading(true);
     setFinished(false);
-    const success = await dispatch(forgotPasswordThunk(email));
+    const success = await dispatch(forgotPasswordThunk(email, password));
     if (success) {
       setMessage('Password reset email sent');
     } else {
@@ -32,6 +33,10 @@ const ForgotPasswordForm = props => {
     setEmail(e.target.value.toLowerCase());
   };
 
+  const updatePassword = e => {
+    setPassword(e.target.value);
+  };
+
   if (loading) {
     return <CircularProgress />;
   }
@@ -40,7 +45,7 @@ const ForgotPasswordForm = props => {
   }
   return (
     <form noValidate onSubmit={handleSubmit}>
-      <TextField
+    <TextField
         color='secondary'
         variant='outlined'
         margin='normal'
@@ -54,6 +59,23 @@ const ForgotPasswordForm = props => {
         type='text'
         value={email}
         onChange={updateEmail}
+      />
+      <TextField
+        inputProps={{
+          autoCapitalize: 'none',
+        }}
+        color='secondary'
+        variant='outlined'
+        margin='normal'
+        required
+        fullWidth
+        name='password'
+        label='Password'
+        type='password'
+        id='password'
+        autoComplete='current-password'
+        value={password}
+        onChange={updatePassword}
       />
       <Button type='submit' fullWidth variant='contained' color='secondary'>
         Send

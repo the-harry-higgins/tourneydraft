@@ -24,6 +24,7 @@ export default function SimpleBottomNavigation() {
   const classes = useStyles();
   const currentDraftId = useSelector(state => state.session.currentDraftId);
   const draftedTeams = useSelector(state => state.entities.draftedTeams);
+  const isAdmin = useSelector(state => state.entities.user.is_admin);
 
   return (
     <BottomNavigation showLabels className={classes.stickToBottom}>
@@ -51,6 +52,15 @@ export default function SimpleBottomNavigation() {
         disabled={!currentDraftId}
         activeClassName={classes.active}
       />
+      {isAdmin && (
+        <BottomNavigationAction
+          label='Admin'
+          icon={<ViewListIcon />}
+          component={NavLink}
+          to='/admin'
+          activeClassName={classes.active}
+        />
+      )}
     </BottomNavigation>
   );
 }

@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_image = db.Column(db.String(255), nullable=True, default=None)
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
 
     leagues = db.relationship('League', secondary='league_users')
     league_users = db.relationship('League_User', back_populates='user')
@@ -35,7 +36,8 @@ class User(db.Model, UserMixin):
             "email": self.email,
             "profile_image": self.profile_image,
             "league_user_ids": [league_user.id for league_user in self.league_users],
-            "league_ids": [league.id for league in self.leagues]
+            "league_ids": [league.id for league in self.leagues],
+            "is_admin": self.is_admin,
         }
 
     def get_reset_token(self, expires=500):

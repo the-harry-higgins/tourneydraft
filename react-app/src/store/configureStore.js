@@ -12,6 +12,7 @@ import session from './reducers/session';
 import tournament from './reducers/tournament';
 import ui from './reducers/ui';
 import user from './reducers/user';
+import admin from './reducers/admin';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -31,6 +32,7 @@ const reducer = combineReducers({
   session,
   messages,
   ui,
+  admin,
 });
 
 const configureStore = initialState => {

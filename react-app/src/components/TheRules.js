@@ -49,6 +49,9 @@ export default function TheRules() {
       <Typography className={classes.sentence} variant='body1'>
         Tournament champion is a partial winner.
       </Typography>
+      <Typography className={classes.sentence} variant='body1'>
+        Last drafted team that wins gets their buy in back.
+      </Typography>
     </>
   );
 }

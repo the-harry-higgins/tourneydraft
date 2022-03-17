@@ -15,6 +15,7 @@ from .tournament_2021_round3 import seed_2021_tournament_round3, undo_2021_tourn
 from .tournament_2021_round4 import seed_2021_tournament_round4, undo_2021_tournament_round4
 from .tournament_2021_round5 import seed_2021_tournament_round5, undo_2021_tournament_round5
 from .tournament_2021_round6 import seed_2021_tournament_round6, undo_2021_tournament_round6
+from .fix_tournament_2022 import fix_2022_tournament
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -88,12 +89,17 @@ def seed_2021():
 
 
 @seed_commands.command('2022')
-def seed_2021():
+def seed_2022():
     seed_colleges_2022()
     seed_2022_tournament()
 
 
 @seed_commands.command('undo-2022')
-def undo_2021():
+def undo_2022():
     undo_colleges_2022()
     undo_2022_tournament()
+
+
+@seed_commands.command('fix-2022')
+def fix_2022():
+    fix_2022_tournament()

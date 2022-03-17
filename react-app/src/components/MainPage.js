@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { toggleLeagueModal } from '../store/actions/ui';
+import AdminPage from './AdminPage';
 import BracketPage from './BracketPage';
 import DemoDraftPage from './DemoDraftPage';
 import DraftModal from './DraftModal';
@@ -17,6 +18,7 @@ import UserMenu from './UserMenu';
 
 export default function MainPage(props) {
   const currentLeagueUserId = useSelector(state => state.session.currentLeagueUserId);
+  const isAdmin = useSelector(state => state.entities.user.is_admin);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,6 +49,11 @@ export default function MainPage(props) {
               <Route path='/bracket' exact>
                 <BracketPage />
               </Route>
+              {isAdmin && (
+                <Route path='/admin' exact>
+                  <AdminPage/>
+                </Route>
+              )}
               <Redirect from='/' to='/bracket' />
             </Switch>
           </Route>

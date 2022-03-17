@@ -1,44 +1,13 @@
-from flask import Blueprint, jsonify, request
-from flask_login import login_required, current_user
-from app.models import User, League_User, League, Draft, db
 import json
+
 from datetime import datetime
-import random
+from flask import Blueprint, request
+from flask_login import login_required, current_user
+
+from app.models import Draft, db
+from app.api.utils import get_data_for_draft, generate_draft_order
 
 draft_routes = Blueprint('drafts', __name__)
-
-
-def get_data_for_draft(draft_id):
-    draft = Draft.query.get(draft_id)
-    tournament_data = draft.tournament.to_dict()
-
-    league_users_data = {
-        league_user.id: league_user.to_dict()
-        for league_user in draft.league.league_users
-    }
-
-    drafted_teams_data = {
-        drafted_team.id: drafted_team.to_dict()
-        for drafted_team in draft.drafted_teams
-    }
-
-    march_madness_teams_data = {
-        march_madness_team.id: march_madness_team.to_dict(
-            draft.tournament.last_round_completed)
-        for march_madness_team in draft.tournament.march_madness_teams
-    }
-
-    games_data = {
-        game.id: game.to_dict()
-        for game in draft.tournament.games
-    }
-
-    return (tournament_data,
-            league_users_data,
-            drafted_teams_data,
-            march_madness_teams_data,
-            games_data)
-
 
 @draft_routes.route('/<int:draft_id>')
 @login_required
@@ -77,20 +46,6 @@ def draft(league_id, draft_id):
         'session': session_data,
         'messages': messages_data,
     }
-
-
-def generate_draft_order(league_id):
-    league = League.query.filter(League.id == league_id).one()
-    league_user_ids = [league_user.id for league_user in league.league_users]
-
-    loops = 64 / (len(league_user_ids) * 2)
-
-    draft_order = []
-    for loop in range(int(loops)):
-        random.shuffle(league_user_ids)
-        draft_order.extend(league_user_ids + list(reversed(league_user_ids)))
-    return draft_order
-
 
 
 @draft_routes.route('/', methods=['POST'])

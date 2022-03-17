@@ -10,5 +10,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "json.format.enable": false,
-  "prettier.requireConfig": true
+  "prettier.requireConfig": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }

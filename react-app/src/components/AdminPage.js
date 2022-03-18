@@ -49,7 +49,7 @@ export default function AdminPage(props) {
               Tournament
             </Typography>
             <Grid container spacing={2}>
-              <Grid item xs={4}>
+              <Grid item xs={12} md={4}>
                 <FormControl>
                   <InputLabel id='tournament-select-label'>Tournament</InputLabel>
                   <Select
@@ -57,6 +57,7 @@ export default function AdminPage(props) {
                     id='tournament-select'
                     value={tournament}
                     label='Tournament'
+                    fullWidth
                     onChange={handleTournamentChange}
                   >
                     {Object.entries(tournaments).map(([id, tournament]) => (
@@ -67,10 +68,10 @@ export default function AdminPage(props) {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} md={4}>
                 <UpdateTournamentForm tournamentId={tournament} />
               </Grid>
-              <Grid item xs={4}>
+              {/* <Grid item xs={3}>
                 {tournament && (
                   <Button
                     type='submit'
@@ -81,19 +82,21 @@ export default function AdminPage(props) {
                     Delete
                   </Button>
                 )}
-              </Grid>
-              <Grid item xs={6}>
+              </Grid> */}
+              <Grid item xs={12} md={4}>
                 <CreateTournamentForm />
               </Grid>
             </Grid>
+          </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <Typography variant='h2' color='primary'>
+              Games
+            </Typography>
             <Grid container spacing={2}>
-              <Typography variant='h2' color='primary'>
-                Games
-              </Typography>
-              <Grid item xs={12}>
-                {tournaments[tournament] &&
-                  tournaments[tournament].games_ids.map(gameId => <AdminGame gameId={gameId} />)}
-              </Grid>
+              {tournaments[tournament] &&
+                tournaments[tournament].games_ids.sort().map(gameId => <AdminGame gameId={gameId} />)}
             </Grid>
           </Paper>
         </Grid>

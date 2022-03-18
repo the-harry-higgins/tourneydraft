@@ -55,22 +55,23 @@ export default function AdminPage({ gameId }) {
   }
 
   return (
-    <Grid className={classes.grid} container spacing={3}>
-      <Grid item xs={3}>
-        {`Round Number: ${game.round_num}`}
-      </Grid>
-      <Grid item xs={3}>
-        {`Game Number: ${game.game_num}`}
-      </Grid>
-      <Grid item xs={3}>
-        {`Winning Team: ${game.winning_team ? game.winning_team.name : ''}`}
-      </Grid>
-      {gameTeamScore1 && (
+    <Grid item xs={12} md={4}>
+      <Grid className={classes.grid} container spacing={1}>
         <Grid item xs={12}>
-          {`Team: ${gameTeamScore1 ? gameTeamScore1.team.name : ''}`}
-          {gameTeamScore1.score ? (
-            gameTeamScore1.score
-          ) : (
+          {`Game Number: ${game.game_num}`}
+        </Grid>
+        <Grid item xs={12}>
+          {`Round Number: ${game.round_num}`}
+        </Grid>
+        <Grid item xs={12}>
+          {`Winning Team: ${game.winning_team ? game.winning_team.name : ''}`}
+        </Grid>
+        {gameTeamScore1 && (
+          <Grid item xs={12}>
+            {`Team: ${gameTeamScore1 ? gameTeamScore1.team.name : ''}`}
+            <br />
+            {`Score: ${gameTeamScore1.score}`}
+            <br />
             <TextField
               color='secondary'
               variant='outlined'
@@ -82,15 +83,14 @@ export default function AdminPage({ gameId }) {
               value={score1}
               onChange={handleScore1Change}
             />
-          )}
-        </Grid>
-      )}
-      {gameTeamScore2 && (
-        <Grid item xs={12}>
-          {`Team: ${gameTeamScore2 ? gameTeamScore2.team.name : ''}`}
-          {gameTeamScore2.score ? (
-            gameTeamScore2.score
-          ) : (
+          </Grid>
+        )}
+        {gameTeamScore2 && (
+          <Grid item xs={12}>
+            {`Team: ${gameTeamScore2 ? gameTeamScore2.team.name : ''}`}
+            <br />
+            {`Score: ${gameTeamScore2.score}`}
+            <br />
             <TextField
               color='secondary'
               variant='outlined'
@@ -102,13 +102,13 @@ export default function AdminPage({ gameId }) {
               value={score2}
               onChange={handleScore2Change}
             />
-          )}
+          </Grid>
+        )}
+        <Grid item xs={12}>
+          <Button fullWidth variant='contained' color='secondary' onClick={handleSubmitGame}>
+            Submit
+          </Button>
         </Grid>
-      )}
-      <Grid item xs={12}>
-        <Button fullWidth variant='contained' color='secondary' onClick={handleSubmitGame}>
-          Submit
-        </Button>
       </Grid>
     </Grid>
   );

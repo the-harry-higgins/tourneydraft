@@ -68,13 +68,18 @@ def game(id):
         game_team_score2.score = req_data['game_team_score2']['score']
         winning_game_team_score = game_team_score1 if game_team_score1.score > game_team_score2.score else game_team_score2
         game.winning_team_id = winning_game_team_score.team_id
+        db.session.commit()
         next_game_num = get_next_game_num(game.game_num)
         if next_game_num:
             next_game = Game.query.filter(Game.tournament_id == game.tournament_id).filter(
                 Game.game_num == next_game_num).first()
-            new_game_team_score = Game_Team_Score(
-                game_id=next_game.id, team_id=winning_game_team_score.team_id, score=None)
-            db.session.add(new_game_team_score)
-        db.session.commit()
+            try:
+                new_game_team_score = Game_Team_Score(
+                    game_id=next_game.id, team_id=winning_game_team_score.team_id, score=None)
+                db.session.add(new_game_team_score)
+                db.session.commit()
+            except Exception as e:
+                print(e)
+                db.session.rollback()
 
         return {'game': game.to_admin_dict()}, 200

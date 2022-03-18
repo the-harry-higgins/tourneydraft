@@ -10,5 +10,8 @@ class Game_Team_Score(db.Model):
         'march_madness_teams.id'), nullable=False)
     score = db.Column(db.Integer, nullable=True, default=None)
 
+    __table_args__ = (db.Index("unique_team_per_game", "game_id",
+                               "team_id", unique=True),)
+
     team = db.relationship('March_Madness_Team')
     game = db.relationship('Game', back_populates='game_team_scores')

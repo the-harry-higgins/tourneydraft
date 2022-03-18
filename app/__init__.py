@@ -130,9 +130,8 @@ def reset_password(token):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
-    if path and path not in ['draft', 'bracket', 'leaderboard', 'splash', 'demo-draft', 'reset-password']:
+    if path and path not in ['draft', 'bracket', 'leaderboard', 'splash', 'demo-draft', 'reset-password', 'admin']:
         return app.send_static_file(path)
-    print(path)
     return app.send_static_file('index.html')
 
 
